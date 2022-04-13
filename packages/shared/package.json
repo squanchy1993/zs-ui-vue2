@@ -1,11 +1,11 @@
 {
-  "name": "@zs-vue-ui/m-page-list",
+  "name": "@zs-vue-ui/shared",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "朱志森 <826482354@qq.com>",
   "homepage": "https://github.com/squanchy1993/zs-vue-lerna#readme",
   "license": "ISC",
-  "main": "lib/m-page-list.js",
+  "main": "lib/shared.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"

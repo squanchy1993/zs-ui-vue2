@@ -1,11 +1,11 @@
-# `m-page-list`
+# `@zs-ui-lib/m-page-list`
 
 > TODO: description
 
 ## Usage
 
 ```
-const mPageList = require('m-page-list');
+const mPageList = require('@zs-ui-lib/m-page-list');
 
 // TODO: DEMONSTRATE API
 ```
