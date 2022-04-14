@@ -59,7 +59,7 @@
 <script>
 import MTableItem from './m-tableItem'
 import { MPageListModel } from './model'
-import { MFormItem } from '@zs-vue-ui/m-form-item'
+import { MFormItem } from '@zs-ui-vue/m-form-item'
 import { CommonUtils } from '@@zs-ui-vue/shared'
 
 export default {

@@ -57,9 +57,9 @@
   </div>
 </template>
 <script>
-// import { CommonUtils } from 'zs-vue-ui/lib/tools/index.js'
-// import { MPageListModel, ResultModel } from 'zs-vue-ui/lib/model/index'
-// import MFormItem from 'zs-vue-ui/packages/m-form/m-form-item'
+// import { CommonUtils } from 'zs-ui-vue/lib/tools/index.js'
+// import { MPageListModel, ResultModel } from 'zs-ui-vue/lib/model/index'
+// import MFormItem from 'zs-ui-vue/packages/m-form/m-form-item'
 import MTableItem from './m-tableItem'
 
 export default {

@@ -1,4 +1,4 @@
-# `@zs-vue-ui/m-form-item`
+# `@zs-ui-vue/m-form-item`
 
 > TODO: description
 
