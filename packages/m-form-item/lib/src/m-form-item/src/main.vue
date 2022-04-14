@@ -2,8 +2,8 @@
 import MInput from '../../m-input';
 import MSelectPicker from '../../m-select-picker';
 import MDateTime from '../../m-date-time';
-import MInputNumber from '../../m-form/m-input-number';
-import MImgUpload from '../../m-form/m-img-upload';
+import MInputNumber from '../../m-input-number';
+import MImgUpload from '../../m-img-upload';
 // import { CommonUtils } from '@/lib/tools/index.js'
 
 import './index.scss';
