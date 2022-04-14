@@ -2,12 +2,13 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <MPageList/>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import MPageList from '@zs-ui-vue/m-page-list'
+import  {MPageList } from '@zs-ui-vue/m-page-list'
 
 export default {
   name: 'App',
