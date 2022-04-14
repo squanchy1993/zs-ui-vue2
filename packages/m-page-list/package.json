@@ -25,7 +25,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@zs-vue-ui/m-form-item": "^1.0.6"
+    "@zs-vue-ui/m-form-item": "^1.0.6",
+    "@zs-ui-vue/shared": "^1.1.6"
   },
   "bugs": {
     "url": "https://github.com/squanchy1993/zs-ui-vue/issues"
