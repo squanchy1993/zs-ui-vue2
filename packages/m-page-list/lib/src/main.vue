@@ -58,9 +58,10 @@
 </template>
 <script>
 // import { CommonUtils } from 'zs-vue-ui/lib/tools/index.js'
-// import { MPageListModel, ResultModel } from 'zs-vue-ui/lib/model/index'
 // import MFormItem from 'zs-vue-ui/packages/m-form/m-form-item'
-// import MTableItem from './m-tableItem'
+import MTableItem from './m-tableItem'
+import { MPageListModel } from './model'
+
 
 export default {
   name: 'MPageList',
@@ -98,7 +99,7 @@ export default {
     getData(current, size) {
       return new Promise((resolve, reject) => {
         if (!this.pageListData.apiFun) {
-          reject(new ResultModel({ success: false, message: 'api未填写' }))
+          reject('api未填写')
         }
         this.getPageListData(current, size).then((res) => {
           const resData = res.data
@@ -107,7 +108,7 @@ export default {
           this.pageListData.list = resData.list
           this.pageListData.isShowPagination &&
             (this.pageListData.totalElement = resData.totalElements)
-          resolve(new ResultModel({ success: true, message: 'success' }))
+          resolve('获取成功')
         })
       })
     },
