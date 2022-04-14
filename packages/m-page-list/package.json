@@ -1,6 +1,6 @@
 {
   "name": "@zs-vue-ui/m-page-list",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "> TODO: description",
   "author": "squanchy <squanchy@yeah.net>",
   "homepage": "https://github.com/squanchy1993/zs-vue-lerna#readme",
@@ -25,7 +25,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@zs-vue-ui/m-form-item": "^1.0.5"
+    "@zs-vue-ui/m-form-item": "^1.0.6"
   },
   "bugs": {
     "url": "https://github.com/squanchy1993/zs-vue-lerna/issues"
