@@ -1,4 +1,4 @@
 'use strict';
 
-import { MFormItemModel } from './src/model'
+import { MFormItemModel } from './src/model';
 export { MFormItemModel }
