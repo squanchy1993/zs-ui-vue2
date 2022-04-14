@@ -14,5 +14,7 @@ lerna publish
 
 // 创建组建
 lerna create @zs-vue-ui/m-page-list
+
 ```
 ### 推送前先push到远程先 然后再进行 lerna publish
+### 发布失败时，先删除标签再进行发布
