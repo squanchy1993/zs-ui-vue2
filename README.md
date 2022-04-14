@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 22:37:59
- * @LastEditTime: 2022-04-14 17:07:45
+ * @LastEditTime: 2022-04-14 21:57:22
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /zs-ui-vue/README.md
@@ -20,6 +20,8 @@ lerna add lodash
 
 // 添加公共依赖
 lerna add lodash --scope=@zs-ui-vue/m-form-item
+lerna clean 清除 lerna bootstrap 添加上依赖包括本地的
+发布时会自动带上最新的 本地依赖版本号
 ```
 ### 发布
 推送前先push到远程先 然后再进行 lerna publish
