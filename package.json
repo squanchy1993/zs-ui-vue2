@@ -1,5 +1,5 @@
 {
-  "name": "zs-vue-lerna",
+  "name": "zs-ui-vue",
   "private": true,
   "devDependencies": {
     "lerna": "^4.0.0"

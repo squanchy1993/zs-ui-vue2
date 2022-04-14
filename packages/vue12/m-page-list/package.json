@@ -17,7 +17,7 @@
     "registry": "https://registry.npm.taobao.org/"
   },
   "dependencies": {
-    "@zs-vue-lerna/m-common-utils": "^1.0.0"
+    "@zs-ui-vue/m-common-utils": "^1.0.0"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
