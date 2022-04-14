@@ -81,8 +81,7 @@
 </template>
 
 <script>
-import { CommonUtils } from '@/tools/index.js'
-import { ResultModel } from '@/model/index'
+// import { CommonUtils } from '@/tools/index.js'
 
 export default {
   name: 'MSelectPicker',
@@ -247,7 +246,7 @@ export default {
           this.pageListData.list = resData.list
           this.pageListData.isShowPagination &&
             (this.pageListData.totalElement = resData.totalElements)
-          resolve(new ResultModel({ success: true, message: 'success' }))
+          resolve('获取成功')
         })
       })
     },
