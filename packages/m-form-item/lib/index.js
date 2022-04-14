@@ -1,7 +1,4 @@
 'use strict';
 
-module.exports = mFormItem;
-
-function mFormItem() {
-    // TODO
-}
+import { MFormItemModel } from './src/model'
+export { MFormItemModel }
