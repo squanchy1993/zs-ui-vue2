@@ -57,10 +57,10 @@
   </div>
 </template>
 <script>
-// import { CommonUtils } from 'zs-vue-ui/lib/tools/index.js'
-// import MFormItem from 'zs-vue-ui/packages/m-form/m-form-item'
 import MTableItem from './m-tableItem'
 import { MPageListModel } from './model'
+// import { CommonUtils } from 'zs-vue-ui/lib/tools/index.js'
+// import MFormItem from 'zs-vue-ui/packages/m-form/m-form-item'
 
 
 export default {

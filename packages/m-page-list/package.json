@@ -24,6 +24,9 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
+  "dependencies": {
+    "@zs-vue-ui/m-form-item": "^1.0.5"
+  },
   "bugs": {
     "url": "https://github.com/squanchy1993/zs-vue-lerna/issues"
   },
