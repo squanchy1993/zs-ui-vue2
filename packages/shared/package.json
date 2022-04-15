@@ -26,5 +26,8 @@
   },
   "bugs": {
     "url": "https://github.com/squanchy1993/zs-ui-vue/issues"
+  },
+  "dependencies": {
+    "sass-loader": "^12.6.0"
   }
 }

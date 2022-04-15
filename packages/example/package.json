@@ -10,7 +10,10 @@
   "dependencies": {
     "@zs-ui-vue/m-form": "^1.0.3",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "sass": "1.26.8",
+    "sass-loader": "8.0.2",
+    "vue": "^2.6.11",
+    "element-ui": "2.15.1"
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.16.7",
