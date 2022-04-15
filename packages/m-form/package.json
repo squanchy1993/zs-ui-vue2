@@ -1,0 +1,29 @@
+{
+  "name": "@zs-ui-vue/m-form",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "squanchy <squanchy@yeah.net>",
+  "homepage": "https://github.com/squanchy1993/zs-ui-vue#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/squanchy1993/zs-ui-vue.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/squanchy1993/zs-ui-vue/issues"
+  }
+}
