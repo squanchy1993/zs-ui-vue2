@@ -1,20 +1,17 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <MPageList/>
+   <MForm />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import  {MPageList } from '@zs-ui-vue/m-page-list'
+import MForm from './components/m-form/index.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    MPageList
+    MForm,
+    // MPageList
   }
 }
 </script>

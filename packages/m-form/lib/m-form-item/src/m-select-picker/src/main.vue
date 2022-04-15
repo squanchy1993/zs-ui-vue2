@@ -81,7 +81,7 @@
 </template>
 
 <script>
-// import { CommonUtils } from '@/tools/index.js'
+import { CommonUtils } from '@zs-ui-vue/shared'
 
 export default {
   name: 'MSelectPicker',
