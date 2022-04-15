@@ -1,6 +1,6 @@
 {
   "name": "@zs-ui-vue/m-page-list",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "description": "> TODO: description",
   "author": "squanchy <squanchy@yeah.net>",
   "homepage": "https://github.com/squanchy1993/zs-ui-vue#readme",
@@ -25,7 +25,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@zs-ui-vue/m-form-item": "^1.0.8",
+    "@zs-ui-vue/m-form-item": "^1.0.9",
     "@zs-ui-vue/shared": "^1.1.6"
   },
   "bugs": {

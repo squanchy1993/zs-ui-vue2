@@ -1,14 +1,14 @@
 {
   "name": "@zs-ui-vue/example",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "> TODO: description",
   "author": "朱志森 <826482354@qq.com>",
   "homepage": "https://github.com/squanchy1993/zs-ui-vue#readme",
   "license": "ISC",
   "main": "lib/main.js",
   "dependencies": {
-    "@zs-ui-vue/m-page-list": "^1.1.11",
+    "@zs-ui-vue/m-page-list": "^1.1.12",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
