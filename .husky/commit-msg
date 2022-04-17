@@ -21,4 +21,4 @@ run_nvm
 
 export PATH="$PATH:/usr/local/bin:/usr/local"
 
-# npx --no-install commitlint --edit "$1"
+npx --no-install commitlint --edit "$1"
