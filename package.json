@@ -25,6 +25,9 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --ext .js"
+    "*.{js, vue, css}": [
+      "eslint",
+      "git add"
+    ]
   }
 }
