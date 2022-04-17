@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 22:37:59
- * @LastEditTime: 2022-04-15 19:00:43
+ * @LastEditTime: 2022-04-17 17:13:42
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /zs-ui-vue/README.md
@@ -36,3 +36,10 @@ lerna clean 清除 lerna bootstrap 添加上依赖包括本地的
 要删除tag并且，回滚版本号再进行推送
 
 先删除标签，git 回滚版本号，再进行发布
+
+
+### 关于提交信息
+使用了 commitizen 来确保提交信息的规范性，不能用souretree 提交了
+如何使用？
+先git add . 
+后再执行 yarn commit

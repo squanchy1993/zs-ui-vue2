@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2022-04-17 14:22:11
- * @LastEditTime: 2022-04-17 14:22:11
+ * @LastEditTime: 2022-04-17 17:24:40
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /zs-ui-vue/packages/example/.eslintrc.js
@@ -228,6 +228,10 @@ module.exports = {
       }
     ],
     'padded-blocks': [2, 'never'],
+    'quotes': [2, 'single', {
+      'avoidEscape': true,
+      'allowTemplateLiterals': true
+    }],
     'semi-spacing': [
       2,
       {
