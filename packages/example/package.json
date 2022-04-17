@@ -1,15 +1,15 @@
 {
   "name": "@zs-ui-vue/example",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "> TODO: description",
   "author": "朱志森 <826482354@qq.com>",
   "homepage": "https://github.com/squanchy1993/zs-ui-vue#readme",
   "license": "ISC",
   "main": "lib/main.js",
   "dependencies": {
-    "@zs-ui-vue/m-form": "^1.0.3",
-    "@zs-ui-vue/shared": "^1.1.6",
+    "@zs-ui-vue/m-form": "^1.0.4",
+    "@zs-ui-vue/shared": "^1.1.7",
     "core-js": "^3.6.5",
     "element-ui": "2.15.1",
     "sass": "1.26.8",
