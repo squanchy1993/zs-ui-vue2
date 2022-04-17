@@ -42,15 +42,15 @@ import { DialogOptionModel } from './model';
 export default {
   name: 'FormDialog',
   components: {
-    MFormItem,
+    MFormItem
   },
   props: {
     dialogOption: {
       type: Object,
       default: () => {
         return new DialogOptionModel({});
-      },
-    },
+      }
+    }
   },
   data() {
     return {
@@ -60,17 +60,17 @@ export default {
       formStatus: 'create', // create、 edit
       resolve: null,
       reject: null,
-      isShow: false,
+      isShow: false
     };
   },
   methods: {
     // 打开对话框
     async openDialog({ type = 'create', dialogData = {} }) {
-      const promise = new Promise((resolve, reject) => {
+      const promise = new Promise( (resolve, reject) => {
         // eslint-disable-next-line prefer-const
         let { originFormItems, originFormData } = this.dialogOption.generateFormItems({
           that: this,
-          openDialogData: dialogData,
+          openDialogData: dialogData
         });
 
         for (var item of originFormItems) {
@@ -142,7 +142,7 @@ export default {
             params,
             api,
             message,
-            resolveData = {},
+            resolveData = {}
           } = submitInterceptor(this.formOriginData, this.formData, extraData);
           if (api) {
             resolveData = await api(params);
@@ -156,8 +156,8 @@ export default {
           console.log('表单检验失败', err);
           this.$message.error(`提交失败: ${err.message}`);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -184,7 +184,7 @@ export default {
       }
     }
   }
-  
+
   .list-dialog__container {
     max-height: 60vh;
     overflow: scroll;
