@@ -1,5 +1,13 @@
 /*
  * @Author: your name
+ * @Date: 2022-04-17 14:22:11
+ * @LastEditTime: 2022-04-17 14:22:11
+ * @LastEditors: Please set LastEditors
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /zs-ui-vue/packages/example/.eslintrc.js
+ */
+/*
+ * @Author: your name
  * @Date: 2022-04-15 18:55:03
  * @LastEditTime: 2022-04-17 12:32:41
  * @LastEditors: Please set LastEditors

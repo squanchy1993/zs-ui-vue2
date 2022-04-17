@@ -1,6 +1,5 @@
- /* eslint-disable */
-
 import { MFormItemModel, MPageListModel } from '@zs-ui-vue/m-form';
+import { getBookCategoryList, getTagList, uploadImage } from './api';
 
 // 生成列表搜索项目
 export const generateQueryFormItems = (that) => {
@@ -19,10 +18,71 @@ export const generateQueryFormItems = (that) => {
         },
         pageListData: new MPageListModel({
           list: [
-            { label: "待借阅", value: 1 },
-            { label: "申请中", value: 2  },
-            { label: "借阅中", value: 3  }
+            { label: '待借阅', value: 1 },
+            { label: '申请中', value: 2 },
+            { label: '借阅中', value: 3 }
           ]
+        })
+      }
+    }),
+    new MFormItemModel({
+      label: '分类',
+      prop: 'category_uuids',
+      el_type: 'MSelectPicker',
+      required: false,
+      defaultValue: [],
+      options: {
+        // filterable: true,
+        multiple: true,
+        labelValue: {
+          label: 'title',
+          value: 'uuid'
+        },
+        defaultValue: '',
+        pageListData: new MPageListModel({
+          apiFun: getBookCategoryList,
+          isShowPagination: false,
+          tableSetting: {
+            stripe: true,
+            border: true
+          }
+        })
+      }
+    }),
+    new MFormItemModel({
+      label: '栏目',
+      prop: 'sale_tag_uuids',
+      el_type: 'MSelectPicker',
+      defaultValue: [],
+      required: false,
+      options: {
+        filterable: true,
+        multiple: true,
+        labelValue: {
+          label: 'name',
+          value: 'uuid'
+        },
+        defaultValue: [],
+        pageListData: new MPageListModel({
+          apiFun: getTagList,
+          query: [
+            // 根据value 设置item
+            new MFormItemModel({
+              label: 'uuids',
+              prop: 'uuids',
+              required: false
+            }),
+            // 可查询时 根据name 查询
+            new MFormItemModel({
+              label: 'name',
+              prop: 'name',
+              required: false
+            })
+          ],
+          tableSetting: {
+            stripe: true,
+            border: true
+          }
         })
       }
     }),
@@ -41,11 +101,13 @@ export const generateQueryFormItems = (that) => {
             size='mini'
             class='btnActive'
             style='margin-top: 28px'
-            onClick={() => { that.createOrUpdataItem('create', {}) }}
+            onClick={() => {
+              that.createOrUpdataItem('create', {});
+            }}
           >
             创建图书
           </el-button>
-        )
+        );
       }
     }),
     new MFormItemModel({
@@ -58,15 +120,18 @@ export const generateQueryFormItems = (that) => {
             size='mini'
             class='btnActive'
             style='margin-top: 28px'
-            onClick={() => { that.$refs.pageList.search() }}
+            onClick={() => {
+              that.$refs.pageList.search();
+            }}
           >
             搜索
           </el-button>
-        )
+        );
       }
     })
-  ]
-}
+  ];
+};
+
 // 生成列表项目
 export const generateColumns = (that) => {
   return [
@@ -85,7 +150,14 @@ export const generateColumns = (that) => {
       // 'show-overflow-tooltip': true,
       resizable: false,
       render: (h, { row }) => {
-        return <el-image z-index={9999} style='width: 50px; height: 50px' src={'http://img.nightwalker.site/' + row.cover} preview-src-list={['http://img.nightwalker.site/' + row.cover]}></el-image>
+        return (
+          <el-image
+            z-index={9999}
+            style='width: 50px; height: 50px'
+            src={'http://img.nightwalker.site/' + row.cover}
+            preview-src-list={['http://img.nightwalker.site/' + row.cover]}
+          ></el-image>
+        );
       }
     },
     {
@@ -109,17 +181,20 @@ export const generateColumns = (that) => {
       resizable: false,
       render: (h, { row }) => {
         return [
-          <el-button type='text' size='small' onClick={() => that.createOrUpdataItem('edit', row)} >详情</el-button>,
-          <el-button
-            type='text'
-            size='small'
-            onClick={() => that.remove(row)}> 删除 </el-button>
-        ]
+          <el-button type='text' size='small' onClick={() => that.createOrUpdataItem('edit', row)}>
+            详情
+          </el-button>,
+          <el-button type='text' size='small' onClick={() => that.remove(row)}>
+            {' '}
+            删除{' '}
+          </el-button>
+        ];
       }
     }
-  ]
-}
+  ];
+};
 
+// 生成弹框表单
 // 生成弹框表单
 export const generateFormItems = ({ that, openDialogData }) => {
   const originFormItems = [
@@ -131,7 +206,7 @@ export const generateFormItems = ({ that, openDialogData }) => {
       required: false,
       itemBoxStyle: { width: '100%' },
       render: ({ h, formItem }) => {
-        return <p class='title'>书本信息</p>
+        return <p class='title'>书本信息</p>;
       }
     }),
     new MFormItemModel({
@@ -140,18 +215,86 @@ export const generateFormItems = ({ that, openDialogData }) => {
       el_type: 'MImgUpload',
       itemBoxStyle: { width: '100%' },
       options: {
-        uploadApi: common.uploadImage,
+        uploadApi: uploadImage,
         limit: 1,
         imageDomain: 'http://img.nightwalker.site/',
         inputTransform: (value) => {
           const imgArr = value
             .split(',')
-            .map((src) => ({ src, localPath: 'http://img.nightwalker.site/' + src }))
-          return imgArr
+            .map((src) => ({ src, localPath: 'http://img.nightwalker.site/' + src }));
+          return imgArr;
         },
         onChanged: (imgArr) => {
-          return imgArr.map((item) => item.src).join(',')
+          return imgArr.map((item) => item.src).join(',');
         }
+      }
+    }),
+    new MFormItemModel({
+      label: '栏目',
+      prop: 'sale_tag_uuids',
+      el_type: 'MSelectPicker',
+      defaultValue: [],
+      required: false,
+      options: {
+        filterable: true,
+        multiple: true,
+        labelValue: {
+          label: 'name',
+          value: 'uuid'
+        },
+        defaultValue: [],
+        pageListData: new MPageListModel({
+          apiFun: getTagList,
+          query: [
+            // 根据value 设置item
+            new MFormItemModel({
+              label: 'uuids',
+              prop: 'uuids',
+              required: false
+            }),
+            // 可查询时 根据name 查询
+            new MFormItemModel({
+              label: 'name',
+              prop: 'name',
+              required: false
+            })
+          ],
+          tableSetting: {
+            stripe: true,
+            border: true
+          }
+        })
+      }
+    }),
+    new MFormItemModel({
+      label: '分类',
+      prop: 'category_uuid',
+      el_type: 'MSelectPicker',
+      defaultValue: '99956220fb3311eb9ccceb357ad2bc2f',
+      options: {
+        // filterable: true,
+        multiple: false,
+        labelValue: {
+          label: 'title',
+          value: 'uuid'
+        },
+        defaultValue: '',
+        pageListData: new MPageListModel({
+          apiFun: getBookCategoryList,
+          query: [
+            // 根据value 设置item
+            new MFormItemModel({
+              label: 'uuid',
+              prop: 'uuid',
+              required: false
+            })
+          ],
+          isShowPagination: false,
+          tableSetting: {
+            stripe: true,
+            border: true
+          }
+        })
       }
     }),
     new MFormItemModel({
@@ -180,30 +323,73 @@ export const generateFormItems = ({ that, openDialogData }) => {
       itemBoxStyle: { width: '100%' }
     }),
     new MFormItemModel({
+      label: '轮播图',
+      prop: 'banner',
+      el_type: 'MImgUpload',
+      itemBoxStyle: { width: '100%' },
+      options: {
+        uploadApi: uploadImage,
+        limit: 4,
+        imageDomain: 'http://img.nightwalker.site/',
+        inputTransform: (value) => {
+          const imgArr = value
+            .split(',')
+            .map((src) => ({ src, localPath: 'http://img.nightwalker.site/' + src }));
+          return imgArr;
+        },
+        onChanged: (imgArr) => {
+          return imgArr.map((item) => item.src).join(',');
+        }
+      }
+    }),
+    new MFormItemModel({
+      label: '图书详情',
+      prop: 'book_detail',
+      el_type: 'MImgUpload',
+      itemBoxStyle: { width: '100%' },
+      options: {
+        uploadApi: uploadImage,
+        limit: 6,
+        imageDomain: 'http://img.nightwalker.site/',
+        inputTransform: (value) => {
+          const imgArr = value
+            .split(',')
+            .map((src) => ({ src, localPath: 'http://img.nightwalker.site/' + src }));
+          return imgArr;
+        },
+        onChanged: (imgArr) => {
+          return imgArr.map((item) => item.src).join(',');
+        }
+      }
+    }),
+    new MFormItemModel({
       required: false,
       itemBoxStyle: { width: '100%' },
       render: ({ h, formItem }) => {
-        return <div style='display:flex'>
-          <el-button
-            type='primary'
-            size='mini'
-            class='btnActive'
-            style='margin-top: 28px'
-            onClick={() => { that.submit() }}
-            disabled={that.$store.getters.user_role_value === 'guset'}
-          >
-            保存
-          </el-button>
-        </div>
+        return (
+          <div style='display:flex'>
+            <el-button
+              type='primary'
+              size='mini'
+              class='btnActive'
+              style='margin-top: 28px'
+              onClick={() => {
+                that.submit();
+              }}
+            >
+              保存
+            </el-button>
+          </div>
+        );
       }
     })
-  ]
+  ];
 
-  const originFormData = {}
+  const originFormData = {};
   originFormItems.map(({ prop, defaultValue }) => {
     if (prop) {
-      that._.set(originFormData, prop, defaultValue)
+      that._.set(originFormData, prop, defaultValue);
     }
-  })
-  return { originFormItems, originFormData }
-}
+  });
+  return { originFormItems, originFormData };
+};

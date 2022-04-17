@@ -1,0 +1,24 @@
+#!/bin/sh
+command_exists () {
+  command -v "$1" >/dev/null 2>&1
+}
+
+load_nvm () {
+  # If nvm is not loaded, load it
+  command_exists nvm || {
+    export NVM_DIR="$1"
+    [ -s "$1/nvm.sh" ] && . "$1/nvm.sh"
+  }
+}
+
+run_nvm () {
+  # If nvm has been loaded correctly, use project .nvmrc
+  command_exists nvm && [ -f .nvmrc ] && nvm use
+}
+
+load_nvm /Users/zhuzhisen_work/.nvm
+run_nvm
+
+export PATH="$PATH:/usr/local/bin:/usr/local"
+
+npx --no-install commitlint --edit "$1"

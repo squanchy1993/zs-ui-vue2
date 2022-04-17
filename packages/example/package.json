@@ -9,11 +9,12 @@
   "main": "lib/main.js",
   "dependencies": {
     "@zs-ui-vue/m-form": "^1.0.3",
+    "@zs-ui-vue/shared": "^1.1.6",
     "core-js": "^3.6.5",
+    "element-ui": "2.15.1",
     "sass": "1.26.8",
     "sass-loader": "8.0.2",
-    "vue": "^2.6.11",
-    "element-ui": "2.15.1"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.16.7",
@@ -43,24 +44,11 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint --ext .js,.vue src",
+    "lint-fix": "eslint --ext .js,.vue src --fix"
   },
   "bugs": {
     "url": "https://github.com/squanchy1993/zs-ui-vue/issues"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
   },
   "browserslist": [
     "> 1%",
