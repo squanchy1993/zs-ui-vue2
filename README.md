@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 22:37:59
- * @LastEditTime: 2022-04-17 17:43:25
+ * @LastEditTime: 2022-04-17 18:07:52
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /zs-ui-vue/README.md
@@ -30,6 +30,9 @@ lerna clean 清除 lerna bootstrap 添加上依赖包括本地的
 不先push也行，lerna publish 会带上新内容进行 发布
 从lerna boostrap(依赖包安装) --> 开发模块 --> git commit --> lerna changed(查看包变化) --> lerna publish。
 
+// 在了解
+lerna publish from-git
+
 ### 发布失败
 由于lerna 发布会推送新的版本号和tag到origin端；
 
@@ -47,3 +50,6 @@ lerna clean 清除 lerna bootstrap 添加上依赖包括本地的
 commitizen
 git add . 
 yarn commit
+
+### note
+lerna publish 有问题 会出发 husky里面的 钩子函数导致无法commit
