@@ -21,5 +21,4 @@ run_nvm
 
 export PATH="$PATH:/usr/local/bin:/usr/local"
 
-# 由于安装了 commitizen所以就不用 触发检查了
 npx --no-install commitlint --edit "$1"
