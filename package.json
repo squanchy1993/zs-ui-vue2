@@ -2,6 +2,21 @@
   "name": "zs-ui-vue",
   "private": true,
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "husky": "^7.0.0",
+    "lerna": "^4.0.0",
+    "lint-staged": "^12.3.8"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js,.vue packages",
+    "lint-fix": "eslint --ext .js,.vue packages --fix",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.js": "eslint --ext .js"
   }
 }

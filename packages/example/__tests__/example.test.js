@@ -3,5 +3,5 @@
 const example = require('..');
 
 describe('@zs-ui-vue/example', () => {
-    it('needs tests');
+  it('needs tests');
 });

@@ -8,6 +8,7 @@
       // ::v-deep {  // 未进行scope
         .el-form-item {
           .el-form-item__label {
+            float: left;
             padding: 0;
           }
           .el-form-item__content {

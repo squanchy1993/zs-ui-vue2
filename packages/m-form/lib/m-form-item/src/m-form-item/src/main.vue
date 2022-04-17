@@ -4,7 +4,7 @@ import MSelectPicker from '../../m-select-picker';
 import MDateTime from '../../m-date-time';
 import MInputNumber from '../../m-input-number';
 import MImgUpload from '../../m-img-upload';
-import { CommonUtils } from '@zs-ui-vue/shared'
+import { CommonUtils } from '@zs-ui-vue/shared';
 
 import './index.scss';
 export default {
@@ -14,29 +14,29 @@ export default {
     MSelectPicker,
     MDateTime,
     MInputNumber,
-    MImgUpload,
+    MImgUpload
   },
   props: {
     formItems: {
       type: Array,
       default: () => {
         return [];
-      },
+      }
     },
     formData: {
       type: Object,
       default: () => {
         return {};
-      },
+      }
     },
     formItemClass: {
       type: String,
-      default: '',
-    },
+      default: ''
+    }
   },
   render(h) {
     return (
-      <div class="outer-box">
+      <div class='outer-box'>
         {this.formItems.map((formItem, index) => {
           const { el_type, prop, itemBoxStyle, render } = formItem;
           const that = this;
@@ -54,7 +54,7 @@ export default {
                   key={el_type}
                   form-item={formItem}
                   value={value}
-                  on-valueChange={function (v) {
+                  on-valueChange={function(v) {
                     CommonUtils.setDeepValue(that.formData, prop, v);
                   }}
                 />
@@ -66,7 +66,7 @@ export default {
                   formData: this.formData,
                   onValueChange: (v) => {
                     CommonUtils.setDeepValue(that.formData, prop, v);
-                  },
+                  }
                 })
               )}
             </div>
@@ -74,6 +74,6 @@ export default {
         })}
       </div>
     );
-  },
+  }
 };
 </script>
