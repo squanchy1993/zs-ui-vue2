@@ -17,7 +17,7 @@
     "lint": "eslint --ext .js,.vue packages",
     "lint-fix": "eslint --ext .js,.vue packages --fix",
     "prepare": "husky install",
-    "c": "git-cz"
+    "commit": "git-cz"
   },
   "config": {
     "commitizen": {
