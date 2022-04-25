@@ -1,6 +1,6 @@
 {
   "name": "@zs-ui-vue/m-form",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "> TODO: description",
   "author": "squanchy <squanchy@yeah.net>",
   "homepage": "https://github.com/squanchy1993/zs-ui-vue#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/squanchy1993/zs-ui-vue/issues"
   },
   "dependencies": {
-    "@zs-ui-vue/shared": "^1.1.10",
+    "@zs-ui-vue/shared": "^1.1.11",
     "sass": "1.26.8",
     "sass-loader": "8.0.2"
   }
