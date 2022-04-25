@@ -15,7 +15,6 @@ const { getPackagesSync } = require('@lerna/project');
 
     // 打包所有包
     if (isCompileAll) {
-      packages.splice(packages.indexOf('@zs-ui-vue/example'), 1)
       for (const p of packages) {
         runWebpack(p, compileWatchMode);
       }
