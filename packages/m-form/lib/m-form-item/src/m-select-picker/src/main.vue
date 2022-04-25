@@ -518,7 +518,8 @@ export default {
       background-color: #fff;
       margin-top: 5px;
       z-index: 999;
-      box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 10%);
+
       box-sizing: border-box;
       .search-header {
         height: 28px;
