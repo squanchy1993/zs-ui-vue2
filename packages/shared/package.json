@@ -11,7 +11,8 @@
     "test": "__tests__"
   },
   "files": [
-    "dist"
+    "dist",
+    "lib/src/styles"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
