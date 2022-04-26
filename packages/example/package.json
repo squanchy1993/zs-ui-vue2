@@ -9,7 +9,7 @@
   "main": "lib/main.js",
   "dependencies": {
     "@zs-ui-vue/m-form": "^1.0.8",
-    "@zs-ui-vue/shared": "^1.1.10",
+    "@zs-ui-vue/shared": "^1.1.11",
     "core-js": "^3.6.5",
     "element-ui": "2.15.1",
     "sass": "1.26.8",

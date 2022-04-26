@@ -50,7 +50,8 @@ export default {
               style={itemBoxStyle}
             >
               {!render ? (
-                <el_type
+                <component
+                  is={el_type}
                   key={el_type}
                   form-item={formItem}
                   value={value}
