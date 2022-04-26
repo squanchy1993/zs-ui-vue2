@@ -4,7 +4,7 @@ import MDateTime from '../../m-date-time';
 import MInputNumber from '../../m-input-number';
 import MImgUpload from '../../m-img-upload';
 import { CommonUtils } from '@zs-ui-vue/shared';
-
+import { component } from 'vue';
 import './index.scss';
 export default {
   name: 'MFormItem',
@@ -13,7 +13,8 @@ export default {
     MSelectPicker,
     MDateTime,
     MInputNumber,
-    MImgUpload
+    MImgUpload,
+    component
   },
   props: {
     formItems: {
@@ -51,7 +52,7 @@ export default {
               {!render ? (
                 <component
                   is={el_type}
-                  key={el_type}
+                  // key={el_type}
                   form-item={formItem}
                   value={value}
                   on-valueChange={function(v) {
