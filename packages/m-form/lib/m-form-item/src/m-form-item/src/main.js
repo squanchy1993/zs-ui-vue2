@@ -1,4 +1,3 @@
-<script>
 import MInput from '../../m-input';
 import MSelectPicker from '../../m-select-picker';
 import MDateTime from '../../m-date-time';
@@ -77,4 +76,3 @@ export default {
     );
   }
 };
-</script>
