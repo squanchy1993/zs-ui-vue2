@@ -12,6 +12,9 @@ Vue.use(ElementUI);
 import _ from 'lodash';
 Vue.prototype._ = _;
 
+// 自定义css
+import '@packages/shared/lib/src/styles/index.scss';
+
 new Vue({
   render: h => h(App)
 }).$mount('#app')
