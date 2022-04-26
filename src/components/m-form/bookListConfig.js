@@ -1,4 +1,5 @@
-import { MFormItemModel, MPageListModel } from '@zs-ui-vue/m-form';
+/* eslint-disable */
+import { MFormItemModel, MPageListModel } from '@packages/m-form/dist/index';
 import { getBookCategoryList, getTagList, uploadImage } from './api';
 
 // 生成列表搜索项目
