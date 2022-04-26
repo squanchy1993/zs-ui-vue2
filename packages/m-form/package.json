@@ -27,8 +27,6 @@
     "url": "https://github.com/squanchy1993/zs-ui-vue/issues"
   },
   "dependencies": {
-    "@zs-ui-vue/shared": "^1.0.0",
-    "sass": "1.26.8",
-    "sass-loader": "8.0.2"
+    "@zs-ui-vue/shared": "^1.0.0"
   }
 }

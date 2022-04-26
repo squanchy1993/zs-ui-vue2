@@ -19,14 +19,6 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "clean-webpack-plugin": "^4.0.0",
-    "core-js": "^3.6.5",
-    "element-ui": "^2.15.8",
-    "sass": "1.26.8",
-    "sass-loader": "8.0.2",
-    "vue": "^2.6.11"
-  },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
@@ -34,14 +26,21 @@
     "@vue/cli-plugin-eslint": "~4.5.12",
     "@vue/cli-service": "~4.5.12",
     "babel-eslint": "^10.1.0",
+    "commitizen": "^4.2.4",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "husky": "^7.0.0",
     "lerna": "^4.0.0",
+    "lint-staged": "^12.3.8",
     "progress-bar-webpack-plugin": "^2.1.0",
     "vue-template-compiler": "^2.6.11",
-    "commitizen": "^4.2.4",
-    "husky": "^7.0.0",
-    "lint-staged": "^12.3.8"
+    "@zs-ui-vue/m-form": "^1.0.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "core-js": "^3.6.5",
+    "element-ui": "^2.15.8",
+    "sass": "1.26.8",
+    "sass-loader": "8.0.2",
+    "vue": "^2.6.11"
   },
   "eslintConfig": {
     "root": true,

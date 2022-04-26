@@ -1,16 +1,13 @@
 <template>
   <div class="hello">
-    <span>asf</span>
     <MPageList ref="pageList" :page-list-data.sync="pageListData" />
     <FormDialog ref="BookDialog" :dialog-option="dialogOption" />
   </div>
 </template>
 
 <script>
-/* eslint-disable */
 import { MPageList, MPageListModel, FormDialog, DialogOptionModel } from '@packages/m-form/dist/index';
 import { generateColumns, generateQueryFormItems, generateFormItems } from './bookListConfig';
-
 import { getBookList } from './api';
 
 export default {
