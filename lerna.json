@@ -1,15 +1,6 @@
 {
   "packages": [
-    "packages/m-form",
-    "packages/shared"
+    "packages/*"
   ],
-  "version": "independent",
-  "command": {
-    "publish": {
-      "ignoreChanges": ["*.md"],  
-      "verifyAccess": false,
-      "verifyRegistry": false, 
-      "message": "chore: publish"
-    }
-  }
+  "version": "0.0.0"
 }
