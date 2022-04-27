@@ -28,5 +28,6 @@
   },
   "dependencies": {
     "@zs-ui-vue/shared": "^1.0.0"
-  }
+  },
+  "gitHead": "36cb699b8ea14a6af25e5a5eca32f3cf31e9ac96"
 }
