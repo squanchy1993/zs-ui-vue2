@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2022-04-17 17:20:41
+ * @LastEditTime: 2022-04-27 11:13:28
  * @LastEditors: Please set LastEditors
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
  * @FilePath: /vue-admin-template/src/views/sidebars/system/permission/index.vue
@@ -40,7 +40,7 @@ import { MFormItem } from '../../m-form-item/index';
 import { DialogOptionModel } from "./model";
 
 export default {
-  name: 'FormDialog',
+  name: 'MFormDialog',
   components: {
     MFormItem
   },
