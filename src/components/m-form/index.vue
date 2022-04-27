@@ -1,12 +1,12 @@
 <template>
   <div class="hello">
     <MPageList ref="pageList" :page-list-data.sync="pageListData" />
-    <FormDialog ref="BookDialog" :dialog-option="dialogOption" />
+    <MFormDialog ref="BookDialog" :dialog-option="dialogOption" />
   </div>
 </template>
 
 <script>
-import { MPageList, MPageListModel, FormDialog, DialogOptionModel } from '@packages/m-form/dist/index';
+import { MPageList, MPageListModel, MFormDialog, DialogOptionModel } from '@packages/m-form/dist/index';
 import { generateColumns, generateQueryFormItems, generateFormItems } from './bookListConfig';
 import { getBookList } from './api';
 
@@ -14,7 +14,7 @@ export default {
   name: 'MForm',
   components: {
     MPageList,
-    FormDialog
+    MFormDialog
   },
   data: function() {
     return {
