@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 22:37:59
- * @LastEditTime: 2022-04-25 16:50:44
+ * @LastEditTime: 2022-04-28 11:27:28
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /zs-ui-vue/README.md
@@ -18,7 +18,7 @@ lerna create @zs-ui-vue/m-page-list
 // 添加公共依赖
 lerna add lodash
 
-// 添加公共依赖
+// 添加公共依赖 
 lerna add lodash --scope=@zs-ui-vue/m-form-item
 
 lerna bootstrap --hoist #将所有 package 的依赖引到 根目录的 node_modules 中，节省空间
