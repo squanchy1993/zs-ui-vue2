@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
 
@@ -43,14 +42,14 @@ export default {
   },
   inject: ['layoutState', 'operator'],
   computed: {
-    ...mapGetters([
-      'user_avatar'
-    ]),
     settingState() {
       return this.layoutState()
     },
     sidebar() {
       return this.settingState.sidebar
+    },
+    user_avatar() {
+      return this.settingState.userInfo.user_avatar
     }
   },
   methods: {

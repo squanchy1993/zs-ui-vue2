@@ -1,3 +1,9 @@
+<!--
+ * @Date: 2022-06-21 22:23:16
+ * @LastEditors: squanchy squanchy@yeah.net
+ * @LastEditTime: 2022-06-21 22:49:30
+ * @FilePath: /zs-ui-vue/packages/m-layout/lib/src/components/Sidebar/SidebarItem.vue
+-->
 <template>
   <div v-if="!item.hidden">
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
@@ -26,7 +32,7 @@
 
 <script>
 import path from 'path'
-import { isExternal } from '@/utils/validate'
+import { isExternal } from '../../utils/validate'
 import Item from './Item'
 import AppLink from './Link'
 import FixiOSBug from './FixiOSBug'
