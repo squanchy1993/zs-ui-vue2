@@ -1,8 +1,8 @@
 <!--
  * @Date: 2022-06-13 18:42:23
- * @LastEditors: 朱志森 826482354@qq.com
- * @LastEditTime: 2022-06-17 14:44:28
- * @FilePath: /book-book-admin-vue/src/components/m-layout/components/Sidebar/index.vue
+ * @LastEditors: squanchy squanchy@yeah.net
+ * @LastEditTime: 2022-06-21 23:13:01
+ * @FilePath: /zs-ui-vue/packages/m-layout/lib/src/components/Sidebar/index.vue
 -->
 <template>
   <div :class="{'has-logo':showLogo}">
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 import variables from '../../style/variables.scss'
@@ -34,9 +33,6 @@ export default {
   components: { SidebarItem, Logo },
   inject: ['layoutState'],
   computed: {
-    ...mapGetters([
-      'user_routes'
-    ]),
     settingState() {
       return this.layoutState()
     },
@@ -54,6 +50,9 @@ export default {
     },
     showLogo() {
       return this.settingState.sidebarLogo
+    },
+    user_routes() {
+      return this.settingState.userInfo.user_routes
     },
     variables() {
       return variables

@@ -1,3 +1,9 @@
+<!--
+ * @Date: 2022-06-21 22:23:16
+ * @LastEditors: squanchy squanchy@yeah.net
+ * @LastEditTime: 2022-06-21 22:49:23
+ * @FilePath: /zs-ui-vue/packages/m-layout/lib/src/components/Sidebar/Link.vue
+-->
 <template>
   <component :is="type" v-bind="linkProps(to)">
     <slot />
@@ -5,7 +11,7 @@
 </template>
 
 <script>
-import { isExternal } from '@/utils/validate'
+import { isExternal } from '../../utils/validate'
 
 export default {
   props: {
