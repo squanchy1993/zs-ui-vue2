@@ -136,25 +136,26 @@ export default {
       handler: function(value) {
         // 延迟到组件创建完毕后再进行
         this.$nextTick(() => {
-          if (value != null) {
-            if (this.multiple) {
-              this.componentValue = [...value]
-            } else {
-              this.componentValue = value
-            }
+          console.log('received value change select picker: ', value)
+          if (CommonUtils.isEmpty(value)) {
+            this.componentValue = this.multiple ? [] : null;
+            this.setTag()
+            return;
           }
-          this.setTag()
+
+          if (!this._.eq(this.componentValue, value)) {
+            this.componentValue = this._.cloneDeep(value)
+            this.setTag()
+          }
         })
       }
     }
   },
   created: function() {
     // 进行组件初始化
-    this.componentValue = this.formItem.defaultValue
-    this.setTag()
+    // this.setTag()
     this.setList()
     this.listenClick()
-    console.log('component inited', this.componentValue)
   },
   destroyed() {
     // 摧毁组件
@@ -195,11 +196,6 @@ export default {
           const id = this.componentValue
           this.selectedTag = pageListData.list.filter((item) => item[this.valueKey] === id)
         }
-        return
-      }
-
-      // eslint-disable-next-line prefer-const
-      if (CommonUtils.isEmpty(this.componentValue)) {
         return
       }
 
