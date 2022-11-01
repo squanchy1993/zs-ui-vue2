@@ -380,6 +380,17 @@ export const generateFormItems = ({ that, openDialogData }) => {
             >
               保存
             </el-button>
+            <el-button
+              type='primary'
+              size='mini'
+              class='btnActive'
+              style='margin-top: 28px'
+              onClick={() => {
+                that.resetForm();
+              }}
+            >
+              重置
+            </el-button>
           </div>
         );
       }
