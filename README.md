@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 22:37:59
- * @LastEditTime: 2022-11-01 20:08:41
+ * @LastEditTime: 2022-11-01 20:22:59
  * @LastEditors: DESKTOP-58041OI\zzs squanchy@yeah.net
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \zs-ui-vue\README.md
@@ -48,6 +48,7 @@ lerna publish from-git
 
 先删除标签，git 回滚版本号，再进行发布
 
+发布失败可以去 相应的包的package中 进行单独发布 npm publish
 
 ### 关于提交
 
