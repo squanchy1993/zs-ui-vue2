@@ -15,7 +15,6 @@
     "lib/src/styles"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {
@@ -31,5 +30,5 @@
   "dependencies": {
     "sass-loader": "^12.6.0"
   },
-  "gitHead": "b60259b95a9e367dcd5a6b4f00eb5fe4d2c23357"
+  "gitHead": "e5b36a5aaa8c716fc1512691994cb9bae9ccc702"
 }
