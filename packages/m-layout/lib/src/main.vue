@@ -1,8 +1,8 @@
 <!--
  * @Date: 2022-06-13 18:42:23
- * @LastEditors: 朱志森 826482354@qq.com
- * @LastEditTime: 2022-06-17 14:45:09
- * @FilePath: /book-book-admin-vue/src/components/m-layout/index.vue
+ * @LastEditors: DESKTOP-58041OI\zzs squanchy@yeah.net
+ * @LastEditTime: 2022-11-01 19:36:37
+ * @FilePath: \zs-ui-vue\packages\m-layout\lib\src\main.vue
 -->
 <template>
   <div :class="classObj" class="app-wrapper">
