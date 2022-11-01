@@ -30,5 +30,6 @@
   },
   "dependencies": {
     "sass-loader": "^12.6.0"
-  }
+  },
+  "gitHead": "b60259b95a9e367dcd5a6b4f00eb5fe4d2c23357"
 }
