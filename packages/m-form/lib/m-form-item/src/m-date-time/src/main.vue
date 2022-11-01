@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import { CommonUtils } from '@zs-ui-vue/shared';
+const defaultVal = null;
 export default {
   name: 'MDateTime',
   model: {
@@ -73,12 +75,12 @@ export default {
     },
     value: {
       type: [String, Number, Array],
-      default: null
+      default: defaultVal
     }
   },
   data() {
     return {
-      componentValue: ''
+      componentValue: defaultVal
     }
   },
   computed: {
@@ -93,7 +95,12 @@ export default {
       handler: function(value) {
         // 延迟到组件创建完毕后再进行
         this.$nextTick(() => {
-          if (value != null) {
+          console.log('received value change: ', value)
+          if (CommonUtils.isEmpty(value)) {
+            this.componentValue = defaultVal
+            return;
+          }
+          if (!this._.eq(this.componentValue, value)) {
             this.componentValue = this._.cloneDeep(value)
           }
         })
@@ -103,7 +110,9 @@ export default {
   methods: {
     // 通知父元素已经变化
     componentValueChange(value) {
+      console.log('noticed father: ', value)
       this.$emit('valueChange', value)
+      this.formItem.change(value)
     }
   }
 }

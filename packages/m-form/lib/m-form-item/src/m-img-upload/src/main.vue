@@ -37,6 +37,8 @@
 <script>
 import ImgUploadModel from './img-upload-model'
 import WImgUploadItem from './ImgUploadItem.vue'
+import { CommonUtils } from '@zs-ui-vue/shared';
+const defaultVal = [];
 
 export default {
   name: 'MImgUpload',
@@ -61,7 +63,7 @@ export default {
   },
   data() {
     return {
-      componentValue: [],
+      componentValue: defaultVal,
       localPath: ''
     }
   },
@@ -78,7 +80,13 @@ export default {
       handler: function(value) {
         // 延迟到组件创建完毕后再进行
         this.$nextTick(() => {
-          if (value) {
+          console.log('received value change: ', value)
+          if (CommonUtils.isEmpty(value)) {
+            this.componentValue = defaultVal
+            return;
+          }
+
+          if (!CommonUtils.isEmpty(value)) {
             this.componentValue = this.formItem.options.inputTransform(value).map(({ localPath, src }) => new ImgUploadModel({
               localPath,
               src,

@@ -752,139 +752,163 @@ export function getBookList() {
   });
 }
 
-export function getBookCategoryList() {
+export function getBookCategoryList(params) {
   return new Promise((resolve) => {
+    const list = [
+      {
+        'id': 1,
+        'uuid': '99956220fb3311eb9ccceb357ad2bc2f',
+        'title': '其他',
+        'thumb': '5fc825d083e311ec9806c7db9509ee10',
+        'pre': 81,
+        'next': null,
+        'deleted': 0,
+        'created_time': '2021-11-12T11:06:08.000Z',
+        'updated_time': '2022-03-10T02:24:00.000Z'
+      },
+      {
+        'id': 65,
+        'uuid': 'aac66c2043a811ecade355501eededd9',
+        'title': '热门',
+        'thumb': 'afb80e6083e411ec9806c7db9509ee10',
+        'pre': null,
+        'next': 74,
+        'deleted': 0,
+        'created_time': '2021-11-12T11:07:04.000Z',
+        'updated_time': '2022-03-10T02:24:00.000Z'
+      },
+      {
+        'id': 74,
+        'uuid': 'f71f20d060cc11ecad9c13eab05da66a',
+        'title': '剧情',
+        'thumb': '6fb65d4083e311ec9806c7db9509ee10',
+        'pre': 65,
+        'next': 81,
+        'deleted': 0,
+        'created_time': '2021-12-19T13:09:57.000Z',
+        'updated_time': '2022-03-10T02:24:00.000Z'
+      },
+      {
+        'id': 80,
+        'uuid': '28c6b550662f11ec85d1cb5cf2302655',
+        'title': '经济123',
+        'thumb': '7592312083e411ec9806c7db9509ee10',
+        'pre': 74,
+        'next': 81,
+        'deleted': 0,
+        'created_time': '2021-12-26T09:35:27.000Z',
+        'updated_time': '2022-02-04T16:16:59.000Z'
+      },
+      {
+        'id': 81,
+        'uuid': 'd8a4a5c085d511ec927e9587c4d13034',
+        'title': '仙侠',
+        'thumb': 'd5afa8b085d511ec927e9587c4d13034',
+        'pre': 74,
+        'next': 1,
+        'deleted': 0,
+        'created_time': '2022-02-04T16:16:45.000Z',
+        'updated_time': '2022-03-10T02:24:00.000Z'
+      }
+    ]
     const data = {
-      'list': [
-        {
-          'id': 1,
-          'uuid': '99956220fb3311eb9ccceb357ad2bc2f',
-          'title': '其他',
-          'thumb': '5fc825d083e311ec9806c7db9509ee10',
-          'pre': 81,
-          'next': null,
-          'deleted': 0,
-          'created_time': '2021-11-12T11:06:08.000Z',
-          'updated_time': '2022-03-10T02:24:00.000Z'
-        },
-        {
-          'id': 65,
-          'uuid': 'aac66c2043a811ecade355501eededd9',
-          'title': '热门',
-          'thumb': 'afb80e6083e411ec9806c7db9509ee10',
-          'pre': null,
-          'next': 74,
-          'deleted': 0,
-          'created_time': '2021-11-12T11:07:04.000Z',
-          'updated_time': '2022-03-10T02:24:00.000Z'
-        },
-        {
-          'id': 74,
-          'uuid': 'f71f20d060cc11ecad9c13eab05da66a',
-          'title': '剧情',
-          'thumb': '6fb65d4083e311ec9806c7db9509ee10',
-          'pre': 65,
-          'next': 81,
-          'deleted': 0,
-          'created_time': '2021-12-19T13:09:57.000Z',
-          'updated_time': '2022-03-10T02:24:00.000Z'
-        },
-        {
-          'id': 80,
-          'uuid': '28c6b550662f11ec85d1cb5cf2302655',
-          'title': '经济123',
-          'thumb': '7592312083e411ec9806c7db9509ee10',
-          'pre': 74,
-          'next': 81,
-          'deleted': 0,
-          'created_time': '2021-12-26T09:35:27.000Z',
-          'updated_time': '2022-02-04T16:16:59.000Z'
-        },
-        {
-          'id': 81,
-          'uuid': 'd8a4a5c085d511ec927e9587c4d13034',
-          'title': '仙侠',
-          'thumb': 'd5afa8b085d511ec927e9587c4d13034',
-          'pre': 74,
-          'next': 1,
-          'deleted': 0,
-          'created_time': '2022-02-04T16:16:45.000Z',
-          'updated_time': '2022-03-10T02:24:00.000Z'
-        }
-      ],
-      'total': 5
+      'list': list,
+      'total': 0
     }
+
+    if (Reflect.has(params.query || {}, 'uuids')) {
+      const setList = list.filter(item => params.query?.uuids.includes(item.uuid))
+      data.list = setList;
+      data.total = setList.length
+    }
+
+    if (Reflect.has(params.query || {}, 'uuid')) {
+      const setList = list.filter(item => params.query?.uuid === item.uuid)
+      data.list = setList;
+      data.total = setList.length
+    }
+
     resolve({ data });
   });
 }
 
-export function getTagList() {
+export function getTagList(params) {
+  console.log('params>>>>>>>>>>>>>', params)
   return new Promise((resolve) => {
+    const list = [
+      {
+        'id': 168,
+        'uuid': 'c70689f04ac511ec8ce49f72480132d9',
+        'name': '热门推荐',
+        'deleted': 0,
+        'created_time': '2021-11-21T12:23:04.000Z',
+        'updated_time': '2022-03-08T03:13:01.000Z',
+        'value': 'kehuan',
+        'required': 0
+      },
+      {
+        'id': 17,
+        'uuid': '04d858304ac611ec8ce49f72480132d9',
+        'name': '侠客行',
+        'deleted': 0,
+        'created_time': '2021-11-21T12:24:48.000Z',
+        'updated_time': '2022-03-08T03:14:11.000Z',
+        'value': 'wuxiad',
+        'required': 0
+      },
+      {
+        'id': 64,
+        'uuid': '90bbec409de111ecbf17a95bb89eb4ba',
+        'name': '天文奇观',
+        'deleted': 0,
+        'created_time': '2022-03-07T06:41:06.000Z',
+        'updated_time': '2022-03-10T02:27:14.000Z',
+        'value': 'l0gc4f0kz4z',
+        'required': 0
+      },
+      {
+        'id': 65,
+        'uuid': 'c46c6c209e8d11eca3fc0b2b5a46d40f',
+        'name': '奇幻小说',
+        'deleted': 0,
+        'created_time': '2022-03-08T03:13:46.000Z',
+        'updated_time': '2022-03-08T03:13:46.000Z',
+        'value': 'l0hk5n1ebos',
+        'required': 0
+      },
+      {
+        'id': 66,
+        'uuid': '32d153409eae11ec879a09ecfebd6b21',
+        'name': '教辅',
+        'deleted': 0,
+        'created_time': '2022-03-08T07:05:55.000Z',
+        'updated_time': '2022-03-08T07:05:55.000Z',
+        'value': 'l0hsg6t08sk',
+        'required': 0
+      },
+      {
+        'id': 671,
+        'uuid': '3ec293809eae11ec879a09ecfebd6b21',
+        'name': '科学秘境',
+        'deleted': 0,
+        'created_time': '2022-03-08T07:06:15.000Z',
+        'updated_time': '2022-03-10T02:30:48.000Z',
+        'value': 'l0hsgm9kze6',
+        'required': 0
+      }
+    ]
     const data = {
-      'list': [
-        {
-          'id': 168,
-          'uuid': 'c70689f04ac511ec8ce49f72480132d9',
-          'name': '热门推荐',
-          'deleted': 0,
-          'created_time': '2021-11-21T12:23:04.000Z',
-          'updated_time': '2022-03-08T03:13:01.000Z',
-          'value': 'kehuan',
-          'required': 0
-        },
-        {
-          'id': 17,
-          'uuid': '04d858304ac611ec8ce49f72480132d9',
-          'name': '侠客行',
-          'deleted': 0,
-          'created_time': '2021-11-21T12:24:48.000Z',
-          'updated_time': '2022-03-08T03:14:11.000Z',
-          'value': 'wuxiad',
-          'required': 0
-        },
-        {
-          'id': 64,
-          'uuid': '90bbec409de111ecbf17a95bb89eb4ba',
-          'name': '天文奇观',
-          'deleted': 0,
-          'created_time': '2022-03-07T06:41:06.000Z',
-          'updated_time': '2022-03-10T02:27:14.000Z',
-          'value': 'l0gc4f0kz4z',
-          'required': 0
-        },
-        {
-          'id': 65,
-          'uuid': 'c46c6c209e8d11eca3fc0b2b5a46d40f',
-          'name': '奇幻小说',
-          'deleted': 0,
-          'created_time': '2022-03-08T03:13:46.000Z',
-          'updated_time': '2022-03-08T03:13:46.000Z',
-          'value': 'l0hk5n1ebos',
-          'required': 0
-        },
-        {
-          'id': 66,
-          'uuid': '32d153409eae11ec879a09ecfebd6b21',
-          'name': '教辅',
-          'deleted': 0,
-          'created_time': '2022-03-08T07:05:55.000Z',
-          'updated_time': '2022-03-08T07:05:55.000Z',
-          'value': 'l0hsg6t08sk',
-          'required': 0
-        },
-        {
-          'id': 671,
-          'uuid': '3ec293809eae11ec879a09ecfebd6b21',
-          'name': '科学秘境',
-          'deleted': 0,
-          'created_time': '2022-03-08T07:06:15.000Z',
-          'updated_time': '2022-03-10T02:30:48.000Z',
-          'value': 'l0hsgm9kze6',
-          'required': 0
-        }
-      ],
-      'total': 6
+      'list': list,
+      'total': 0
     }
+
+    console.log('params.query>>>>>>>>>>>>>', params.query)
+    if (Reflect.has(params.query || {}, 'uuids')) {
+      const setList = list.filter(item => params.query?.uuids.includes(item.uuid))
+      data.list = setList;
+      data.total = setList.length
+    }
+
     resolve({ data });
   });
 }

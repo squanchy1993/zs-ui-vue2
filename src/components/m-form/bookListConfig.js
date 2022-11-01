@@ -324,6 +324,13 @@ export const generateFormItems = ({ that, openDialogData }) => {
       itemBoxStyle: { width: '100%' }
     }),
     new MFormItemModel({
+      label: 'num',
+      prop: 'testNum',
+      el_type: 'MInputNumber',
+      itemBoxStyle: { width: '100%' },
+      defaultValue: 23
+    }),
+    new MFormItemModel({
       label: '轮播图',
       prop: 'banner',
       el_type: 'MImgUpload',
@@ -390,6 +397,17 @@ export const generateFormItems = ({ that, openDialogData }) => {
               }}
             >
               重置
+            </el-button>
+            <el-button
+              type='primary'
+              size='mini'
+              class='btnActive'
+              style='margin-top: 28px'
+              onClick={() => {
+                that.clearForm();
+              }}
+            >
+              清空
             </el-button>
           </div>
         );

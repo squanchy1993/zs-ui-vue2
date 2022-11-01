@@ -1,3 +1,9 @@
+<!--
+ * @Date: 2022-11-01 09:12:52
+ * @LastEditors: DESKTOP-58041OI\zzs squanchy@yeah.net
+ * @LastEditTime: 2022-11-01 13:50:31
+ * @FilePath: \zs-ui-vue\packages\m-form\lib\m-form-item\src\m-input\src\main.vue
+-->
 <template>
   <el-form-item
     class="form-item"
@@ -15,6 +21,8 @@
 </template>
 
 <script>
+import { CommonUtils } from '@zs-ui-vue/shared';
+const defaultVal = '';
 export default {
   name: 'MInput',
   model: {
@@ -30,12 +38,12 @@ export default {
     },
     value: {
       type: String,
-      default: ''
+      default: defaultVal
     }
   },
   data() {
     return {
-      componentValue: ''
+      componentValue: defaultVal
     }
   },
   computed: {
@@ -50,8 +58,12 @@ export default {
       handler: function(value) {
         // 延迟到组件创建完毕后再进行
         this.$nextTick(() => {
-          if (value != null && this.componentValue !== value) {
-            console.log('received value change: ', value)
+          console.log('received value change: ', value)
+          if (CommonUtils.isEmpty(value)) {
+            this.componentValue = defaultVal
+            return;
+          }
+          if (!this._.eq(this.componentValue, value)) {
             this.componentValue = this._.cloneDeep(value)
           }
         })
