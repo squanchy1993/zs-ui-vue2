@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2022-04-27 11:13:28
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-11-01 11:53:48
+ * @LastEditors: DESKTOP-58041OI\zzs squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
- * @FilePath: /vue-admin-template/src/views/sidebars/system/permission/index.vue
+ * @FilePath: \zs-ui-vue\packages\m-form\lib\m-form-dialog\src\mian.vue
 -->
 <template>
   <div class="book-dialog">
@@ -38,6 +38,7 @@
 /* eslint-disable */
 import { MFormItem } from '../../m-form-item/index';
 import { DialogOptionModel } from "./model";
+import { CommonUtils } from '@zs-ui-vue/shared';
 
 export default {
   name: 'MFormDialog',
@@ -73,24 +74,20 @@ export default {
           openDialogData: dialogData
         });
 
-        for (var item of originFormItems) {
+        for (let item of originFormItems) {
           if (item.prop) {
-            if (type === 'auth' || type === 'check') {
+
+            if (['auth', 'check'].includes(type)) {
               item.disabled = true;
             }
+
             // 当dialogData的模型和formitems的一致时可以取巧，不一致的时候还是要一个个设置
             const dialogDataValue = this._.get(dialogData, item.prop);
-            let setValue;
-            if (!this._.isNumber(dialogDataValue)) {
-              setValue = !this._.isEmpty(dialogDataValue) ? dialogDataValue : item.defaultValue;
-            } else {
-              setValue = !this._.isNil(dialogDataValue) ? dialogDataValue : item.defaultValue;
-            }
-            console.log('this._.isEmpty(setValue)', setValue);
-
+            let setValue = !CommonUtils.isEmpty(dialogDataValue)? dialogDataValue : item.defaultValue
             this._.set(originFormData, item.prop, setValue);
           }
         }
+        
         this.formItems = originFormItems;
         this.formData = originFormData;
         this.formOriginData = { ...dialogData };
@@ -100,6 +97,18 @@ export default {
         this.isShow = true;
       });
       return promise;
+    },
+
+    // 重置表单
+    resetForm(){
+      for (let item of this.formItems) {
+          if (item.prop) {
+            // 当dialogData的模型和formitems的一致时可以取巧，不一致的时候还是要一个个设置
+            const dialogDataValue = this._.get(this.formOriginData, item.prop);
+            let setValue = !CommonUtils.isEmpty(dialogDataValue)? dialogDataValue : item.defaultValue
+            this._.set(this.formData, item.prop, setValue);
+          }
+        }
     },
 
     // 点击

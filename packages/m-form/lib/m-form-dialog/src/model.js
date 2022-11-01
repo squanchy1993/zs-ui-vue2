@@ -13,10 +13,8 @@
 export class DialogOptionModel {
   constructor({
     dialogAtter = {},
-    generateFormItems = () => {
-      return { originFormItems: [], originFormData: {}}
-    },
-    createInterceptor = (formOriginData, formData, extraData) => { },
+    generateFormItems = () => ({ originFormItems: [], originFormData: {}}),
+    createInterceptor = (formOriginData, formData, extraData) => {},
     editInterceptor = (formOriginData, formData, extraData) => {},
     authInterceptor = (formOriginData, formData, extraData) => {},
     submitSuccess = () => {}

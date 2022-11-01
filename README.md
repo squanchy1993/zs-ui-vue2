@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 22:37:59
- * @LastEditTime: 2022-04-28 11:27:28
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-11-01 11:44:42
+ * @LastEditors: DESKTOP-58041OI\zzs squanchy@yeah.net
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: /zs-ui-vue/README.md
+ * @FilePath: \zs-ui-vue\README.md
 -->
 
 ### 命令行
@@ -24,6 +24,9 @@ lerna add lodash --scope=@zs-ui-vue/m-form-item
 lerna bootstrap --hoist #将所有 package 的依赖引到 根目录的 node_modules 中，节省空间
 lerna clean 清除 lerna bootstrap 添加上依赖包括本地的
 发布时会自动带上最新的 本地依赖版本号
+
+// 打包
+yarn run compile @zs-ui-vue/m-form
 ```
 ### 发布
 // 发布前准备
