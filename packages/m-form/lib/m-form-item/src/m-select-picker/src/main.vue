@@ -275,7 +275,7 @@ export default {
       }
 
       // // 设置其他参数 (非 adminQuery 字段)
-      if (!CommonUtils.isEmpty(this.pageListData.otherParams, true)) {
+      if (!CommonUtils.isEmpty(this.pageListData.otherParams)) {
         Object.keys(this.pageListData.otherParams).forEach((key) => {
           params[key] = this.pageListData.otherParams[key]
         })

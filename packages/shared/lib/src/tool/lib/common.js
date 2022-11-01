@@ -12,25 +12,18 @@ export default class CommonUtils {
    * @func
    * @desc  判断是否为空
    * @param { * } val - 参数val一般数据类型
-   * @param {boolean} [isExpectZero]=false - 参数isExpectZero默认值为false
    * @returns {boolean}
    */
-  static isEmpty(val, isExpectZero = false) {
-    // 0 判断是否有值
-    // null or undefined
-    if (val == null) return true
+  static isEmpty(val) {
+    // null
+    if (val === null) return true
+
+    // undefined
+    if (val === undefined) return true
 
     if (typeof val === 'boolean') return false
 
-    if (typeof val === 'number') {
-      if (!val && isExpectZero) {
-        return !isExpectZero
-      } else {
-        return !val
-      }
-    }
-
-    if (val instanceof Error) return val.message === ''
+    if (typeof val === 'number') return false
 
     switch (Object.prototype.toString.call(val)) {
       // String or Array
@@ -49,6 +42,7 @@ export default class CommonUtils {
         return !Object.keys(val).length
       }
     }
+
     return false
   }
 
