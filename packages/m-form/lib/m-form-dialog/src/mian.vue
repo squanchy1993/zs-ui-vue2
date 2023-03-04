@@ -204,7 +204,7 @@ export default {
       // 手机屏幕
       @media screen and (max-width: 990px) {
         width: 90vw !important;
-        height: 90vh !important;
+        max-height: 90vh !important;
         margin-top: 5vh !important;
         .form-item-box {
             width: 100%;
@@ -214,7 +214,7 @@ export default {
       // 电脑屏幕
       @media screen and (min-width: 990px) {
         width: 80vh !important;
-        height: 80vh !important;
+        max-height: 80vh !important;
         margin-top: 10vh !important;
         .form-item-box {
             width: 45%;
@@ -224,7 +224,6 @@ export default {
   }
 
   .list-dialog__container {
-    max-height: 60vh;
     overflow: scroll;
     .m-form {
       ::v-deep {
