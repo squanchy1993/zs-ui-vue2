@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2022-11-01 13:48:44
- * @LastEditors: DESKTOP-58041OI\zzs squanchy@yeah.net
+ * @LastEditTime: 2023-03-04 16:34:23
+ * @LastEditors: squanchy squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
- * @FilePath: \zs-ui-vue\packages\m-form\lib\m-form-dialog\src\mian.vue
+ * @FilePath: /zs-ui-vue/packages/m-form/lib/m-form-dialog/src/mian.vue
 -->
 <template>
   <div class="book-dialog">
@@ -188,21 +188,36 @@ export default {
 .list-dialog {
   ::v-deep {
     .m-dialog {
+      display: flex;
+      flex-direction: column;
+      .el-dialog__body{
+        height: 100%;
+        box-sizing: border-box;
+        .list-dialog__container{
+            height: 100%;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+      }
+
       // 手机屏幕
       @media screen and (max-width: 990px) {
-        // 详情弹框的宽度
-        width: 90%;
+        width: 90vw !important;
+        height: 90vh !important;
+        margin-top: 5vh !important;
         .form-item-box {
-          width: 100%;
+            width: 100%;
         }
       }
 
       // 电脑屏幕
       @media screen and (min-width: 990px) {
-        // 详情弹框的宽度
-        width: 600px;
+        width: 80vh !important;
+        height: 80vh !important;
+        margin-top: 10vh !important;
         .form-item-box {
-          width: 45%;
+            width: 45%;
         }
       }
     }
