@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 22:37:59
- * @LastEditTime: 2022-11-01 20:22:59
- * @LastEditors: DESKTOP-58041OI\zzs squanchy@yeah.net
+ * @LastEditTime: 2023-03-04 18:30:58
+ * @LastEditors: squanchy squanchy@yeah.net
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \zs-ui-vue\README.md
+ * @FilePath: /zs-ui-vue/README.md
 -->
 
 ### 命令行
@@ -28,6 +28,7 @@ lerna clean 清除 lerna bootstrap 添加上依赖包括本地的
 // 打包
 yarn run compile @zs-ui-vue/m-form
 ```
+
 ### 发布
 // 发布前准备
 npm 源切换到 npm原来的源 登录npm 账户 npm login
