@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-03-04 18:15:18
+ * @LastEditTime: 2023-03-04 19:00:31
  * @LastEditors: squanchy squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
  * @FilePath: /zs-ui-vue/packages/m-form/lib/m-form-dialog/src/mian.vue
@@ -119,7 +119,7 @@ export default {
       for (let item of this.formItems) {
         if (item.prop) {
           // 当dialogData的模型和formitems的一致时可以取巧，不一致的时候还是要一个个设置
-          let setValue = item.defaultValue
+          let setValue = item.defaultValue;
           this._.set(this.formData, item.prop, setValue);
         }
       }
@@ -190,14 +190,18 @@ export default {
     .m-dialog {
       display: flex;
       flex-direction: column;
-      .el-dialog__body{
-        height: 100%;
+      .el-dialog__header {
+        height: 65px;
+      }
+      .el-dialog__body {
+        max-height: calc(80vh - 65px);
+        overflow: scroll;
         box-sizing: border-box;
-        .list-dialog__container{
-            height: 100%;
-            &::-webkit-scrollbar {
-                display: none;
-            }
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        .list-dialog__container {
+          height: 100%;
         }
       }
 
@@ -207,7 +211,7 @@ export default {
         max-height: 90vh !important;
         margin-top: 5vh !important;
         .form-item-box {
-            width: 100%;
+          width: 100%;
         }
       }
 
@@ -217,7 +221,7 @@ export default {
         max-height: 80vh !important;
         margin-top: 10vh !important;
         .form-item-box {
-            width: 45%;
+          width: 45%;
         }
       }
     }
