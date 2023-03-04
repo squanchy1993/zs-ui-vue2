@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-03-04 19:03:23
+ * @LastEditTime: 2023-03-04 19:16:15
  * @LastEditors: squanchy squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
  * @FilePath: /zs-ui-vue/packages/m-form/lib/m-form-dialog/src/mian.vue
@@ -228,7 +228,6 @@ export default {
   }
 
   .list-dialog__container {
-    overflow: scroll;
     .m-form {
       ::v-deep {
         .title {
