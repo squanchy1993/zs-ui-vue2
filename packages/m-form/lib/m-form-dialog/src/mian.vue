@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-03-04 16:34:23
+ * @LastEditTime: 2023-03-04 18:15:18
  * @LastEditors: squanchy squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
  * @FilePath: /zs-ui-vue/packages/m-form/lib/m-form-dialog/src/mian.vue
@@ -213,7 +213,7 @@ export default {
 
       // 电脑屏幕
       @media screen and (min-width: 990px) {
-        width: 80vh !important;
+        width: 80vw !important;
         max-height: 80vh !important;
         margin-top: 10vh !important;
         .form-item-box {
