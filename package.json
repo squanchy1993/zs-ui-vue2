@@ -34,7 +34,6 @@
     "lint-staged": "^12.3.8",
     "progress-bar-webpack-plugin": "^2.1.0",
     "vue-template-compiler": "^2.6.11",
-    "@zs-ui-vue/m-form": "^1.0.0",
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.8",

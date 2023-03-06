@@ -31,7 +31,7 @@
             :class="{ 'is-disabled' : formItem.disabled}"
             :disable-transitions="false"
             :closable="!formItem.disabled"
-            @close.stop="remove(tag)"
+            @close.stop="selectItemClick(tag)"
           >
             {{ tag[labelKey] }}
           </el-tag>
@@ -40,7 +40,7 @@
       <div class="select__body">
         <div v-show="isShowList" class="select__body-inner">
           <el-input
-            v-if="formItem.options.filterable"
+            v-if="filterPropsKey"
             v-model="searchValue"
             :validate-event="false"
             size="mini"
@@ -52,11 +52,11 @@
               class="el-icon-search"
             /></el-input>
           <div class="search-body">
-            <div v-if="pageListData.list.length > 0" class="search-body_list">
+            <div v-if="itemList.length > 0" class="search-body_list">
               <div
-                v-for="(item, index) in pageListData.list"
+                v-for="(item, index) in itemList"
                 :key="index"
-                :class="isSelected(item.uuid) ? 'selected' : ''"
+                :class="isSelected(item) ? 'selected' : ''"
                 class="select-option"
                 @click="selectItemClick(item)"
               >
@@ -66,13 +66,12 @@
             <div v-else class="search-body_empty">暂无内容</div>
           </div>
           <el-pagination
-            v-if="pageListData.isShowPagination"
+            v-if="isShowPagination"
             layout="prev, total, next"
-            :current-page="pageListData.listSeting.setValue.current"
-            :total="pageListData.totalElement * 1"
-            :page-size="10"
-            @current-change="paginationClick"
-            @size-change="paginationSizeChange"
+            :current-page="curPage"
+            :total=" total * 1"
+            :page-size="size"
+            @current-change="getData"
           />
         </div>
       </div>
@@ -81,7 +80,6 @@
 </template>
 
 <script>
-import { CommonUtils } from '@zs-ui-vue/shared'
 
 export default {
   name: 'MSelectPicker',
@@ -97,7 +95,7 @@ export default {
       }
     },
     value: {
-      type: [String, Array, Number],
+      type: [Array],
       default: null
     }
   },
@@ -109,7 +107,11 @@ export default {
       pageListData: null,
       selectedTag: [],
       isShowList: false,
-      searchValue: ''
+      searchValue: '',
+      curPage: 1,
+      size: 10,
+      total: 0,
+      itemList: []
     }
   },
   computed: {
@@ -123,8 +125,11 @@ export default {
     valueKey() {
       return this.formItem.options.labelValue.value
     },
-    multiple() {
-      return this.formItem.options.multiple
+    isShowPagination() {
+      return this.formItem.options.pageData?.pagination
+    },
+    filterPropsKey() {
+      return this.formItem.options.filterPropsKey
     },
     removeInterceptor() {
       return this.formItem.options.removeInterceptor
@@ -137,10 +142,10 @@ export default {
         // 延迟到组件创建完毕后再进行
         this.$nextTick(() => {
           console.log('received value change select picker: ', value)
-          if (CommonUtils.isEmpty(value)) {
-            this.componentValue = this.multiple ? [] : null;
+          if ([null, undefined].includes(value)) {
+            this.componentValue = null
             this.setTag()
-            return;
+            return
           }
 
           if (!this._.eq(this.componentValue, value)) {
@@ -183,231 +188,113 @@ export default {
     },
 
     // 设置已选标签
-    setTag() {
-      const pageListData = this.formItem.options.pageListData
+    async setTag() {
+      const pageData = this.formItem.options.pageData
       // api 为空意味着不需要请求
-      if (!pageListData.apiFun) {
-        if (this.multiple) {
-          // this.selectedTag = this.selectedTag.filter((item) => item[this.valueKey] !== id)
-          // this.value_ = this.value_.filter((item) => item !== id)
-        }
-
-        if (!this.multiple) {
-          const id = this.componentValue
-          this.selectedTag = pageListData.list.filter((item) => item[this.valueKey] === id)
+      if (!pageData.api) {
+        if (this.componentValue) {
+          this.selectedTag = pageData.list.filter((item) => this.componentValue.includes(item[this.valueKey]))
+        } else {
+          this.setTag = []
         }
         return
       }
 
-      // 根据value值 请求 api ，设置请求字段名
-      const valueKey = pageListData.query.formItems[0].prop
-      const params = {
-        query: {
-          [valueKey]: this.componentValue
+      // api 存在需要请求
+      if (pageData.api) {
+        if (this.componentValue) {
+          const valueKey = this.formItem.options.valuePropKey
+          const params = {
+            query: {
+              [valueKey]: this.componentValue
+            }
+          }
+          const { list } = (await pageData.api(params)).data
+          this.selectedTag = list
+        } else {
+          this.setTag = []
         }
       }
-      // 不分页
-      if (pageListData.isShowPagination) {
-        const { currentKeyName, sizeKeyName } = pageListData.listSeting.keyName
-        const pageable = {
-          [`${currentKeyName}`]: 1,
-          [`${sizeKeyName}`]: 10
-        }
-        params[`pageable`] = pageable
-      }
-
-      pageListData.apiFun(params).then((res) => {
-        this.selectedTag = res.data.list
-      })
     },
 
     // 获得下拉列表
     setList() {
-      this.pageListData = this.formItem.options.pageListData
-      if (!this.pageListData.apiFun) {
+      const pageData = this.formItem.options.pageData
+      if (!pageData.api) {
+        this.itemList = [...pageData.list]
         return
+      } else {
+        const curPage = pageData.pagination ? 1 : null
+        this.getData(curPage)
       }
-      const { current, size } = this.pageListData.listSeting.setValue
-      this.getData(current, size)
     },
 
     // 获取数据
-    getData(current, size) {
+    getData(curPage) {
       // eslint-disable-next-line no-unused-vars
       return new Promise((resolve, reject) => {
-        this.getPageListData(current, size).then((res) => {
-          const resData = res.data
-          this.pageListData.listSeting.setValue.current = current
-          this.pageListData.listSeting.setValue.size = size
-          this.pageListData.list = resData.list
-          this.pageListData.isShowPagination &&
-            (this.pageListData.totalElement = resData.totalElements)
+        this.getPageListData(curPage).then((res) => {
+          curPage && (this.curPage = curPage)
+          const { totalElements, list } = res.data
+          this.total = totalElements
+          this.itemList = list
           resolve('获取成功')
         })
       })
     },
 
     // api请求
-    getPageListData(current, size) {
-      let params = {}
+    getPageListData(curPage) {
+      const params = {}
 
       // 设置分页
-      if (this.pageListData.isShowPagination) {
-        const { currentKeyName, sizeKeyName } = this.pageListData.listSeting.keyName
+      if (curPage) {
+        const { pageKeyName, sizeKeyName } = this.formItem.options.pageData.pagination
         const pageable = {
-          [`${currentKeyName}`]: current,
-          [`${sizeKeyName}`]: size
+          [pageKeyName]: curPage,
+          [sizeKeyName]: this.size
         }
         params[`pageable`] = pageable
       }
-
-      // 设置筛选条件
-      if (this.pageListData.query.formItems.length > 0) {
-        const { formItems, searchFormData } = this.pageListData.query
-        const query = this.dealQuery(formItems, searchFormData)
-        if (!CommonUtils.isEmpty(query)) {
-          params = { ...params, query }
+      // 搜索框
+      if (this.filterPropsKey && this.searchValue) {
+        const query = {
+          [this.filterPropsKey]: this.searchValue
         }
-      }
-
-      // // 设置其他参数 (非 adminQuery 字段)
-      if (!CommonUtils.isEmpty(this.pageListData.otherParams)) {
-        Object.keys(this.pageListData.otherParams).forEach((key) => {
-          params[key] = this.pageListData.otherParams[key]
-        })
+        params[`query`] = query
       }
 
       // 进行请求
-      return this.pageListData.apiFun(params)
-    },
-
-    // 处理查询字段  value有值的时候设置value，无值的话；且defalue不为null 时就默认设置default 进行请求
-    dealQuery(formItems, formData) {
-      const queryData = {}
-      formItems.forEach(({ prop, el_type, defaultValue }) => {
-        let formDataValue = null
-        var getPathValue = CommonUtils.getValueByObjPath(formData, prop)
-
-        // value为空 而defaultValue为空
-        if (CommonUtils.isEmpty(getPathValue) && defaultValue == null) {
-          return
-        }
-        // value为空 而defaultValue不为空
-        if (CommonUtils.isEmpty(getPathValue) && defaultValue != null) {
-          formDataValue = defaultValue
-        }
-
-        if (!CommonUtils.isEmpty(getPathValue)) {
-          formDataValue = getPathValue
-        }
-
-        switch (el_type) {
-          case 'MDateTime':
-            if (prop.indexOf('-') !== -1) {
-              const keyArr = prop.split('-')
-              const maxKey = keyArr[0]
-              const minKey = keyArr[1]
-              CommonUtils.setDeepValue(queryData, maxKey, formDataValue[0])
-              CommonUtils.setDeepValue(queryData, minKey, formDataValue[1])
-            } else {
-              CommonUtils.setDeepValue(queryData, prop, formDataValue)
-            }
-            break
-          default:
-            CommonUtils.setDeepValue(queryData, prop, formDataValue)
-            break
-        }
-      })
-      return queryData
-    },
-
-    // 分页点击
-    paginationClick(current) {
-      const { size } = this.pageListData.listSeting.setValue
-      this.getData(current, size)
-    },
-
-    // 分页个数发生变化
-    paginationSizeChange(size) {
-      const { current } = this.pageListData.listSeting.setValue
-      this.getData(current, size)
-    },
-
-    // 刷新
-    regetList(isShowSuccessToast) {
-      const { current, size } = this.pageListData.listSeting.setValue
-      this.getData(current, size).then((res) => {
-        if (res.success && isShowSuccessToast) {
-          this.$message.success('刷新成功')
-        }
-      })
-    },
-
-    // 重置
-    resetList() {
-      // eslint-disable-next-line prefer-const
-      const { defaultValue } = this.formItem.options
-      const valueKey = this.pageListData.query.formItems[0].prop
-      const searchKey = this.pageListData.query.formItems[1].prop
-
-      this.pageListData.query.searchFormData = {
-        [valueKey]: '',
-        [searchKey]: '',
-        ...defaultValue
-      }
-
-      this.$nextTick(() => {
-        const { current, size } = this.pageListData.listSeting.defaultValue
-        this.getData(current, size)
-      })
-    },
-
-    // 搜索
-    async search(value) {
-      // 重置 current
-      const { defaultValue } = this.formItem.options
-      const searchKey = this.pageListData.query.formItems[1].prop
-
-      this.pageListData.query.searchFormData = {
-        [searchKey]: value,
-        ...defaultValue
-      }
-
-      const { current, size } = this.pageListData.listSeting.defaultValue
-      await this.getData(current, size)
+      return this.formItem.options.pageData.api(Object.keys(params).length ? params : null)
     },
 
     // 点击item
     selectItemClick(tag) {
       try {
         const id = tag[this.valueKey]
-        if (this.formItem.options.multiple) {
-          if (!this.componentValue.includes(id)) {
-            // 添加
-            this.selectedTag.push(tag)
-            this.componentValue.push(id)
-          } else {
-            // 清除
-
-            // 检查是否有必需项
-            this.removeInterceptor && this.removeInterceptor(id, this.componentValue)
-
-            this.selectedTag = this.selectedTag.filter((item) => item[this.valueKey] !== id)
-            this.componentValue = this.componentValue.filter((item) => item !== id)
+        if (!this.componentValue || !this.componentValue.includes(id)) {
+          // 添加
+          if (Array.isArray(this.componentValue)) {
+            const valueList = Array.from(this.componentValue)
+            if (this.formItem.options.limit <= valueList.length) {
+              return
+            }
           }
+
+          this.selectedTag.push(tag)
+          this.componentValue.push(id)
         } else {
-          if (this.componentValue !== id) {
-            // 添加
-            this.componentValue = id
-            this.selectedTag = [tag]
-          } else {
-            // 清除
-            // 检查是否有必需项
-            this.removeInterceptor && this.removeInterceptor(id, this.componentValue)
+          // 清除
+          // 检查是否有必需项
+          this.removeInterceptor && this.removeInterceptor(id, this.componentValue)
 
-            this.componentValue = ''
-            this.selectedTag = []
-          }
+          // 删除tag
+          const index = this.selectedTag.findIndex(item => item[this.valueKey] === id)
+          this.selectedTag.splice(index, 1)
+
+          // 删除value
+          const valueIndex = this.componentValue.findIndex(item => item[this.valueKey] === id)
+          this.componentValue.splice(valueIndex, 1)
         }
         this.componentValueChange(this.componentValue)
       } catch (error) {
@@ -415,35 +302,25 @@ export default {
       }
     },
 
-    // 删除
-    remove(tag) {
-      try {
-        const id = tag[this.valueKey]
-
-        // 检查是否有必需项
-        this.removeInterceptor && this.removeInterceptor(id, this.componentValue)
-
-        if (this.multiple) {
-          this.selectedTag = this.selectedTag.filter((item) => item[this.valueKey] !== id)
-          this.componentValue = this.componentValue.filter((item) => item !== id)
-        } else {
-          this.componentValue = ''
-          this.selectedTag = []
-        }
-        this.componentValueChange(this.componentValue)
-      } catch (error) {
-        this.$message.warning(error.message)
-      }
-    },
-
-    isSelected(uuid) {
-      let selected = true
-      if (this.multiple) {
-        selected = this.componentValue.includes(uuid)
+    isSelected(tag) {
+      const id = tag[this.valueKey]
+      if (this.componentValue) {
+        return this.componentValue.includes(id)
       } else {
-        selected = this.componentValue === uuid
+        return false
       }
-      return selected
+    },
+
+    // 搜索
+    async search(value) {
+      const pageData = this.formItem.options.pageData
+      if (!pageData.api) {
+        const list = pageData.list.filter(item => item[this.filterPropsKey].includes(value))
+        this.list = [...list]
+      } else {
+        const curPage = pageData.pagination ? 1 : null
+        this.getData(curPage)
+      }
     }
   }
 }
@@ -502,6 +379,15 @@ export default {
     height: 0;
     position: relative;
     width: 100%;
+  ::-webkit-scrollbar {
+    width: 10px;      /* Safari,Chrome 隐藏滚动条 */
+    height: 0;     /* Safari,Chrome 隐藏滚动条 */
+    background: #fafafa;
+  }
+
+  ::-webkit-scrollbar-thumb{
+    background: #c7c7c7;
+  }
     .select__body-inner {
       position: absolute;
       top: 12px;
