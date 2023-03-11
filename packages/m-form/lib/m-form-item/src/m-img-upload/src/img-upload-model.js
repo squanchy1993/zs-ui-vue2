@@ -1,4 +1,3 @@
-
 export default class ImgUploadModel {
   constructor({
     upload_progress = 0,

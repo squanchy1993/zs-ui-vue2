@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-23 13:29:12
- * @LastEditTime: 2022-03-04 20:07:30
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-02-20 23:11:16
+ * @LastEditors: squanchy1993 squanchy@yeah.net
  * @Description: In User Settings Edit
- * @FilePath: /micro-rail/src/views/system/robot/components/forms/robot-base-info/w-img-upload/index.vue
+ * @FilePath: /rail-dection-web/src/components/m-img-upload/src/ImgUploadItem.vue
 -->
 <!-- 单文件上传组件 -->
 <template>
