@@ -20,12 +20,13 @@
         @uploaded="uploaded"
       />
       <img :src="localPath">
-      <div v-show="componentValue.length < formItem.options.limit && !formItem.disabled" class="img-upload__item img-upload__add">
+      <div v-show="isShowUpload" class="img-upload__item img-upload__add">
         <input
           ref="addPicFile"
           type="file"
           class="add-btn"
-          :accept="{ String, default: 'image/jpg,image/jpeg,image/png,image/bmp' }"
+          multiple="multiple"
+          accept="image/*"
           @change="addFile"
         >
         <span>上传</span>
@@ -37,8 +38,6 @@
 <script>
 import ImgUploadModel from './img-upload-model'
 import WImgUploadItem from './ImgUploadItem.vue'
-import { CommonUtils } from '@zs-ui-vue/shared';
-const defaultVal = [];
 
 export default {
   name: 'MImgUpload',
@@ -63,7 +62,7 @@ export default {
   },
   data() {
     return {
-      componentValue: defaultVal,
+      componentValue: [],
       localPath: ''
     }
   },
@@ -71,6 +70,9 @@ export default {
     inputValue() {
       // 监听输入value的变化
       return this.value
+    },
+    isShowUpload() {
+      return !this.formItem.options.limit || (this.componentValue.length < this.formItem.options.limit && !this.formItem.disabled)
     }
   },
   watch: {
@@ -80,13 +82,7 @@ export default {
       handler: function(value) {
         // 延迟到组件创建完毕后再进行
         this.$nextTick(() => {
-          console.log('received value change: ', value)
-          if (CommonUtils.isEmpty(value)) {
-            this.componentValue = defaultVal
-            return;
-          }
-
-          if (!CommonUtils.isEmpty(value)) {
+          if (value) {
             this.componentValue = this.formItem.options.inputTransform(value).map(({ localPath, src }) => new ImgUploadModel({
               localPath,
               src,
@@ -111,17 +107,22 @@ export default {
 
     // 添加图片
     addFile(e) {
-      const file = e.target.files[0]
-      const localPath = window.URL.createObjectURL(file)
-      this.componentValue.push(
-        new ImgUploadModel({
-          localPath,
-          file
-        })
-      )
+      // eslint-disable-next-line no-unused-vars
+      for (const [k, file] of Object.entries(e.target.files)) {
+        if (file.type.includes('image/')) {
+          const localPath = window.URL.createObjectURL(file)
+          this.componentValue.push(
+            new ImgUploadModel({
+              localPath,
+              file,
+              path: this.formItem.options.path
+            })
+          )
+        }
+      }
     },
 
-    // 删除
+    // 删除ß
     deleteFun(e) {
       this.componentValue = this.componentValue.filter((item) => item.id !== e)
       this.componentValueChange(this.componentValue)
