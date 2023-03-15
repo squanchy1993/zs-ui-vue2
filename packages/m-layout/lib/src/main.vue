@@ -2,7 +2,7 @@
  * @Date: 2022-06-13 18:42:2
  * @LastEditors: DESKTOP-58041OI\zzs squanchy@yeah.net
  * @LastEditTime: 2022-11-01 19:44:48
- * @FilePath: \zs-ui-vue\packages\m-layout\lib\src\main.vue
+ * @FilePath: \zs-ui-vue2\packages\m-layout\lib\src\main.vue
 -->
 <template>
   <div :class="classObj" class="app-wrapper">

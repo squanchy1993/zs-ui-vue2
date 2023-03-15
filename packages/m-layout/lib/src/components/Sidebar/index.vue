@@ -2,7 +2,7 @@
  * @Date: 2022-06-13 18:42:23
  * @LastEditors: squanchy squanchy@yeah.net
  * @LastEditTime: 2022-06-21 23:13:01
- * @FilePath: /zs-ui-vue/packages/m-layout/lib/src/components/Sidebar/index.vue
+ * @FilePath: /zs-ui-vue2/packages/m-layout/lib/src/components/Sidebar/index.vue
 -->
 <template>
   <div :class="{'has-logo':showLogo}">

@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { CommonUtils } from '@zs-ui-vue/shared';
+import { CommonUtils } from '@zs-ui-vue2/shared';
 const defaultVal = null;
 export default {
   name: 'MDateTime',

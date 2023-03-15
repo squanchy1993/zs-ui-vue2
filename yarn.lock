@@ -2786,16 +2786,16 @@
   resolved "https://registry.npmmirror.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@zs-ui-vue/m-form@^1.0.0":
+"@zs-ui-vue2/m-form@^1.0.0":
   version "1.0.13"
-  resolved "https://registry.npmmirror.com/@zs-ui-vue/m-form/-/m-form-1.0.13.tgz#382192222beb3dd5cea814abc3601b2820603236"
+  resolved "https://registry.npmmirror.com/@zs-ui-vue2/m-form/-/m-form-1.0.13.tgz#382192222beb3dd5cea814abc3601b2820603236"
   integrity sha512-vq749zcmdHr2QA1TMv58xX93NQ1NPra7iq1eOiPcvmj0NgFq8Banh7KrpP1lRq4BjZbFW5QtB4pyh2lF8cP0XQ==
   dependencies:
-    "@zs-ui-vue/shared" "^1.0.0"
+    "@zs-ui-vue2/shared" "^1.0.0"
 
-"@zs-ui-vue/shared@^1.0.0":
+"@zs-ui-vue2/shared@^1.0.0":
   version "1.0.0"
-  resolved "https://registry.npmmirror.com/@zs-ui-vue/shared/-/shared-1.0.0.tgz#0f89489532669f095a358d1ab0e2f9b7a03cdce7"
+  resolved "https://registry.npmmirror.com/@zs-ui-vue2/shared/-/shared-1.0.0.tgz#0f89489532669f095a358d1ab0e2f9b7a03cdce7"
   integrity sha512-MPtQUZkshfefUSQ67xUUK8BK3Lqj4Ajngs3jS4TzhCH1bD7MTfyx1tWuypj/qY7t1sxZifHnUuZxuCxaTzGk7g==
   dependencies:
     sass-loader "^12.6.0"

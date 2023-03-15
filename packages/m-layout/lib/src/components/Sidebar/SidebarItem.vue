@@ -2,7 +2,7 @@
  * @Date: 2022-06-21 22:23:16
  * @LastEditors: squanchy squanchy@yeah.net
  * @LastEditTime: 2022-06-21 22:49:30
- * @FilePath: /zs-ui-vue/packages/m-layout/lib/src/components/Sidebar/SidebarItem.vue
+ * @FilePath: /zs-ui-vue2/packages/m-layout/lib/src/components/Sidebar/SidebarItem.vue
 -->
 <template>
   <div v-if="!item.hidden">
