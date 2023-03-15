@@ -1,6 +1,6 @@
 {
   "name": "@zs-ui-vue2/m-layout",
-  "version": "2.0.13",
+  "version": "2.1.0",
   "description": "> TODO: description",
   "author": "squanchy <squanchy@yeah.net>",
   "homepage": "https://github.com/squanchy1993/zs-ui-vue2#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/squanchy1993/zs-ui-vue2/issues"
   },
   "dependencies": {
-    "@zs-ui-vue2/shared": "^2.0.13"
+    "@zs-ui-vue2/shared": "^2.1.0"
   },
   "gitHead": "099efea17fead3c3368fcadb5e3f6ddd2f4c000c"
 }
