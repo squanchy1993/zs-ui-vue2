@@ -1,2 +1,2 @@
 'use strict';
-export * as LongPress from './src/longPress'
+export { default as LongPress } from './src/longPress'
