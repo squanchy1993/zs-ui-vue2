@@ -2,6 +2,6 @@
 
 const mForm = require('..');
 
-describe('@zs-ui-vue/m-form', () => {
+describe('@zs-ui-vue2/m-form', () => {
   it('needs tests');
 });

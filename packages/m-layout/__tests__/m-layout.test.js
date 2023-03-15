@@ -2,6 +2,6 @@
 
 const mLayout = require('..');
 
-describe('@zs-ui-vue/m-layout', () => {
+describe('@zs-ui-vue2/m-layout', () => {
     it('needs tests');
 });

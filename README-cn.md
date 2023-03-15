@@ -4,7 +4,7 @@
  * @LastEditTime: 2023-03-04 18:30:58
  * @LastEditors: squanchy squanchy@yeah.net
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: /zs-ui-vue/README.md
+ * @FilePath: /zs-ui-vue2/README.md
 -->
 
 ### 命令行
@@ -13,20 +13,20 @@
 lerna publish
 
 // 创建组建
-lerna create @zs-ui-vue/m-page-list
+lerna create @zs-ui-vue2/m-page-list
 
 // 添加公共依赖
 lerna add lodash
 
 // 添加公共依赖 
-lerna add lodash --scope=@zs-ui-vue/m-form-item
+lerna add lodash --scope=@zs-ui-vue2/m-form-item
 
 lerna bootstrap --hoist #将所有 package 的依赖引到 根目录的 node_modules 中，节省空间
 lerna clean 清除 lerna bootstrap 添加上依赖包括本地的
 发布时会自动带上最新的 本地依赖版本号
 
 // 打包
-yarn run compile @zs-ui-vue/m-form
+yarn run compile @zs-ui-vue2/m-form
 ```
 
 ### 发布
@@ -65,4 +65,4 @@ yarn commit
 lerna publish 有问题 会出发 husky里面的 钩子函数导致无法commit --- 解决在lerna.json中设置默认提交信息，
 
 ### npm 取消包的发布
-`npm unpublish @zs-ui-vue/m-form-item --force`
+`npm unpublish @zs-ui-vue2/m-form-item --force`

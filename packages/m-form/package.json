@@ -1,9 +1,9 @@
 {
-  "name": "@zs-ui-vue/m-form",
+  "name": "@zs-ui-vue2/m-form",
   "version": "2.0.11",
   "description": "> TODO: description",
   "author": "squanchy <squanchy@yeah.net>",
-  "homepage": "https://github.com/squanchy1993/zs-ui-vue#readme",
+  "homepage": "https://github.com/squanchy1993/zs-ui-vue2#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "directories": {
@@ -18,16 +18,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/squanchy1993/zs-ui-vue.git"
+    "url": "git+https://github.com/squanchy1993/zs-ui-vue2.git"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
-    "url": "https://github.com/squanchy1993/zs-ui-vue/issues"
+    "url": "https://github.com/squanchy1993/zs-ui-vue2/issues"
   },
   "dependencies": {
-    "@zs-ui-vue/shared": "^2.0.4"
+    "@zs-ui-vue2/shared": "^2.0.4"
   },
   "gitHead": "b60259b95a9e367dcd5a6b4f00eb5fe4d2c23357"
 }

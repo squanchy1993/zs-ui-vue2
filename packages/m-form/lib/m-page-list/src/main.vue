@@ -60,7 +60,7 @@
 import MTableItem from './m-tableItem'
 import { MPageListModel } from './model'
 import { MFormItem } from '../../m-form-item/index'
-import { CommonUtils } from '@zs-ui-vue/shared'
+import { CommonUtils } from '@zs-ui-vue2/shared'
 
 export default {
   name: 'MPageList',

@@ -4,7 +4,7 @@
  * @LastEditTime: 2023-03-04 19:16:15
  * @LastEditors: squanchy squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
- * @FilePath: /zs-ui-vue/packages/m-form/lib/m-form-dialog/src/mian.vue
+ * @FilePath: /zs-ui-vue2/packages/m-form/lib/m-form-dialog/src/mian.vue
 -->
 <template>
   <div class="book-dialog">
@@ -38,7 +38,7 @@
 /* eslint-disable */
 import { MFormItem } from '../../m-form-item/index';
 import { DialogOptionModel } from './model';
-import { CommonUtils } from '@zs-ui-vue/shared';
+import { CommonUtils } from '@zs-ui-vue2/shared';
 
 export default {
   name: 'MFormDialog',

@@ -2,7 +2,7 @@
  * @Date: 2022-11-01 09:12:52
  * @LastEditors: DESKTOP-58041OI\zzs squanchy@yeah.net
  * @LastEditTime: 2022-11-01 13:50:31
- * @FilePath: \zs-ui-vue\packages\m-form\lib\m-form-item\src\m-input\src\main.vue
+ * @FilePath: \zs-ui-vue2\packages\m-form\lib\m-form-item\src\m-input\src\main.vue
 -->
 <template>
   <el-form-item
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { CommonUtils } from '@zs-ui-vue/shared';
+import { CommonUtils } from '@zs-ui-vue2/shared';
 const defaultVal = '';
 export default {
   name: 'MInput',
