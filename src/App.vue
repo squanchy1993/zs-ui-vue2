@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MForm from './components/m-form/index.vue'
+import MForm from './components/m-form'
 
 export default {
   name: 'App',
