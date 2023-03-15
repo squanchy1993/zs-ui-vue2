@@ -51,7 +51,8 @@ Vue.directive('longPress', new LongPress({}))
 ### LongPress
 - v-longPress
 
-The delay and interval default value is 400ms and 50ms, but you can set it by `v-longPress="{delay:5000 ,interval: 1000 }"`. 
+The delay and interval default value is 400ms and 50ms, but you can change it by `Vue.directive('longPress', new LongPress({delay:5000 ,interval: 1000 }))`or onely change temporary by
+`v-longPress="{delay:5000 ,interval: 1000 }"`. 
 
 - longPressStart
 
