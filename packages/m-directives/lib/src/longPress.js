@@ -46,7 +46,6 @@ export default class LongPress {
       }
     }
 
-
     ['mousedown', 'touchstart'].forEach(e => {
       el.addEventListener(e, start, { passive: true })
     });
