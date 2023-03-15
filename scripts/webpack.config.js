@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const { runWebpack, checkArgs } = require('./utils');
 const { getPackagesSync } = require('@lerna/project');
 
-(function() {
+(async function() {
   try {
     const packages = getPackagesSync().map((pck) => pck.name).filter((name) => name.includes('@zs-ui-vue2'));
     const argvs = process.argv.slice(2);
@@ -16,7 +16,7 @@ const { getPackagesSync } = require('@lerna/project');
     // 打包所有包
     if (isCompileAll) {
       for (const p of packages) {
-        runWebpack(p, compileWatchMode);
+        await runWebpack(p, compileWatchMode);
       }
       return false
     }
@@ -25,7 +25,7 @@ const { getPackagesSync } = require('@lerna/project');
     const wait_compile_compoment = argvs.filter((item) => item.indexOf('@zs-ui-vue2/') !== -1); // 编译传入的组件
     if (wait_compile_compoment) {
       for (const p of wait_compile_compoment) {
-        runWebpack(p, compileWatchMode);
+        await runWebpack(p, compileWatchMode);
       }
     }
   } catch (error) {

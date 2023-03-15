@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { MPageList, MPageListModel, MFormDialog, DialogOptionModel } from '@packages/m-form/dist/index';
+import { MPageList, MPageListModel, MFormDialog, DialogOptionModel } from '@packages/m-components/dist/index';
 import { generateColumns, generateQueryFormItems, generateFormItems } from './bookListConfig';
 import { getBookList } from './api';
 

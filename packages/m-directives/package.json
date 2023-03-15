@@ -1,5 +1,5 @@
 {
-  "name": "@zs-ui-vue2/shared",
+  "name": "@zs-ui-vue2/m-directives",
   "version": "2.1.1",
   "description": "> TODO: description",
   "author": "squanchy <squanchy@yeah.net>",
@@ -11,8 +11,7 @@
     "test": "__tests__"
   },
   "files": [
-    "dist",
-    "lib/src/styles"
+    "dist"
   ],
   "publishConfig": {
     "access": "public",
@@ -27,9 +26,5 @@
   },
   "bugs": {
     "url": "https://github.com/squanchy1993/zs-ui-vue2/issues"
-  },
-  "dependencies": {
-    "sass-loader": "^12.6.0"
-  },
-  "gitHead": "e5b36a5aaa8c716fc1512691994cb9bae9ccc702"
+  }
 }

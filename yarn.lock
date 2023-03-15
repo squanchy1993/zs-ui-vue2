@@ -2788,7 +2788,7 @@
 
 "@zs-ui-vue2/m-form@^1.0.0":
   version "1.0.13"
-  resolved "https://registry.npmmirror.com/@zs-ui-vue2/m-form/-/m-form-1.0.13.tgz#382192222beb3dd5cea814abc3601b2820603236"
+  resolved "https://registry.npmmirror.com/@zs-ui-vue2/m-components/-/m-form-1.0.13.tgz#382192222beb3dd5cea814abc3601b2820603236"
   integrity sha512-vq749zcmdHr2QA1TMv58xX93NQ1NPra7iq1eOiPcvmj0NgFq8Banh7KrpP1lRq4BjZbFW5QtB4pyh2lF8cP0XQ==
   dependencies:
     "@zs-ui-vue2/shared" "^1.0.0"

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { MFormItemModel, MPageListModel } from '@packages/m-form/dist/index';
+import { MFormItemModel, MPageListModel } from '@packages/m-components/dist/index';
 import { getBookCategoryList, getTagList, uploadImage } from './api';
 
 // 生成列表搜索项目
