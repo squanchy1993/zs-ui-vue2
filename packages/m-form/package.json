@@ -1,6 +1,6 @@
 {
   "name": "@zs-ui-vue2/m-form",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "> TODO: description",
   "author": "squanchy <squanchy@yeah.net>",
   "homepage": "https://github.com/squanchy1993/zs-ui-vue2#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/squanchy1993/zs-ui-vue2/issues"
   },
   "dependencies": {
-    "@zs-ui-vue2/shared": "^2.0.12"
+    "@zs-ui-vue2/shared": "^2.0.13"
   },
   "gitHead": "b60259b95a9e367dcd5a6b4f00eb5fe4d2c23357"
 }
