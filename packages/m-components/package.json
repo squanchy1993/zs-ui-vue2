@@ -1,6 +1,6 @@
 {
   "name": "@zs-ui-vue2/m-components",
-  "version": "2.1.2",
+  "version": "2.1.7",
   "description": "vue2 components, includs form and list",
   "author": "squanchy <squanchy@yeah.net>",
   "homepage": "https://github.com/squanchy1993/zs-ui-vue2/tree/master/packages/m-components#README",
@@ -29,20 +29,20 @@
     "url": "https://github.com/squanchy1993/zs-ui-vue2/issues"
   },
   "devDependencies": {
-    "@zs-ui-vue2/shared": "^2.1.2",
-    "element-ui": "^2.15.8",
-    "sass": "1.26.8",
-    "sass-loader": "8.0.2",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "babel-eslint": "^10.1.0",
     "@vue/cli-plugin-babel": "~4.5.12",
     "@vue/cli-plugin-eslint": "~4.5.12",
     "@vue/cli-service": "~4.5.12",
+    "@zs-ui-vue2/shared": "^2.1.2",
+    "babel-eslint": "^10.1.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "element-ui": "^2.15.8",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
     "progress-bar-webpack-plugin": "^2.1.0",
-    "clean-webpack-plugin": "^4.0.0"
+    "sass": "1.26.8",
+    "sass-loader": "8.0.2",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
     "root": true,
