@@ -27,8 +27,8 @@ export default class LongPress {
               this.emitEvent(vNode, LONG_PRESS_INTERVAL, e)
             }, funInterval)
           }
-          this.emitEvent(vNode, LONG_PRESS_INTERVAL, e)
           this.emitEvent(vNode, LONG_PRESS_START, e)
+          this.emitEvent(vNode, LONG_PRESS_INTERVAL, e)
         }, funDelay)
       }
     }

@@ -1,9 +1,9 @@
 {
   "name": "@zs-ui-vue2/m-directives",
   "version": "2.1.6",
-  "description": "> TODO: description",
+  "description": "vue2 directives",
   "author": "squanchy <squanchy@yeah.net>",
-  "homepage": "https://github.com/squanchy1993/zs-ui-vue2#readme",
+  "homepage": "https://github.com/squanchy1993/zs-ui-vue2/tree/master/packages/m-directives#README",
   "license": "ISC",
   "main": "dist/index.js",
   "directories": {
@@ -22,9 +22,40 @@
     "url": "git+https://github.com/squanchy1993/zs-ui-vue2.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "serve": "vue-cli-service serve",
+    "lint": "eslint --ext .js,.vue lib",
+    "compile": "node scripts/webpack.config.js m-directives"
   },
   "bugs": {
     "url": "https://github.com/squanchy1993/zs-ui-vue2/issues"
-  }
+  },
+  "devDependencies": {
+    "sass": "1.26.8",
+    "sass-loader": "8.0.2",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "babel-eslint": "^10.1.0",
+    "@vue/cli-plugin-babel": "~4.5.12",
+    "@vue/cli-plugin-eslint": "~4.5.12",
+    "@vue/cli-service": "~4.5.12",
+    "progress-bar-webpack-plugin": "^2.1.0",
+    "clean-webpack-plugin": "^4.0.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "gitHead": "b60259b95a9e367dcd5a6b4f00eb5fe4d2c23357"
 }
