@@ -1,11 +1,9 @@
 module.exports = {
     extends: ['@commitlint/config-conventional'],
     rules: {
-        //0为disable，1为warning，2为error
-        //always|never
-        //第三位该rule的值
+        // [0:disable/1:warning/2:error, always/nerver, rule]
         'type-enum': [2, 'always', [
-            'feature', 'update', 'fixbug', 'refactor', 'optimize', 'style', 'docs', 'chore'
+            'feat', 'update', 'fix', 'refactor', 'optimize', 'style', 'docs', 'chore', 'build'
         ]],
         'subject-full-stop': [0, 'never'],
         'subject-case': [0, 'never']
