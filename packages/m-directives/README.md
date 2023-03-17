@@ -1,8 +1,13 @@
+<!--
+ * @Date: 2023-03-15 13:03:27
+ * @LastEditors: squanchy squanchy@yeah.net
+ * @LastEditTime: 2023-03-17 11:14:43
+ * @FilePath: \zs-ui-vue2\packages\m-directives\README.md
+-->
 ## Table of Contents
 
   - [Installing](#installing)
     - [Package manager](#package-manager)
-    - [CDN](#cdn)
   - [Example](#example)
   - [Directives API](#directives-api)
   - [License](#license)
