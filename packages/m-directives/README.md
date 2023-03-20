@@ -45,7 +45,7 @@ Vue.directive('longPress', new LongPress())
 
 ```js
 <i
-    v-longPress="{delay:5000 ,interval: 1000 }"
+    v-longPress="{delay:5000 ,interval: 1000}"
     class="el-icon-arrow-up"
     @longPressStart="()=> longPressStart()"
     @longPressEnd="()=> longPressEnd()"
@@ -58,8 +58,8 @@ Vue.directive('longPress', new LongPress())
 ### LongPress
 - v-longPress
 
-The delay and interval default value is 400ms and 50ms, but you can change it by `Vue.directive('longPress', new LongPress(5000, 1000))`or onely temporary changed by
-`v-longPress="{delay:5000 ,interval: 1000 }"`. 
+The delay and interval default value is 400ms and 50ms, but you can change it by `Vue.directive('longPress', new LongPress({ delay:5000, interval: 1000 }))`or onely temporary changed by
+`v-longPress="{delay:5000, interval: 1000}"`. 
 
 - longPressStart
 
