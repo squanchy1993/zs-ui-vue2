@@ -37,10 +37,10 @@ $ pnpm add @zs-ui-vue2/m-directives
 ## Example
 ```js
 import directive from '@zs-ui-vue2/m-directives';
-Vue.directive('longPress', new directive.LongPress())
+Vue.directive('longPress', new directive.LongPress());
 // or
 import { LongPress } from '@zs-ui-vue2/m-directives';
-Vue.directive('longPress', new LongPress())
+Vue.directive('longPress', new LongPress());
 ```
 
 ```js
