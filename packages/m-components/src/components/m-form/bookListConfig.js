@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { MFormItemModel, MPageListModel } from '@lib/index';
+import { MFormItemModel, MPageListModel, MSelectPickerOption } from '@lib/index';
 import { getBookCategoryList, getTagList, uploadImage } from './api';
 
 // 生成列表搜索项目
@@ -11,44 +11,31 @@ export const generateQueryFormItems = (that) => {
       el_type: 'MSelectPicker',
       required: false,
       defaultValue: [],
-      options: {
+      options: new MSelectPickerOption({
+        list: [
+          { label: '待借阅', value: 1 },
+          { label: '申请中', value: 2 },
+          { label: '借阅中', value: 3 }
+        ],
+        labelKeyName: 'label',
+        valueKeyName: 'value',
         limit: 1,
-        pageData: {
-          list: [
-            { label: '待借阅', value: 1 },
-            { label: '申请中', value: 2 },
-            { label: '借阅中', value: 3 }
-          ]
-        },
-        labelValue: {
-          label: 'label',
-          value: 'value'
-        }
-      }
+      }),
     }),
     new MFormItemModel({
       label: '分类',
       prop: 'category_uuids',
       el_type: 'MSelectPicker',
-      defaultValue: ['aac66c2043a811ecade355501eededd9'],
       required: false,
-      options: {
+      defaultValue: ['aac66c2043a811ecade355501eededd9'],
+      options: new MSelectPickerOption({
+        api: getBookCategoryList,
+        list: [],
+        labelKeyName: 'title',
+        valueKeyName: 'uuid',
         valuePropKey: 'uuids',
-        filterPropsKey: 'title',
-        pageData: {
-          api: getBookCategoryList,
-          List: [],
-          pagination: {
-            pageKeyName: 'pageIndex',
-            sizeKeyName: 'pageSize'
-          },
-          isPagination: true
-        },
-        labelValue: {
-          label: 'title',
-          value: 'uuid'
-        }
-      }
+        filterPropsKey: 'title'
+      })
     }),
     new MFormItemModel({
       label: '书名',
@@ -158,7 +145,6 @@ export const generateColumns = (that) => {
   ];
 };
 
-// 生成弹框表单
 // 生成弹框表单
 export const generateFormItems = ({ that, openDialogData }) => {
   const originFormItems = [
