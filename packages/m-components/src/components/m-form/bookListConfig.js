@@ -6,85 +6,48 @@ import { getBookCategoryList, getTagList, uploadImage } from './api';
 export const generateQueryFormItems = (that) => {
   return [
     new MFormItemModel({
-      label: '图书状态',
+      label: 'BorrowState',
       prop: 'borrow_state',
       el_type: 'MSelectPicker',
       required: false,
       defaultValue: [],
       options: {
-        multiple: true,
-        labelValue: {
-          label: 'label',
-          value: 'value'
-        },
-        pageListData: new MPageListModel({
+        limit: 1,
+        pageData: {
           list: [
             { label: '待借阅', value: 1 },
             { label: '申请中', value: 2 },
             { label: '借阅中', value: 3 }
           ]
-        })
+        },
+        labelValue: {
+          label: 'label',
+          value: 'value'
+        }
       }
     }),
     new MFormItemModel({
       label: '分类',
       prop: 'category_uuids',
       el_type: 'MSelectPicker',
+      defaultValue: ['aac66c2043a811ecade355501eededd9'],
       required: false,
-      defaultValue: [],
       options: {
-        // filterable: true,
-        multiple: true,
+        valuePropKey: 'uuids',
+        filterPropsKey: 'title',
+        pageData: {
+          api: getBookCategoryList,
+          List: [],
+          pagination: {
+            pageKeyName: 'pageIndex',
+            sizeKeyName: 'pageSize'
+          },
+          isPagination: true
+        },
         labelValue: {
           label: 'title',
           value: 'uuid'
-        },
-        defaultValue: '',
-        pageListData: new MPageListModel({
-          apiFun: getBookCategoryList,
-          isShowPagination: false,
-          tableSetting: {
-            stripe: true,
-            border: true
-          }
-        })
-      }
-    }),
-    new MFormItemModel({
-      label: '栏目',
-      prop: 'sale_tag_uuids',
-      el_type: 'MSelectPicker',
-      defaultValue: [],
-      required: false,
-      options: {
-        filterable: true,
-        multiple: true,
-        labelValue: {
-          label: 'name',
-          value: 'uuid'
-        },
-        defaultValue: [],
-        pageListData: new MPageListModel({
-          apiFun: getTagList,
-          query: [
-            // 根据value 设置item
-            new MFormItemModel({
-              label: 'uuids',
-              prop: 'uuids',
-              required: false
-            }),
-            // 可查询时 根据name 查询
-            new MFormItemModel({
-              label: 'name',
-              prop: 'name',
-              required: false
-            })
-          ],
-          tableSetting: {
-            stripe: true,
-            border: true
-          }
-        })
+        }
       }
     }),
     new MFormItemModel({

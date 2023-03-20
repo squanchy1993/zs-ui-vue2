@@ -753,6 +753,7 @@ export function getBookList() {
 }
 
 export function getBookCategoryList(params) {
+  console.log('getBookCategoryList>>>', params)
   return new Promise((resolve) => {
     const list = [
       {
@@ -813,7 +814,7 @@ export function getBookCategoryList(params) {
     ]
     const data = {
       'list': list,
-      'total': 0
+      'total': list.length
     }
 
     if (Reflect.has(params.query || {}, 'uuids')) {
