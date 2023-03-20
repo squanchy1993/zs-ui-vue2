@@ -5,7 +5,7 @@ const LONG_PRESS_INTERVAL = 'longPressInterval'
 export default class LongPress {
   delay = 400;
   interval = 50;
-  constructor({ delay = null, interval = null }) {
+  constructor(delay = null, interval = null) {
     delay && (this.delay = delay)
     interval && (this.interval = interval)
   }
