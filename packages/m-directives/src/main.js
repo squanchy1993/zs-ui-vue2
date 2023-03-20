@@ -3,10 +3,10 @@ import App from './App.vue'
 
 // ------------------ longPress------------------
 import directive from '@lib/index';
-Vue.directive('longPress', new directive.LongPress({}))
+Vue.directive('longPress', new directive.LongPress())
 // or
 // import { LongPress } from '@lib/index';
-// Vue.directive('longPress', new LongPress({}))
+// Vue.directive('longPress', new LongPress())
 
 Vue.config.productionTip = false
 
