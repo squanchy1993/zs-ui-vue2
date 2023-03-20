@@ -7,10 +7,11 @@
  * @FilePath: /zs-ui-vue2/packages/m-components/m-input-number/index.js
  */
 import MSelectPicker from './src/main';
+import MSelectPickerOption from './src/model'
 
 /* istanbul ignore next */
 MSelectPicker.install = function(Vue) {
   Vue.component(MSelectPicker.name, MSelectPicker);
 };
 
-export default MSelectPicker;
+export { MSelectPicker, MSelectPickerOption };

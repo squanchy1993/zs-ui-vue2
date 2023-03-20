@@ -1,5 +1,5 @@
 import MInput from '../../m-input';
-import MSelectPicker from '../../m-select-picker';
+import { MSelectPicker } from '../../m-select-picker';
 import MDateTime from '../../m-date-time';
 import MInputNumber from '../../m-input-number';
 import MImgUpload from '../../m-img-upload';
