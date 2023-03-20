@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-03-15 13:03:27
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-03-20 09:11:41
- * @FilePath: \m-directives\README.md
+ * @LastEditTime: 2023-03-20 09:32:27
+ * @FilePath: \zs-ui-vue2\packages\m-directives\README.md
 -->
 ## Table of Contents
 
@@ -47,8 +47,8 @@ Vue.directive('longPress', new LongPress())
 <i
     v-longPress="{delay:5000 ,interval: 1000 }"
     class="el-icon-arrow-up"
-    @longPressStart="()=> longPressStart('forward')"
-    @longPressEnd="()=> longPressEnd('robot')"
+    @longPressStart="()=> longPressStart()"
+    @longPressEnd="()=> longPressEnd()"
     @longPressInterval="()=> longPressInterval()"
 />
 ```
@@ -58,7 +58,7 @@ Vue.directive('longPress', new LongPress())
 ### LongPress
 - v-longPress
 
-The delay and interval default value is 400ms and 50ms, but you can change it by `Vue.directive('longPress', new LongPress( delay: 5000 ,interval: 1000 ))`or onely change temporary by
+The delay and interval default value is 400ms and 50ms, but you can change it by `Vue.directive('longPress', new LongPress(5000, 1000))`or onely temporary changed by
 `v-longPress="{delay:5000 ,interval: 1000 }"`. 
 
 - longPressStart
