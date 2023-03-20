@@ -142,14 +142,19 @@ export default {
         // 延迟到组件创建完毕后再进行
         this.$nextTick(() => {
           console.log('received value change select picker: ', value)
-          if ([null, undefined].includes(value)) {
+
+          // remove __ob__: Observer: 1. Array.from 2. JSON.parse(JSON.stringify(value))
+          const importVal = JSON.stringify(value)
+          const innerVal = JSON.stringify(this.componentValue)
+          if ([null, undefined].includes(importVal)) {
             this.componentValue = null
             this.setTag()
             return
           }
 
-          if (!this._.eq(this.componentValue, value)) {
-            this.componentValue = this._.cloneDeep(value)
+          if (innerVal !== importVal) {
+            console.log('got setTag', innerVal, importVal)
+            this.componentValue = JSON.parse(importVal)
             this.setTag()
           }
         })
@@ -170,7 +175,8 @@ export default {
   methods: {
     // 通知父元素已经变化
     componentValueChange(value) {
-      const emitVal = this.multiple ? this._.cloneDeep(value) : value
+      const emitVal = JSON.parse(JSON.stringify(value))
+      console.log('notify father value change select picker: ', emitVal)
       this.$emit('valueChange', emitVal)
     },
 
@@ -235,8 +241,8 @@ export default {
       return new Promise((resolve, reject) => {
         this.getPageListData(curPage).then((res) => {
           curPage && (this.curPage = curPage)
-          const { totalElements, list } = res.data
-          this.total = totalElements
+          const { total, list } = res.data
+          this.total = total
           this.itemList = list
           resolve('获取成功')
         })
@@ -276,7 +282,8 @@ export default {
           // 添加
           if (Array.isArray(this.componentValue)) {
             const valueList = Array.from(this.componentValue)
-            if (this.formItem.options.limit <= valueList.length) {
+            const { limit } = this.formItem.options
+            if (limit && limit <= valueList.length) {
               return
             }
           }
@@ -293,7 +300,7 @@ export default {
           this.selectedTag.splice(index, 1)
 
           // 删除value
-          const valueIndex = this.componentValue.findIndex(item => item[this.valueKey] === id)
+          const valueIndex = this.componentValue.findIndex(item => item === id)
           this.componentValue.splice(valueIndex, 1)
         }
         this.componentValueChange(this.componentValue)
