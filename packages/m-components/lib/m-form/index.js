@@ -6,12 +6,11 @@
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /zs-ui-vue2/packages/m-components/m-input-number/index.js
  */
-import MFormItem from './src/main';
-import MFormItemModel from './src/model'
+import MForm from './src/main';
 
 /* istanbul ignore next */
-MFormItem.install = function(Vue) {
-  Vue.component(MFormItem.name, MFormItem);
+MForm.install = function(Vue) {
+  Vue.component(MForm.name, MForm);
 };
 
-export { MFormItem, MFormItemModel };
+export { MForm };
