@@ -1,4 +1,2 @@
-export * from './m-form-item/index'
-export * from './m-form-dialog/index'
-export * from './m-page-list/index'
-export * from './m-layout/index'
+export * from './m-form'
+export * from './m-form-item'

@@ -1,4 +1,4 @@
-export class MFormItemModel {
+export class DynamicItemModel {
   constructor({
     label = '',
     prop = '', // 键名
