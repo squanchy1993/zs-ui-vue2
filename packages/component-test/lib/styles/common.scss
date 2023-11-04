@@ -1,0 +1,46 @@
+@charset "UTF-8";
+@mixin input-compoment-size($compomentName) {
+  .#{$compomentName} {
+    font-size: 14px;
+    &__inner {
+      line-height: 40px;
+      height: 40px;
+    }
+  }
+  .#{$compomentName}--medium {
+    font-size: 14px;
+    .#{$compomentName}__inner {
+      line-height: 36px;
+      height: 36px;
+    }
+  }
+
+  .#{$compomentName}--small {
+    font-size: 13px;
+    .#{$compomentName}__inner {
+      line-height: 32px;
+      height: 32px;
+    }
+  }
+
+  .#{$compomentName}--mini {
+    font-size: 12px;
+    .#{$compomentName}__inner {
+      line-height: 28px;
+      height: 28px;
+    }
+  }
+}
+
+@mixin input-compoment-disabled($compomentName) {
+  .is-disabled {
+    .#{$compomentName}__inner {
+      background-color: #f5f7fa;
+      border-color: #e4e7ed;
+      color: #c0c4cc;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+}

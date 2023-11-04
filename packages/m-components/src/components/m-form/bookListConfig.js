@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { MFormItemModel, MPageListModel, MSelectPickerOption } from '@lib/index';
+import { MFormItemModel, MPageListModel, MSelectPickerOption } from '@m-components/index';
 import { getBookCategoryList, getTagList, uploadImage } from './api';
 
 // 生成列表搜索项目

@@ -1,65 +1,86 @@
 <!--
  * @Date: 2023-03-17 14:10:44
- * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-03-21 19:23:46
- * @FilePath: \m-components\src\App.vue
+ * @LastEditors: squanchy squanchy@yeah.net
+ * @LastEditTime: 2023-11-03 23:14:14
+ * @FilePath: /m-components/src/App.vue
 -->
 <template>
   <div id="app">
-    <div style="width: 300px;">
-      <MForm ref="form" :m-form-item-models="MFormItemModels" :form-data="formData">
-        <MFormItem :m-form-item-model="MFormItemModels[0]">
-          <input style="width: 100%; box-sizing: border-box;" type="text">
-        </MFormItem>
-        <MFormItem :m-form-item-model="MFormItemModels[1]">
-          <input style="width: 100%; box-sizing: border-box;" type="text">
-        </MFormItem>
-      </MForm>
-    </div>
-    <button @click="submit">submit</button>
+    <el-tabs tab-position="left" v-model="activeName" class="tabs">
+      <el-tab-pane label="BasicExample" name="BasicExample">
+        <BasicExample />
+      </el-tab-pane>
+      <el-tab-pane label="JsConfigExample" name="JsConfigExample">
+        <JsConfigExample />
+      </el-tab-pane>
+      <el-tab-pane label="JsonConfigExample" name="JsonConfigExample">
+        <JsonConfigExample />
+      </el-tab-pane>
+      <el-tab-pane label="SetConfigExample" name="SetConfigExample">
+        <SetConfigExample />
+      </el-tab-pane>
+      <el-tab-pane label="SetConfigExample2" name="SetConfigExample2">
+        <SetConfigExample2 />
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
-import { MForm, MFormItem, MFormItemModel } from '../lib/index';
+import BasicExample from './views/BasicExample/index';
+import JsConfigExample from './views/JsConfigExample/index';
+import JsonConfigExample from './views/JsonConfigExample/index';
+import SetConfigExample from './views/SetConfigExample';
+import SetConfigExample2 from './views/SetConfigExample2';
 
 export default {
   name: 'App',
   components: {
-    MForm,
-    MFormItem
+    BasicExample,
+    JsConfigExample,
+    JsonConfigExample,
+    SetConfigExample,
+    SetConfigExample2
   },
   data() {
     return {
-      formData: {
-        name: ''
-      },
-      MFormItemModels: [
-        new MFormItemModel({
-          prop: 'name',
-          label: 'name'
-        }),
-        new MFormItemModel({
-          prop: 'title',
-          label: 'title'
-        })
-      ]
+      activeName: 'SetConfigExample'
     };
   },
-  methods: {
-    submit() {
-      this.$refs.form.submit().then((res) => [console.log('res>>>>>>>>>>>', res)]);
-    }
-  }
+  mounted() {},
+  methods: {}
 };
 </script>
-
 <style>
+body {
+  margin: 0;
+}
+</style>
+
+<style lang="scss" scoped>
 #app {
+  height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+}
+
+::v-deep {
+  .tabs.el-tabs {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+
+    .el-tabs__content {
+      flex: 1;
+      height: 100%;
+
+      .el-tab-pane {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }
 </style>
