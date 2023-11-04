@@ -1,3 +1,9 @@
+<!--
+ * @Date: 2023-03-22 23:21:37
+ * @LastEditors: squanchy squanchy@yeah.net
+ * @LastEditTime: 2023-11-02 09:13:55
+ * @FilePath: \zs-ui-vue2\packages\m-components\src\components\m-form\index.vue
+-->
 <template>
   <div class="hello">
     <MPageList ref="pageList" :page-list-data.sync="pageListData" />
@@ -6,7 +12,7 @@
 </template>
 
 <script>
-import { MPageList, MPageListModel, MFormDialog, DialogOptionModel } from '@lib/index';
+import { MPageList, MPageListModel, MFormDialog, DialogOptionModel } from '@m-components/index';
 import { generateColumns, generateQueryFormItems, generateFormItems } from './bookListConfig';
 import { getBookList } from './api';
 
@@ -16,7 +22,7 @@ export default {
     MPageList,
     MFormDialog
   },
-  data: function() {
+  data: function () {
     return {
       pageListData: new MPageListModel({
         apiFun: getBookList,
@@ -75,7 +81,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       })
-        .then(async({ value }) => {
+        .then(async ({ value }) => {
           // withDrawAgree()
           const { uuid } = data;
           // await book.deleteBook({ uuid });

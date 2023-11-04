@@ -3,7 +3,7 @@
  * @Date: 2022-04-15 18:55:03
  * @LastEditTime: 2022-04-17 17:24:43
  * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @Description: 默认使用Prettier
  * @FilePath: /zs-ui-vue2/.eslintrc.js
  */
 module.exports = {
@@ -182,6 +182,7 @@ module.exports = {
     'no-undef-init': 2,
     'no-unexpected-multiline': 2,
     'no-unmodified-loop-condition': 2,
+    'no-async-promise-executor': 0,
     'no-unneeded-ternary': [
       2,
       {
@@ -220,10 +221,14 @@ module.exports = {
       }
     ],
     'padded-blocks': [2, 'never'],
-    'quotes': [2, 'single', {
-      'avoidEscape': true,
-      'allowTemplateLiterals': true
-    }],
+    quotes: [
+      2,
+      'single',
+      {
+        avoidEscape: true,
+        allowTemplateLiterals: true
+      }
+    ],
     'semi-spacing': [
       2,
       {
@@ -232,7 +237,14 @@ module.exports = {
       }
     ],
     'space-before-blocks': [2, 'always'],
-    'space-before-function-paren': [2, 'never'],
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always', // 匿名声明  always 要加空格、never 不加空格 function () {}
+        named: 'never', // 普通声明 test() {}
+        asyncArrow: 'always' // 箭头函数 () => {}
+      }
+    ],
     'space-in-parens': [2, 'never'],
     'space-infix-ops': 2,
     'space-unary-ops': [
@@ -246,15 +258,7 @@ module.exports = {
       2,
       'always',
       {
-        markers: [
-          'global',
-          'globals',
-          'eslint',
-          'eslint-disable',
-          '*package',
-          '!',
-          ','
-        ]
+        markers: ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
       }
     ],
     'template-curly-spacing': [2, 'never'],
@@ -263,10 +267,10 @@ module.exports = {
     'wrap-iife': [2, 'any'],
     'yield-star-spacing': [2, 'both'],
     yoda: [2, 'never'],
-    'prefer-const': 2,
+    'prefer-const': 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'object-curly-spacing': [
-      2,
+      0,
       'always',
       {
         objectsInObjects: false
@@ -274,4 +278,4 @@ module.exports = {
     ],
     'array-bracket-spacing': [2, 'never']
   }
-}
+};
