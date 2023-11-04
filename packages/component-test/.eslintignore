@@ -1,0 +1,7 @@
+build/*.js
+src/assets
+public
+dist
+node_modules/
+lerna-debug.log
+__tests__/

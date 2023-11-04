@@ -29,20 +29,22 @@
     "url": "https://github.com/squanchy1993/zs-ui-vue2/issues"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.12",
-    "@vue/cli-plugin-eslint": "~4.5.12",
-    "@vue/cli-service": "~4.5.12",
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.4.0",
+    "@vue/babel-preset-jsx": "^1.4.0",
+    "@vue/cli-plugin-babel": "~4.5.19",
+    "@vue/cli-plugin-eslint": "~4.5.19",
+    "@vue/cli-service": "~4.5.19",
     "@zs-ui-vue2/shared": "^2.1.2",
     "babel-eslint": "^10.1.0",
     "clean-webpack-plugin": "^4.0.0",
-    "element-ui": "^2.15.8",
+    "element-ui": "^2.15.13",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "progress-bar-webpack-plugin": "^2.1.0",
     "sass": "1.26.8",
     "sass-loader": "8.0.2",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11"
+    "vue": "^2.7.11",
+    "vue-template-compiler": "^2.7.11"
   },
   "eslintConfig": {
     "root": true,
@@ -58,5 +60,12 @@
     },
     "rules": {}
   },
-  "gitHead": "b60259b95a9e367dcd5a6b4f00eb5fe4d2c23357"
+  "gitHead": "b60259b95a9e367dcd5a6b4f00eb5fe4d2c23357",
+  "dependencies": {
+    "draggable": "^4.2.0",
+    "lodash-es": "^4.17.21",
+    "vue-codemirror": "^4.0.6",
+    "vue-json-editor": "^1.4.3",
+    "vuedraggable": "^2.24.3"
+  }
 }

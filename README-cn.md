@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-13 22:37:59
- * @LastEditTime: 2023-03-04 18:30:58
+ * @LastEditTime: 2023-08-20 20:33:18
  * @LastEditors: squanchy squanchy@yeah.net
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: /zs-ui-vue2/README.md
+ * @FilePath: /zs-ui-vue2/README-cn.md
 -->
 
 ### 命令行
@@ -66,3 +66,9 @@ lerna publish 有问题 会出发 husky里面的 钩子函数导致无法commit 
 
 ### npm 取消包的发布
 `npm unpublish @zs-ui-vue2/m-form-item --force`
+
+### ToDo
+[1]m-select 设置既可以支持符号分割，也支持数组，对输入的数据进行按type值区分处理
+[2]重新处理table-list 组件，分为list组件和table组件，list组件设置 是否展示分页搜索,通过slot 插入table组件 和 form组件，table组件和form组件一样只负责展示
+   table的requestFun 迁移到list组件的model当中
+[3]list 组件既可以支持controller 传入,也可以不传入。
