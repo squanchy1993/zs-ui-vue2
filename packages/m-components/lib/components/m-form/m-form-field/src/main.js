@@ -11,6 +11,7 @@ import {
 
 // if use index.js has error;
 import { MButtonOperator } from '../../../m-button-operator';
+import { MJsonEditor } from '../../../m-json-editor'
 
 export default {
   name: 'MFormField',
@@ -20,7 +21,7 @@ export default {
     MAsyncComponent,
     MButtonOperator,
     // MFormFieldCodeButton,
-    // MFormFieldCodeInput,
+    MJsonEditor,
     MFormFieldRules
   },
   props: {

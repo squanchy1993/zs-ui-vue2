@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-03-17 14:10:44
  * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-03 23:14:14
+ * @LastEditTime: 2023-11-04 22:59:31
  * @FilePath: /m-components/src/App.vue
 -->
 <template>
@@ -19,9 +19,6 @@
       <el-tab-pane label="SetConfigExample" name="SetConfigExample">
         <SetConfigExample />
       </el-tab-pane>
-      <el-tab-pane label="SetConfigExample2" name="SetConfigExample2">
-        <SetConfigExample2 />
-      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -31,7 +28,6 @@ import BasicExample from './views/BasicExample/index';
 import JsConfigExample from './views/JsConfigExample/index';
 import JsonConfigExample from './views/JsonConfigExample/index';
 import SetConfigExample from './views/SetConfigExample';
-import SetConfigExample2 from './views/SetConfigExample2';
 
 export default {
   name: 'App',
@@ -39,8 +35,7 @@ export default {
     BasicExample,
     JsConfigExample,
     JsonConfigExample,
-    SetConfigExample,
-    SetConfigExample2
+    SetConfigExample
   },
   data() {
     return {
