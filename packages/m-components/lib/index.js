@@ -40,3 +40,4 @@ export * from './components/m-button-operator';
 export * from './components/m-popup';
 export * as MUtils from './components/m-utils';
 export * from './components/m-layout-table';
+export * from './components/m-json-editor'

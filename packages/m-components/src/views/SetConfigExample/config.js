@@ -229,7 +229,7 @@ export function getLayoutConfig() {
         elem: 'el-dialog',
         props: {
           title: '列表编辑',
-          width: '60%',
+          width: '80%',
           size: '30%'
         },
 
@@ -247,7 +247,7 @@ export function getLayoutConfig() {
           ref: 'form',
           size: 'mini',
           labelPosition: 'right',
-          labelWidth: '120px'
+          labelWidth: '140px'
         },
         boxStyle: {
           'justify-content': 'space-between'
@@ -264,11 +264,10 @@ export function getLayoutConfig() {
             },
             elemOptions: {
               type: 'registered',
-              elem: 'el-input',
+              elem: 'MJsonEditor',
               props: {
-                placeholder: '输入name',
-                type: 'textarea',
-                autosize: { minRows: 2, maxRows: 5 }
+                showBtns: false,
+                expandedOnStart: false
               }
             }
           },
@@ -283,11 +282,10 @@ export function getLayoutConfig() {
             },
             elemOptions: {
               type: 'registered',
-              elem: 'el-input',
+              elem: 'MJsonEditor',
               props: {
-                placeholder: '输入name',
-                type: 'textarea',
-                autosize: { minRows: 2, maxRows: 5 }
+                showBtns: false,
+                expandedOnStart: false
               }
             }
           },
@@ -302,11 +300,10 @@ export function getLayoutConfig() {
             },
             elemOptions: {
               type: 'registered',
-              elem: 'el-input',
+              elem: 'MJsonEditor',
               props: {
-                placeholder: '输入tableConfig',
-                type: 'textarea',
-                autosize: { minRows: 2, maxRows: 5 }
+                showBtns: false,
+                expandedOnStart: false
               }
             }
           },
@@ -321,11 +318,10 @@ export function getLayoutConfig() {
             },
             elemOptions: {
               type: 'registered',
-              elem: 'el-input',
+              elem: 'MJsonEditor',
               props: {
-                placeholder: '输入dialogConfig',
-                type: 'textarea',
-                autosize: { minRows: 2, maxRows: 5 }
+                showBtns: false,
+                expandedOnStart: false
               }
             }
           },
