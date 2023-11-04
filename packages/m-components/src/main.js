@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 // element-ui
 import ElementUI from 'element-ui';
@@ -12,6 +12,19 @@ Vue.use(ElementUI);
 import _ from 'lodash';
 Vue.prototype._ = _;
 
-new Vue({
-  render: h => h(App)
-}).$mount('#app')
+// db
+import IndexedDB from './db/indexedDB';
+IndexedDB.initialize('local_test', '1', [
+  { name: 'configs', keyPath: 'id', indexs: ['id'] },
+  { name: 'users', keyPath: 'id', indexs: ['id'] }
+]);
+
+const instance = new Vue({
+  render: (h) => h(App)
+}).$mount('#app');
+
+Vue.prototype.$indexedDB = IndexedDB;
+window['Vue'] = instance;
+
+Vue.prototype.$importSrc = async (url) => import('@/' + url);
+Vue.prototype.$mComponent = (url) => import('@m-components/' + url);
