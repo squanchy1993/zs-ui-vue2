@@ -1,16 +1,16 @@
 <!--
  * @Date: 2023-11-02 19:26:05
  * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-03 09:55:08
- * @FilePath: \zs-ui-vue2\packages\m-components\src\views\JsonConfigExample\index.vue
+ * @LastEditTime: 2023-11-05 23:05:56
+ * @FilePath: /zs-ui-vue2/packages/m-components/src/views/TableLayout/JsonConfigExample/index.vue
 -->
 <template>
   <MLayoutTable v-bind="tableConfig"></MLayoutTable>
 </template>
 
 <script>
-import { MLayoutTable } from '../../../lib/index';
-import { getConfig } from '../../api';
+import { MLayoutTable } from '@m-components/index';
+import { getConfig } from '@/api';
 
 export default {
   components: {
@@ -26,9 +26,8 @@ export default {
   },
   methods: {
     async getPageConfig() {
-    // if you are using the route-vue that you can get the config id from the router params;
-      this.tableConfig = (await getConfig(1)).data
-      console.log('this.', this.tableConfig)
+      const { id } = this.$route.params;
+      this.tableConfig = (await getConfig(Number(id))).data
     }
   }
 };

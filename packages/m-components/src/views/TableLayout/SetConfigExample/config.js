@@ -1,5 +1,5 @@
-import { getConfigList, createConfig, updateConfig, deleteConfig } from '../../api';
-import { difference, stringify } from '../../../lib/components/m-utils';
+import { getConfigList, createConfig, updateConfig, deleteConfig } from '@/api';
+import { difference, stringify } from '@m-components/components/m-utils';
 
 export function getLayoutConfig() {
   const listConfig = {
@@ -175,7 +175,8 @@ export function getLayoutConfig() {
         props: {
           label: 'MTableFieldButton',
           prop: 'MTableFieldButton',
-          width: '180'
+          width: '240',
+          fixed: 'right'
         },
         elemOptions: {
           type: 'registered',
@@ -212,6 +213,22 @@ export function getLayoutConfig() {
                 option: {
                   size: 'mini',
                   type: 'danger'
+                },
+                'option.size': null,
+                'option.type': null
+              },
+              {
+                name: '查看列表',
+                code: async function ({ injectData: { mListCtrl, mLayoutTable }, row }) {
+                  try {
+                    this.$router.push({ path: `/tableLayout/jsonConfigExample/${row.id}`})
+                  } catch (error) {
+                    console.error('查看列表', error);
+                  }
+                },
+                option: {
+                  size: 'mini',
+                  type: 'primary'
                 },
                 'option.size': null,
                 'option.type': null

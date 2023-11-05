@@ -66,6 +66,7 @@
     "lodash-es": "^4.17.21",
     "vue-codemirror": "^4.0.6",
     "vue-json-editor": "^1.4.3",
+    "vue-router": "3.6.5",
     "vuedraggable": "^2.24.3"
   }
 }

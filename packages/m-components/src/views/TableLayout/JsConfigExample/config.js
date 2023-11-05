@@ -1,4 +1,4 @@
-import { getUserList, createUser, updateUser, deleteUser } from '../../api';
+import { getUserList, createUser, updateUser, deleteUser } from '@/api';
 export function getLayoutConfig() {
   const listConfig = {
     loadList: true,
@@ -375,7 +375,7 @@ export function getLayoutConfig() {
                         await validateFields();
 
                         // only submit changed data;
-                        const { difference } = await import('../../../lib/components/m-utils');
+                        const { difference } = await import('@m-components/components/m-utils');
                         const params = difference(formData, originData);
                         if (!Object.keys(params).length) {
                           this.$message.error('没有修改!');
