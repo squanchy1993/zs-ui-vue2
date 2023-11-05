@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-05 17:15:38
- * @FilePath: /zs-ui-vue2/packages/m-components/src/views/SetConfigExample/index.vue
+ * @LastEditTime: 2023-11-05 22:35:38
+ * @FilePath: /zs-ui-vue2/packages/m-components/src/views/TableLayout/JsConfigExample/index.vue
 -->
 <template>
   <MList v-bind="listConfig">
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { MList, MTableGenerator, MFormGenerator, MPopupGenerator } from '../../../lib/index';
+import { MList, MTableGenerator, MFormGenerator, MPopupGenerator } from '@m-components/index';
 
 import { getLayoutConfig } from './config.js';
 

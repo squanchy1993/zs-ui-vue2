@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { getUserList, createUser, updateUser, deleteUser } from '../../api';
+import { getUserList, createUser, updateUser, deleteUser } from '@/api';
 import {
   MList,
   ListController,
@@ -45,8 +45,8 @@ import {
   MPopupGenerator,
   MPopupController,
   MFormController
-} from '../../../lib/index';
-import { difference } from '../../../lib/components/m-utils';
+} from '@m-components/index';
+import { difference } from '@m-components/components/m-utils';
 
 export default {
   provide() {

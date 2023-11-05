@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
+import { router } from './router/index'
 
 Vue.config.productionTip = false;
 
@@ -20,7 +21,8 @@ IndexedDB.initialize('local_test', '1', [
 ]);
 
 const instance = new Vue({
-  render: (h) => h(App)
+  render: (h) => h(App),
+  router
 }).$mount('#app');
 
 Vue.prototype.$indexedDB = IndexedDB;
