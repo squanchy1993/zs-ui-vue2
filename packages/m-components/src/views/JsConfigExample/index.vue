@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-01 15:11:48
- * @FilePath: \zs-ui-vue2\packages\m-components\src\views\ExampleThree\index.vue
+ * @LastEditTime: 2023-11-05 16:48:27
+ * @FilePath: /zs-ui-vue2/packages/m-components/src/views/JsConfigExample/index.vue
 -->
 <template>
   <MList v-bind="listConfig">
@@ -28,19 +28,19 @@
         layout="total, sizes, prev, pager, next, jumper"
       />
     </template>
-    <MPopup
+    <MPopupGenerator
       v-for="({ mPopoupConfig, mFormGeneratorConfig }, key, i) in dialogConfig"
       :ref="setDialogRef(key)"
       :key="i"
       :config="mPopoupConfig"
     >
       <MFormGenerator :config="mFormGeneratorConfig" />
-    </MPopup>
+    </MPopupGenerator>
   </MList>
 </template>
 
 <script>
-import { MList, MTableGenerator, MFormGenerator, MPopup } from '../../../lib/index';
+import { MList, MTableGenerator, MFormGenerator, MPopupGenerator } from '../../../lib/index';
 
 import { getLayoutConfig } from './config.js';
 
@@ -54,7 +54,7 @@ export default {
     MList,
     MTableGenerator,
     MFormGenerator,
-    MPopup
+    MPopupGenerator
   },
   data() {
     return {

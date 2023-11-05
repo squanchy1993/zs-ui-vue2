@@ -28,14 +28,12 @@
         layout="total, sizes, prev, pager, next, jumper"
       />
     </template>
-    <MPopup
-      v-for="({ mPopoupConfig, mFormGeneratorConfig }, key, i) in parsedData.dialogConfig"
+    <MPopupGenerator
+      v-for="({ mPopoupConfig }, key, i) in parsedData.dialogConfig"
       :ref="setDialogRef(key)"
       :key="i"
       :config="mPopoupConfig"
-    >
-      <MFormGenerator :config="mFormGeneratorConfig" />
-    </MPopup>
+    />
   </MList>
 </template>
 
@@ -43,7 +41,7 @@
 import { MList } from '../../m-list/index';
 import { MTableGenerator } from '../../m-table/m-table-generator/index';
 import { MFormGenerator } from '../../m-form/m-form-generator/index';
-import { MPopup } from '../../m-popup/index';
+import { MPopupGenerator } from '../../m-popup/m-popup-generator';
 import { parse } from '../../m-utils/index';
 
 export default {
@@ -57,7 +55,7 @@ export default {
     MList,
     MTableGenerator,
     MFormGenerator,
-    MPopup
+    MPopupGenerator
   },
   props: {
     listConfig: {

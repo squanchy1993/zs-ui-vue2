@@ -1,16 +1,20 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-11-02 09:37:44
+ * @LastEditTime: 2023-11-05 17:35:07
  * @LastEditors: squanchy squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
- * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-popup\src\mian.vue
+ * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-popup/m-popup-generator/src/mian.vue
 -->
 <script>
 /* eslint-disable */
 import MPopupController from './MPopupController';
+import { MFormGenerator } from '../../../m-form/m-form-generator/index'
 export default {
-  name: 'MPopup',
+  name: 'MPopupGenerator',
+  components: {
+    MFormGenerator
+  },
   provide() {
     return {
       mFormDialogCtrl: this.popupController
@@ -59,24 +63,56 @@ export default {
     };
   },
   methods: {
-    generator() {
-      const node = Object.entries(this.$slots).filter(([k, v]) => k !== 'default');
-      return node.map(([k, v]) => {
-        return <template slot={k}>{v}</template>;
-      });
+    contentGenerator(h, elemOptions) {
+      // eslint-disable-next-line prefer-const
+      let returnElement = null;
+      // eslint-disable-next-line no-unused-vars
+      const { type, elem, props } = elemOptions;
+      console.log('elemOptions>>', elemOptions)
+      // const [res, key] = this.getValueByObjPath(this.formData, prop)
+      switch (type) {
+        case 'registered':
+          // eslint-disable-next-line no-case-declarations
+          returnElement = <elem props={{ ...props }} />;
+          break;
+        case 'async':
+          returnElement = <MAsyncComponent path={elem} props={{ ...props }} />;
+          break;
+        case 'render':
+          // eslint-disable-next-line no-undef
+          returnElement = elem({ h, props: { ...props } });
+          break;
+        case 'slot':
+          // eslint-disable-next-line no-undef
+          returnElement = this.$slots[elem];
+          break;
+        default:
+          returnElement = <div>donsnet</div>;
+          break;
+      }
+      return returnElement;
     },
     open(data) {
       return this.popupController.open(data);
     }
   },
   render(h) {
-    const { elem, props, on, scrollStyle, visible, visibleKey } = this.popupController;
+    const { 
+      elem, 
+      props, 
+      on, 
+      scrollStyle, 
+      visible, 
+      visibleKey, 
+      elemOptions 
+    } = this.popupController;
+
+    const elementContent = this.contentGenerator(h, elemOptions);
     return (
       <elem class="m-popup" props={{ ...props, [visibleKey]: visible }} on={{ ...on }}>
         <el-scrollbar class="m-popup__scrollbar" style={scrollStyle}>
-          {this.$slots['default']}
+          {elementContent}
         </el-scrollbar>
-        {this.generator()}
       </elem>
     );
   }

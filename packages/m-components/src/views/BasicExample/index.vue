@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-01 15:18:38
- * @FilePath: \zs-ui-vue2\packages\m-components\src\views\basicExample\index.vue
+ * @LastEditTime: 2023-11-05 17:13:00
+ * @FilePath: /zs-ui-vue2/packages/m-components/src/views/BasicExample/index.vue
 -->
 <template>
   <MList :controller="listController" v-bind="listConfig">
@@ -29,9 +29,9 @@
         layout="total, sizes, prev, pager, next, jumper"
       />
     </template>
-    <MPopup ref="userDialog" :controller="userdialogCtrl">
+    <MPopupGenerator ref="userDialog" :controller="userdialogCtrl">
       <MFormGenerator :controller="userFormCtrl" />
-    </MPopup>
+    </MPopupGenerator>
   </MList>
 </template>
 
@@ -42,7 +42,7 @@ import {
   ListController,
   MTableGenerator,
   MFormGenerator,
-  MPopup,
+  MPopupGenerator,
   MPopupController,
   MFormController
 } from '../../../lib/index';
@@ -58,7 +58,7 @@ export default {
     MList,
     MTableGenerator,
     MFormGenerator,
-    MPopup
+    MPopupGenerator
   },
   data() {
     return {

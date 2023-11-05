@@ -638,179 +638,229 @@ export function getConfig() {
           return {
             close: mTableCtrl.close
           };
-        }
-      },
-      mFormGeneratorConfig: {
-        props: {
-          ref: 'form',
-          size: 'mini',
-          labelPosition: 'right',
-          labelWidth: '80px'
         },
-        boxStyle: {
-          'justify-content': 'space-between'
-        },
-        fields: [
-          {
-            props: {
-              prop: 'name',
-              label: '名字',
-              rules: [{ required: true, message: '请输入name', trigger: 'change' }]
-            },
-            itemBoxStyle: {
-              width: '50%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'el-input',
+        elemOptions: {
+          type: 'registered',
+          elem: 'MFormGenerator',
+          props: {
+            config: {
               props: {
-                placeholder: '输入name'
-              }
-            }
-          },
+                ref: 'form',
+                size: 'mini',
+                labelPosition: 'right',
+                labelWidth: '80px'
+              },
+              boxStyle: {
+                'justify-content': 'space-between'
+              },
+              fields: [
+                {
+                  props: {
+                    prop: 'name',
+                    label: '名字',
+                    rules: [{ required: true, message: '请输入name', trigger: 'change' }]
+                  },
+                  itemBoxStyle: {
+                    width: '50%'
+                  },
+                  elemOptions: {
+                    type: 'registered',
+                    elem: 'el-input',
+                    props: {
+                      placeholder: '输入name'
+                    }
+                  }
+                },
 
-          {
-            props: {
-              prop: 'age',
-              label: '年龄',
-              rules: [{ required: true, message: '请输入age', trigger: 'change' }]
-            },
-            defaultValue: 0,
-            itemBoxStyle: {
-              width: '50%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'el-input-number',
-              props: {
-                placeholder: '输入name'
-              }
-            }
-          },
+                {
+                  props: {
+                    prop: 'age',
+                    label: '年龄',
+                    rules: [{ required: true, message: '请输入age', trigger: 'change' }]
+                  },
+                  defaultValue: 0,
+                  itemBoxStyle: {
+                    width: '50%'
+                  },
+                  elemOptions: {
+                    type: 'registered',
+                    elem: 'el-input-number',
+                    props: {
+                      placeholder: '输入name'
+                    }
+                  }
+                },
 
-          {
-            props: {
-              prop: 'gender',
-              label: '性别',
-              rules: [{ required: true, message: '请输入gender', trigger: 'change' }]
-            },
-            defaultValue: 0,
-            itemBoxStyle: {
-              width: '50%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'el-switch',
-              props: {
-                placeholder: '输入gender',
-                activeValue: 0,
-                activeText: '女',
-                activeColor: 'pink',
-                inactiveValue: 1,
-                inactiveText: '男',
-                inactiveColor: 'green'
-              }
-            }
-          },
+                {
+                  props: {
+                    prop: 'gender',
+                    label: '性别',
+                    rules: [{ required: true, message: '请输入gender', trigger: 'change' }]
+                  },
+                  defaultValue: 0,
+                  itemBoxStyle: {
+                    width: '50%'
+                  },
+                  elemOptions: {
+                    type: 'registered',
+                    elem: 'el-switch',
+                    props: {
+                      placeholder: '输入gender',
+                      activeValue: 0,
+                      activeText: '女',
+                      activeColor: 'pink',
+                      inactiveValue: 1,
+                      inactiveText: '男',
+                      inactiveColor: 'green'
+                    }
+                  }
+                },
 
-          {
-            props: {
-              prop: 'membership',
-              label: '会员',
-              rules: [{ required: true, message: '输入membership', trigger: 'change' }]
-            },
-            defaultValue: false,
-            itemBoxStyle: {
-              width: '50%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'el-switch',
-              props: {
-                placeholder: '输入membership'
-              }
-            }
-          },
+                {
+                  props: {
+                    prop: 'membership',
+                    label: '会员',
+                    rules: [{ required: true, message: '输入membership', trigger: 'change' }]
+                  },
+                  defaultValue: false,
+                  itemBoxStyle: {
+                    width: '50%'
+                  },
+                  elemOptions: {
+                    type: 'registered',
+                    elem: 'el-switch',
+                    props: {
+                      placeholder: '输入membership'
+                    }
+                  }
+                },
 
-          {
-            props: {
-              prop: 'address',
-              label: '地址',
-              rules: [{ required: true, message: '请输入address', trigger: 'change' }]
-            },
-            defaultValue: '',
-            itemBoxStyle: {
-              width: '50%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'el-input',
-              props: {
-                placeholder: '请输入address'
-              }
-            }
-          },
+                {
+                  props: {
+                    prop: 'address',
+                    label: '地址',
+                    rules: [{ required: true, message: '请输入address', trigger: 'change' }]
+                  },
+                  defaultValue: '',
+                  itemBoxStyle: {
+                    width: '50%'
+                  },
+                  elemOptions: {
+                    type: 'registered',
+                    elem: 'el-input',
+                    props: {
+                      placeholder: '请输入address'
+                    }
+                  }
+                },
 
-          {
-            defaultValue: '',
-            itemBoxStyle: {
-              width: '100%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'MButtonOperator',
-              props: {
-                btns: [
-                  {
-                    name: '保存',
-                    code: async function ({
-                      injectData: { mFormCtrl, mFormDialogCtrl, mListCtrl }
-                    }) {
-                      console.log('asdf>>>', this);
-                      try {
-                        const { validateFields, formData, originData } = mFormCtrl;
-                        await validateFields();
+                {
+                  defaultValue: '',
+                  itemBoxStyle: {
+                    width: '100%'
+                  },
+                  elemOptions: {
+                    type: 'registered',
+                    elem: 'MButtonOperator',
+                    props: {
+                      btns: [
+                        {
+                          name: '保存',
+                          code: async function ({
+                            injectData: { mFormCtrl, mFormDialogCtrl, mListCtrl }
+                          }) {
+                            console.log('asdf>>>', this);
+                            try {
+                              const { validateFields, formData, originData } = mFormCtrl;
+                              await validateFields();
 
-                        // only submit changed data;
-                        const { $importSrc, $mComponent } = mListCtrl.componentInstance;
-                        const {
-                          MUtils: { difference }
-                        } = await $mComponent('index.js');
-                        const params = difference(formData, originData);
-                        if (!Object.keys(params).length) {
-                          this.$message.error('没有修改!');
-                          throw new Error('没有修改!');
+                              // only submit changed data;
+                              const { $importSrc, $mComponent } = mListCtrl.componentInstance;
+                              const {
+                                MUtils: { difference }
+                              } = await $mComponent('index.js');
+                              const params = difference(formData, originData);
+                              if (!Object.keys(params).length) {
+                                this.$message.error('没有修改!');
+                                throw new Error('没有修改!');
+                              }
+
+                              // submit data
+                              const { createUser, updateUser } = await $importSrc('api.js');
+                              let res;
+                              const { id } = originData;
+                              if (!id) {
+                                res = await createUser(params);
+                              } else {
+                                res = await updateUser({ ...params, id });
+                              }
+
+                              mFormDialogCtrl.openResolve(res);
+                              mFormDialogCtrl.clear();
+                            } catch (error) {
+                              console.log('提交失败', error);
+                            }
+                          }
+                        },
+                        {
+                          name: '重置',
+                          code: ({ injectData: { mFormCtrl } }) => mFormCtrl.resetFields()
                         }
-
-                        // submit data
-                        const { createUser, updateUser } = await $importSrc('api.js');
-                        let res;
-                        const { id } = originData;
-                        if (!id) {
-                          res = await createUser(params);
-                        } else {
-                          res = await updateUser({ ...params, id });
-                        }
-
-                        mFormDialogCtrl.openResolve(res);
-                        mFormDialogCtrl.clear();
-                      } catch (error) {
-                        console.log('提交失败', error);
+                      ],
+                      boxStyle: {
+                        'justify-content': 'flex-end'
                       }
                     }
-                  },
-                  {
-                    name: '重置',
-                    code: ({ injectData: { mFormCtrl } }) => mFormCtrl.resetFields()
                   }
-                ],
-                boxStyle: {
-                  'justify-content': 'flex-end'
+                }
+              ],
+              elemOptions: {
+                type: 'registered',
+                elem: 'MButtonOperator',
+                props: {
+                  btns: [
+                    {
+                      name: '编辑',
+                      code: async function ({ injectData: { mListCtrl, mLayoutTable }, row }) {
+                        try {
+                          await mLayoutTable.dialogs.userDialog.open({ tag: 'edit', data: row });
+                          await mListCtrl.getList();
+                        } catch (error) {
+                          console.error('编辑失败', error);
+                        }
+                      },
+                      option: {
+                        size: 'mini',
+                        type: 'primary'
+                      },
+                      'option.size': null,
+                      'option.type': null
+                    },
+                    {
+                      name: '删除',
+                      code: async function ({ injectData: { mListCtrl }, row }) {
+                        try {
+                          const { $importSrc } = mListCtrl.componentInstance;
+                          const { deleteUser } = await $importSrc('api.js');
+                          await deleteUser(row.id);
+                          await mListCtrl.getList();
+                        } catch (error) {
+                          console.error('删除失败', error);
+                        }
+                      },
+                      option: {
+                        size: 'mini',
+                        type: 'danger'
+                      },
+                      'option.size': null,
+                      'option.type': null
+                    }
+                  ]
                 }
               }
             }
           }
-        ]
+        }
       }
     }
   };
