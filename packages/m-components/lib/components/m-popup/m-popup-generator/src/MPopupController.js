@@ -1,23 +1,26 @@
-import { deepMerge } from '../../m-utils';
+import { deepMerge } from '../../../m-utils';
 
 export default class MPopupController {
-  componentInstance = null;
-
-  elem = 'el-dialog';
   visible = false;
-  visibleKey = 'visible';
-  props = {
-    ref: `form_${Date.now()}`
-  };
-
-  scrollStyle = {
-    height: '100%'
-  };
   openResolve;
   openReject;
 
+  componentInstance = null;
+  elem = 'el-dialog';
+  props = {
+    ref: `form_${Date.now()}`
+  };
   on = {
     close: () => this.close()
+  };
+  scrollStyle = {
+    height: '100%'
+  };
+  visibleKey = 'visible';
+  elemOptions = {
+    type: 'slot',
+    elem: 'default',
+    props: {}
   };
 
   constructor(options = {}) {
@@ -25,7 +28,7 @@ export default class MPopupController {
   }
 
   // set
-  setOptions({ componentInstance, elem, props, on, scrollStyle, visibleKey }) {
+  setOptions({ componentInstance, elem, props, on, scrollStyle, visibleKey, elemOptions }) {
     if (componentInstance) {
       this.componentInstance = componentInstance;
     }
@@ -49,6 +52,10 @@ export default class MPopupController {
 
     if (visibleKey) {
       this.visibleKey = visibleKey;
+    }
+
+    if (elemOptions) {
+      this.elemOptions = deepMerge(this.elemOptions, elemOptions);
     }
   }
 

@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-03-17 14:10:44
  * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-04 22:59:31
- * @FilePath: /m-components/src/App.vue
+ * @LastEditTime: 2023-11-05 16:52:51
+ * @FilePath: /zs-ui-vue2/packages/m-components/src/App.vue
 -->
 <template>
   <div id="app">
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      activeName: 'SetConfigExample'
+      activeName: 'JsConfigExample'
     };
   },
   mounted() {},
