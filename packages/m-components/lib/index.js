@@ -37,7 +37,7 @@ export * from './components/m-async-component';
 export * from './components/m-select-picker';
 export * from './components/m-img-upload';
 export * from './components/m-button-operator';
-export * from './components/m-popup';
+export * from './components/m-popup/m-popup-generator';
 export * as MUtils from './components/m-utils';
 export * from './components/m-layout-table';
 export * from './components/m-json-editor'
