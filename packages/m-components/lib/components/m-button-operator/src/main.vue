@@ -1,7 +1,7 @@
 <!--
  * @Date: 2022-11-01 09:12:52
- * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-02 13:04:21
+ * @LastEditors: squanchy1993 squanchy@yeah.net
+ * @LastEditTime: 2023-11-09 18:59:17
  * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-button-operator\src\main.vue
 -->
 <template>
@@ -27,7 +27,7 @@ export default {
     mFormDialogCtrl: { default: null }
   },
   props: {
-    row: {
+    data: {
       type: Object,
       default: () => {}
     },
@@ -43,10 +43,10 @@ export default {
   methods: {
     async click(item) {
       try {
-        const { mLayoutTable, mListCtrl, mTableCtrl, mFormCtrl, mFormDialogCtrl, row } = this;
+        const { mLayoutTable, mListCtrl, mTableCtrl, mFormCtrl, mFormDialogCtrl, $props } = this;
         await item.code.call(this, {
           injectData: { mLayoutTable, mListCtrl, mTableCtrl, mFormCtrl, mFormDialogCtrl },
-          row
+          props: $props
         });
       } catch (error) {
         console.error(error);

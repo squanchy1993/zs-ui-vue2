@@ -21,13 +21,11 @@ export * from './components/m-list';
 
 // m-tables
 export * from './components/m-table/m-table-generator';
-export * from './components/m-table/m-table-field/index';
 
 // m-form
 export * from './components/m-form/m-form-generator';
-export * from './components/m-form/m-form-field';
-export * from './components/m-form/m-form-field-rules';
-export * from './components/m-form/m-form-field-tags';
+// export * from './components/m-form/m-form-field-rules';
+// export * from './components/m-form/m-form-field-tags';
 // export * from './components/m-form/m-form-field-button';
 // export * from './components/m-form/m-form-field-code-button';
 // export * from './components/m-form/m-form-field-code-input';
@@ -41,3 +39,5 @@ export * from './components/m-popup/m-popup-generator';
 export * as MUtils from './components/m-utils';
 export * from './components/m-layout-table';
 export * from './components/m-json-editor'
+export * from './components/m-design/index'
+export * from './components/m-async-component/index'

@@ -64,6 +64,7 @@
   "dependencies": {
     "draggable": "^4.2.0",
     "lodash-es": "^4.17.21",
+    "sortablejs": "^1.15.0",
     "vue-codemirror": "^4.0.6",
     "vue-json-editor": "^1.4.3",
     "vue-router": "3.6.5",

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2022-11-01 09:12:52
- * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-01 15:10:41
+ * @LastEditors: squanchy1993 squanchy@yeah.net
+ * @LastEditTime: 2023-11-09 19:18:13
  * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-table\m-table-generator\src\main.vue
 -->
 <template>
@@ -9,23 +9,24 @@
     :data="tableController.list"
     style="width: 100%"
     v-bind="tableController.props"
+    v-on="tableController.on"
     height="100%"
   >
     <el-table-column
-      v-for="(tableFieldItem, index) of tableController.fields"
+      v-for="({ props, elemOptions }, index) of tableController.fields"
       :key="index"
-      v-bind="tableFieldItem.props"
+      v-bind="props"
     >
       <template slot-scope="{ row }">
-        <m-table-field :row="row" :mTableFieldOption="tableController.fields[index]" />
+        <MDynamicElem  :config="elemOptions" :data="row" :propKey="props.prop" />
       </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
-import { MTableField } from '../../m-table-field';
-import MTableController from './MTableController';
+import { MTableController } from './MTableController';
+import { MDynamicElem } from '../../../m-dynamic-elem';
 export default {
   name: 'MTableGenerator',
   provide() {
@@ -34,7 +35,7 @@ export default {
     };
   },
   components: {
-    MTableField
+    MDynamicElem
   },
   props: {
     controller: {

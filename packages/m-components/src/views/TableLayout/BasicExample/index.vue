@@ -1,17 +1,25 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-05 17:13:00
- * @FilePath: /zs-ui-vue2/packages/m-components/src/views/BasicExample/index.vue
+ * @LastEditTime: 2023-11-09 22:20:54
+ * @FilePath: /zs-ui-vue2/packages/m-components/src/views/TableLayout/BasicExample/index.vue
 -->
 <template>
   <MList :controller="listController" v-bind="listConfig">
-    <template #search="{ searchParams, handleSearch, getList }">
+    <!-- <template #search="{ searchParams, handleSearch, getList }"> -->
+    <template #search="{ handleSearch }">
       <MFormGenerator :config="searchFormConfig">
-        <template #test2>
-          <el-button @click="handleSearch">搜索</el-button>
-          <el-button @click="getList">刷新</el-button>
-          <el-button @click="refrash">刷新example</el-button>
+        <!-- elemOptions.type = 'slot' -->
+        <template #btn1>
+          <div>
+            <el-button @click="handleSearch">搜索</el-button>
+            <el-button @click="refrash">slot 刷新</el-button>
+          </div>
+        </template>
+
+        <!-- or elemOptions.type ='scopedSlot' -->
+        <template #btn2="{ props, injectData: { mListCtrl } }">
+          <el-button @click="mListCtrl.getList">soltScope 刷新</el-button>
         </template>
       </MFormGenerator>
     </template>
@@ -36,6 +44,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { getUserList, createUser, updateUser, deleteUser } from '@/api';
 import {
   MList,
@@ -148,8 +157,8 @@ export default {
             },
             elemOptions: {
               type: 'render',
-              elem: ({ h, formItem, props: { resetFields } }) => {
-                return <el-button onClick={() => resetFields()}>重置</el-button>;
+              elem: ({ h, injectData: { mFormCtrl } }) => {
+                return <el-button onClick={() => mFormCtrl.reset()}>重置</el-button>;
               }
             }
           },
@@ -160,7 +169,17 @@ export default {
             },
             elemOptions: {
               type: 'slot',
-              elem: 'test2'
+              elem: 'btn1'
+            }
+          },
+          {
+            itemBoxStyle: {
+              width: 'fit-content',
+              paddingRight: '10px'
+            },
+            elemOptions: {
+              type: 'scopedSlot',
+              elem: 'btn2'
             }
           }
         ]
@@ -404,7 +423,7 @@ export default {
                   },
                   {
                     name: '重置',
-                    code: ({ injectData: { mFormCtrl } }) => mFormCtrl.resetFields()
+                    code: ({ injectData: { mFormCtrl } }) => mFormCtrl.reset()
                   }
                 ],
                 boxStyle: {
@@ -434,18 +453,18 @@ export default {
       }
     },
 
-    async deleteRow({ injectData: { mListCtrl }, row }) {
+    async deleteRow({ injectData: { mListCtrl }, props: { data } }) {
       try {
-        await deleteUser(row.id);
+        await deleteUser(data.id);
         await mListCtrl.getList();
       } catch (error) {
         console.log('deleteRow', error);
       }
     },
 
-    async editRow({ injectData: { mFormCtrl, mFormDialogCtrl, mListCtrl }, row }) {
+    async editRow({ injectData: { mListCtrl }, props: { data } }) {
       try {
-        await this.$refs['userDialog'].open({ tag: 'edit', data: row });
+        await this.$refs['userDialog'].open({ tag: 'edit', data });
         await mListCtrl.getList();
       } catch (error) {
         console.error('editRow', error);

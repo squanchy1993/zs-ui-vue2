@@ -6,7 +6,7 @@
 <script>
 import {
   MTableGenerator,
-  MTableFieldModel
+  MTableFieldController
 } from '../../../lib/index';
 
 export default {
@@ -20,7 +20,7 @@ export default {
           border: true
         },
         field: [
-          new MTableFieldModel({
+          new MTableFieldController({
             elType: 'registered',
             element: 'MTableFieldText',
             defaultValue: '无',
@@ -29,7 +29,7 @@ export default {
               prop: 'name'
             }
           }),
-          new MTableFieldModel({
+          new MTableFieldController({
             elType: 'registered',
             element: 'MTableFieldText',
             defaultValue: '无',
@@ -38,7 +38,7 @@ export default {
               prop: 'age'
             }
           }),
-          new MTableFieldModel({
+          new MTableFieldController({
             elType: 'registered',
             element: 'MTableFieldText',
             defaultValue: '无',
@@ -47,7 +47,7 @@ export default {
               prop: 'gender'
             }
           }),
-          new MTableFieldModel({
+          new MTableFieldController({
             elType: 'registered',
             element: 'MTableFieldText',
             defaultValue: '无',
@@ -56,7 +56,7 @@ export default {
               prop: 'membership'
             }
           }),
-          new MTableFieldModel({
+          new MTableFieldController({
             elType: 'registered',
             element: 'MTableFieldText',
             defaultValue: '无',
@@ -65,7 +65,7 @@ export default {
               prop: 'address'
             }
           }),
-          new MTableFieldModel({
+          new MTableFieldController({
             elType: 'registered',
             element: 'MTableFieldButton',
             defaultValue: [
