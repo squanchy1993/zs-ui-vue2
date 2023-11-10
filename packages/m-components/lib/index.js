@@ -40,4 +40,3 @@ export * as MUtils from './components/m-utils';
 export * from './components/m-layout-table';
 export * from './components/m-json-editor'
 export * from './components/m-design/index'
-export * from './components/m-async-component/index'
