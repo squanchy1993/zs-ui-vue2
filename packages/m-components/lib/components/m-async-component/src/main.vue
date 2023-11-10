@@ -74,22 +74,22 @@ export default {
     },
 
     // 测试方法
-    downLoadFile() {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          reject(new Error('加载超时'));
-        }, this.timeOut);
-        import('@/' + this.path)
-          .then((res) => {
-            setTimeout(() => {
-              resolve(res);
-            }, 1000);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
-    },
+    // downLoadFile() {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       reject(new Error('加载超时'));
+    //     }, this.timeOut);
+    //     import('@/' + this.path)
+    //       .then((res) => {
+    //         setTimeout(() => {
+    //           resolve(res);
+    //         }, 1000);
+    //       })
+    //       .catch((error) => {
+    //         reject(error);
+    //       });
+    //   });
+    // },
 
     async delay() {
       return new Promise((resolve, reject) => {

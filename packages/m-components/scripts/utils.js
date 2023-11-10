@@ -60,7 +60,6 @@ exports.runWebpack = async(componentName, entry, output, compileWatchMode) => {
           },
           {
             test: /\.vue$/,
-            exclude: /node_modules/,
             loader: 'vue-loader'
           },
           {
@@ -81,7 +80,6 @@ exports.runWebpack = async(componentName, entry, output, compileWatchMode) => {
           },
           {
             test: /\.css$/,
-            exclude: /node_modules/,
             use: ['vue-style-loader', 'css-loader']
           },
           {
