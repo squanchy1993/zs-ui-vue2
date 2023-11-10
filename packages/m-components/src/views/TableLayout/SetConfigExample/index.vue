@@ -1,16 +1,25 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-05 22:36:02
+ * @LastEditTime: 2023-11-09 22:26:24
  * @FilePath: /zs-ui-vue2/packages/m-components/src/views/TableLayout/SetConfigExample/index.vue
 -->
+<!-- eslint-disable  -->
 <template>
   <MList v-bind="listConfig">
-    <template #search="{ searchParams, handleSearch, getList }">
+    <template #search="{ handleSearch, getList }">
       <MFormGenerator :config="searchFormConfig">
-        <template #test2>
-          <el-button @click="handleSearch">搜索</el-button>
-          <el-button @click="getList">刷新</el-button>
+        <!-- elemOptions.type = 'slot' -->
+        <template #btn1>
+          <div>
+            <el-button @click="handleSearch">搜索</el-button>
+            <el-button @click="getList">slot 刷新</el-button>
+          </div>
+        </template>
+
+        <!-- or elemOptions.type ='scopedSlot' -->
+        <template #btn2="{ props, injectData: { mListCtrl } }">
+          <el-button @click="mListCtrl.getList">soltScope 刷新</el-button>
         </template>
       </MFormGenerator>
     </template>

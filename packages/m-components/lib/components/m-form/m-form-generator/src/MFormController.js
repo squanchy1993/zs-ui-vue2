@@ -1,5 +1,4 @@
-import { deepMerge } from '../../../m-utils';
-import { MFormFieldModel } from '../../m-form-field/index';
+import { deepMerge, buildShortUUID } from '../../../m-utils';
 
 export default class MFormController {
   componentInstance = null;
@@ -66,7 +65,7 @@ export default class MFormController {
     }
   }
 
-  resetFields = () => {
+  _resetFields = () => {
     this._setFormDataByFormDataDefault();
     this._setFormDataByOriginData();
   };
@@ -90,7 +89,7 @@ export default class MFormController {
   }
 
   startup = ({ data, tag }) => {
-    this.resetFields();
+    this._resetFields();
 
     this.tag = tag;
 
@@ -110,11 +109,47 @@ export default class MFormController {
   clear = async () => {
     this.originData = {};
 
-    this.resetFields();
+    this._resetFields();
 
     this.tag = null;
 
     // clear form validate
     this.clearFieldsValidate();
   };
+
+  reset = async () => {
+    this._resetFields()
+    this.clearFieldsValidate();
+  }
+}
+
+export class MFormFieldModel {
+  id = buildShortUUID();
+  props = {};
+  defaultValue = null;
+  itemBoxStyle = {}; // 盒子的style
+  itemBoxClass = []; // 盒子自定义class
+  elemOptions = {
+    type: null,
+    elem: null,
+    props: {}
+  };
+
+  constructor(config = {}) {
+    this.setOptions(config);
+  }
+
+  setOptions({ id, props, defaultValue, itemBoxStyle, itemBoxClass, elemOptions }) {
+    if (id) this.id = !id;
+
+    if (props) this.props = deepMerge(this.props, props);
+
+    if (defaultValue !== undefined) this.defaultValue = defaultValue;
+
+    if (itemBoxStyle) deepMerge(this.itemBoxStyle, itemBoxStyle);
+
+    if (itemBoxClass) this.itemBoxClass = [...this.itemBoxClass, ...this.itemBoxClass];
+
+    if (elemOptions) this.elemOptions = deepMerge(this.elemOptions, elemOptions);
+  }
 }

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { MTableFieldModel } from '../../../../index';
+import { MTableFieldController } from '../../../../index';
 const defaultValue = '暂无';
 export default {
   name: 'MTableFieldText',
@@ -28,7 +28,7 @@ export default {
     },
     tableFieldOptions: {
       type: Object,
-      default: () => new MTableFieldModel({})
+      default: () => new MTableFieldController({})
     }
   },
   data: function () {

@@ -1,8 +1,8 @@
 <!--
  * @Date: 2022-11-01 09:12:52
- * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-06-04 20:31:17
- * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-list/m-table-field-button/src/main.vue
+ * @LastEditors: squanchy1993 squanchy@yeah.net
+ * @LastEditTime: 2023-11-09 11:03:52
+ * @FilePath: \zs-ui-vue2\packages\m-components\backup\m-list-----list\m-table-field-button\src\main.vue
 -->
 <template>
   <div class="buttons-opeation">

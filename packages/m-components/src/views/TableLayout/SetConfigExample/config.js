@@ -118,8 +118,8 @@ export function getLayoutConfig() {
         },
         elemOptions: {
           type: 'render',
-          elem: function ({ h, formItem, props: { resetFields } }) {
-            return <el-button onClick={() => resetFields()}>重置</el-button>;
+          elem: ({ h, injectData: { mFormCtrl } }) => {
+            return <el-button onClick={() => mFormCtrl.reset()}>重置</el-button>;
           }
         }
       },
@@ -130,7 +130,17 @@ export function getLayoutConfig() {
         },
         elemOptions: {
           type: 'slot',
-          elem: 'test2'
+          elem: 'btn1'
+        }
+      },
+      {
+        itemBoxStyle: {
+          width: 'fit-content',
+          paddingRight: '10px'
+        },
+        elemOptions: {
+          type: 'scopedSlot',
+          elem: 'btn2'
         }
       }
     ]
@@ -175,7 +185,7 @@ export function getLayoutConfig() {
         props: {
           label: 'MTableFieldButton',
           prop: 'MTableFieldButton',
-          width: '240',
+          width: '310',
           fixed: 'right'
         },
         elemOptions: {
@@ -185,9 +195,12 @@ export function getLayoutConfig() {
             btns: [
               {
                 name: '编辑',
-                code: async function ({ injectData: { mListCtrl, mLayoutTable }, row }) {
+                code: async function ({
+                  injectData: { mListCtrl, mLayoutTable },
+                  props: { data }
+                }) {
                   try {
-                    await mLayoutTable.dialogs.userDialog.open({ tag: 'edit', data: row });
+                    await mLayoutTable.dialogs.userDialog.open({ tag: 'edit', data });
                     await mListCtrl.getList();
                   } catch (error) {
                     console.error('编辑失败', error);
@@ -202,9 +215,9 @@ export function getLayoutConfig() {
               },
               {
                 name: '删除',
-                code: async function ({ injectData: { mListCtrl }, row }) {
+                code: async function ({ injectData: { mListCtrl }, props: { data } }) {
                   try {
-                    await deleteConfig(row.id);
+                    await deleteConfig(data.id);
                     await mListCtrl.getList();
                   } catch (error) {
                     console.error('删除失败', error);
@@ -219,9 +232,31 @@ export function getLayoutConfig() {
               },
               {
                 name: '查看列表',
-                code: async function ({ injectData: { mListCtrl, mLayoutTable }, row }) {
+                code: async function ({
+                  injectData: { mListCtrl, mLayoutTable },
+                  props: { data }
+                }) {
                   try {
-                    this.$router.push({ path: `/tableLayout/jsonConfigExample/${row.id}`})
+                    this.$router.push({ path: `/tableLayout/jsonConfigExample/${data.id}` });
+                  } catch (error) {
+                    console.error('查看列表', error);
+                  }
+                },
+                option: {
+                  size: 'mini',
+                  type: 'primary'
+                },
+                'option.size': null,
+                'option.type': null
+              },
+              {
+                name: '设计',
+                code: async function ({
+                  injectData: { mListCtrl, mLayoutTable },
+                  props: { data }
+                }) {
+                  try {
+                    this.$router.push({ path: `/tableLayout/DesignTable` });
                   } catch (error) {
                     console.error('查看列表', error);
                   }
@@ -386,7 +421,7 @@ export function getLayoutConfig() {
                   },
                   {
                     name: '重置',
-                    code: ({ injectData: { mFormCtrl } }) => mFormCtrl.resetFields()
+                    code: ({ injectData: { mFormCtrl } }) => mFormCtrl.reset()
                   }
                 ],
                 boxStyle: {
@@ -508,19 +543,9 @@ export function getConfig() {
         },
         elemOptions: {
           type: 'render',
-          elem: function ({ h, formItem, props: { resetFields } }) {
-            return <el-button onClick={() => resetFields()}>重置</el-button>;
+          elem: ({ h, injectData: { mFormCtrl } }) => {
+            return <el-button onClick={() => mFormCtrl.reset()}>重置</el-button>;
           }
-        }
-      },
-      {
-        itemBoxStyle: {
-          width: 'fit-content',
-          paddingRight: '10px'
-        },
-        elemOptions: {
-          type: 'slot',
-          elem: 'test2'
         }
       }
     ]
@@ -597,9 +622,12 @@ export function getConfig() {
             btns: [
               {
                 name: '编辑',
-                code: async function ({ injectData: { mListCtrl, mLayoutTable }, row }) {
+                code: async function ({
+                  injectData: { mListCtrl, mLayoutTable },
+                  props: { data }
+                }) {
                   try {
-                    await mLayoutTable.dialogs.userDialog.open({ tag: 'edit', data: row });
+                    await mLayoutTable.dialogs.userDialog.open({ tag: 'edit', data });
                     await mListCtrl.getList();
                   } catch (error) {
                     console.error('编辑失败', error);
@@ -614,11 +642,11 @@ export function getConfig() {
               },
               {
                 name: '删除',
-                code: async function ({ injectData: { mListCtrl }, row }) {
+                code: async function ({ injectData: { mListCtrl }, props: { data } }) {
                   try {
                     const { $importSrc } = mListCtrl.componentInstance;
                     const { deleteUser } = await $importSrc('api.js');
-                    await deleteUser(row.id);
+                    await deleteUser(data.id);
                     await mListCtrl.getList();
                   } catch (error) {
                     console.error('删除失败', error);
@@ -821,7 +849,7 @@ export function getConfig() {
                         },
                         {
                           name: '重置',
-                          code: ({ injectData: { mFormCtrl } }) => mFormCtrl.resetFields()
+                          code: ({ injectData: { mFormCtrl } }) => mFormCtrl.reset()
                         }
                       ],
                       boxStyle: {
@@ -838,9 +866,12 @@ export function getConfig() {
                   btns: [
                     {
                       name: '编辑',
-                      code: async function ({ injectData: { mListCtrl, mLayoutTable }, row }) {
+                      code: async function ({
+                        injectData: { mListCtrl, mLayoutTable },
+                        props: { data }
+                      }) {
                         try {
-                          await mLayoutTable.dialogs.userDialog.open({ tag: 'edit', data: row });
+                          await mLayoutTable.dialogs.userDialog.open({ tag: 'edit', data });
                           await mListCtrl.getList();
                         } catch (error) {
                           console.error('编辑失败', error);
@@ -855,11 +886,11 @@ export function getConfig() {
                     },
                     {
                       name: '删除',
-                      code: async function ({ injectData: { mListCtrl }, row }) {
+                      code: async function ({ injectData: { mListCtrl }, props: { data } }) {
                         try {
                           const { $importSrc } = mListCtrl.componentInstance;
                           const { deleteUser } = await $importSrc('api.js');
-                          await deleteUser(row.id);
+                          await deleteUser(data.id);
                           await mListCtrl.getList();
                         } catch (error) {
                           console.error('删除失败', error);

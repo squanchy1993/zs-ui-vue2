@@ -1,18 +1,13 @@
 <!--
  * @Date: 2023-07-15 16:16:17
- * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-02 19:23:20
+ * @LastEditors: squanchy1993 squanchy@yeah.net
+ * @LastEditTime: 2023-11-09 20:09:26
  * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-layout-table\src\main.vue
 -->
 <template>
   <MList v-bind="parsedData.listConfig">
-    <template #search="{ searchParams, handleSearch, getList }">
-      <MFormGenerator :config="parsedData.searchFormConfig">
-        <template #test2>
-          <el-button @click="handleSearch">搜索</el-button>
-          <el-button @click="getList">刷新</el-button>
-        </template>
-      </MFormGenerator>
+    <template #search>
+      <MFormGenerator :config="parsedData.searchFormConfig" />
     </template>
     <template #table="{ list }">
       <MTableGenerator :config="parsedData.tableConfig" :list="list" />

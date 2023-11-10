@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-11-05 17:35:07
- * @LastEditors: squanchy squanchy@yeah.net
+ * @LastEditTime: 2023-11-09 19:11:26
+ * @LastEditors: squanchy1993 squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
- * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-popup/m-popup-generator/src/mian.vue
+ * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-popup\m-popup-generator\src\mian.vue
 -->
 <script>
 /* eslint-disable */
@@ -68,7 +68,6 @@ export default {
       let returnElement = null;
       // eslint-disable-next-line no-unused-vars
       const { type, elem, props } = elemOptions;
-      console.log('elemOptions>>', elemOptions)
       // const [res, key] = this.getValueByObjPath(this.formData, prop)
       switch (type) {
         case 'registered':

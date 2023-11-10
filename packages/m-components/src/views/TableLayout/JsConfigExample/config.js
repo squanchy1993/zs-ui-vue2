@@ -4,7 +4,6 @@ export function getLayoutConfig() {
     loadList: true,
     pageParams: { pageIndex: 1, pageSize: 10 },
     requestFun: async ({ pageParams, searchParams }) => {
-      console.log('this', this)
       let {
         data: { list, total }
       } = await getUserList({ ...pageParams });
@@ -99,8 +98,8 @@ export function getLayoutConfig() {
         },
         elemOptions: {
           type: 'render',
-          elem: ({ h, formItem, props: { resetFields } }) => {
-            return <el-button onClick={() => resetFields()}>重置</el-button>;
+          elem: ({h, injectData: { mFormCtrl } }) => {
+            return <el-button onClick={() => mFormCtrl.reset()}>重置</el-button>;
           }
         }
       },
@@ -111,7 +110,17 @@ export function getLayoutConfig() {
         },
         elemOptions: {
           type: 'slot',
-          elem: 'test2'
+          elem: 'btn1'
+        }
+      },
+      {
+        itemBoxStyle: {
+          width: 'fit-content',
+          paddingRight: '10px'
+        },
+        elemOptions: {
+          type: 'scopedSlot',
+          elem: 'btn2'
         }
       }
     ]
@@ -188,9 +197,9 @@ export function getLayoutConfig() {
             btns: [
               {
                 name: '编辑',
-                code: async ({ injectData: { mListCtrl, mLayoutTable }, row }) => {
+                code: async ({ injectData: { mListCtrl }, props: { data } }) => {
                   try {
-                    await this.dialogs.userDialog.open({ tag: 'edit', data: row });
+                    await this.dialogs.userDialog.open({ tag: 'edit', data });
                     await mListCtrl.getList();
                   } catch (error) {
                     console.error('编辑失败', error);
@@ -205,9 +214,9 @@ export function getLayoutConfig() {
               },
               {
                 name: '删除',
-                code: async ({ injectData: { mListCtrl }, row }) => {
+                code: async ({ injectData: { mListCtrl }, props: { data } }) => {
                   try {
-                    await deleteUser(row.id);
+                    await deleteUser(data.id);
                     await mListCtrl.getList();
                   } catch (error) {
                     console.error('删除失败', error);
@@ -401,7 +410,7 @@ export function getLayoutConfig() {
                   },
                   {
                     name: '重置',
-                    code: ({ injectData: { mFormCtrl } }) => mFormCtrl.resetFields()
+                    code: ({ injectData: { mFormCtrl } }) => mFormCtrl.reset()
                   }
                 ],
                 boxStyle: {
