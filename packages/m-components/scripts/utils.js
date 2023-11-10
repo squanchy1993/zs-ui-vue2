@@ -60,10 +60,12 @@ exports.runWebpack = async(componentName, entry, output, compileWatchMode) => {
           },
           {
             test: /\.vue$/,
+            exclude: /node_modules/,
             loader: 'vue-loader'
           },
           {
             test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            exclude: /node_modules/,
             loader: 'url-loader',
             options: {
               limit: 10000,
@@ -72,6 +74,7 @@ exports.runWebpack = async(componentName, entry, output, compileWatchMode) => {
           },
           {
             test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+            exclude: /node_modules/,
             loader: 'url-loader',
             options: {
               limit: 10000,
@@ -80,10 +83,12 @@ exports.runWebpack = async(componentName, entry, output, compileWatchMode) => {
           },
           {
             test: /\.css$/,
+            exclude: /node_modules/,
             use: ['vue-style-loader', 'css-loader']
           },
           {
             test: /\.scss$/,
+            exclude: /node_modules/,
             use: ['vue-style-loader', 'css-loader', 'sass-loader']
           }
         ]
@@ -97,7 +102,10 @@ exports.runWebpack = async(componentName, entry, output, compileWatchMode) => {
         /* config.plugin('vue-loader') */
         new VueLoaderPlugin()
       ],
-      externals: ['vue', 'element-ui', 'vue-loader'],
+      /*  Tips: 此处是配置项目中,既可以 import 又不打包，
+          不然webpack还是会去node_modules里面去找，
+          但是被module.ruls被exclude掉了会报错找不到loader */
+      externals: ['vue', 'element-ui', 'vue-loader', 'vue-json-editor'],
       stats: {
         errors: true,
         errorDetails: true
