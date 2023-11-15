@@ -1,8 +1,8 @@
 <!--
  * @Date: 2022-11-01 09:12:52
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-09 19:18:13
- * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-table\m-table-generator\src\main.vue
+ * @LastEditTime: 2023-11-13 21:36:58
+ * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-table/m-table-generator/src/main.vue
 -->
 <template>
   <el-table
@@ -13,12 +13,20 @@
     height="100%"
   >
     <el-table-column
-      v-for="({ props, elemOptions }, index) of tableController.fields"
+      v-for="(item, index) of tableController.fields"
       :key="index"
-      v-bind="props"
+      v-bind="item.props"
     >
       <template slot-scope="{ row }">
-        <MDynamicElem  :config="elemOptions" :data="row" :propKey="props.prop" />
+        <div class="m-table-item">
+          <div class="m-table-item__delete" @click="$emit('deleteItem', { field: item, index })">
+            <i class="el-icon-delete" />
+          </div>
+          <div class="m-table-item__edit" @click="$emit('editItem', { field: item, index })">
+            <i class="el-icon-edit" />
+          </div>
+          <MDynamicElem :config="item.elemOptions" :data="row" :propKey="item.props.prop" />
+        </div>
       </template>
     </el-table-column>
   </el-table>
@@ -70,6 +78,7 @@ export default {
     config: {
       handler: function (config) {
         if (config) {
+          console.log('m-table-config')
           this.tableController.setOptions(config);
         }
       },
@@ -90,8 +99,40 @@ export default {
     return {
       tableController
     };
-  }
+  },
+  methods: {}
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped lang="scss">
+    .m-table-item {
+      position: relative;
+      &__delete {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 12px;
+        height: 12px;
+        font-size: 8px;
+        line-height: 12px;
+        overflow: hidden;
+        background-color: #f56c6c;
+        color: #fff;
+        display: none;
+      }
+
+      &__edit {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 12px;
+        height: 12px;
+        font-size: 8px;
+        line-height: 12px;
+        overflow: hidden;
+        background-color: #409eff;
+        color: #fff;
+        display: none;
+      }
+    }
+</style>

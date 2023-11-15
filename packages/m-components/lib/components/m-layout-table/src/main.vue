@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-09 20:09:26
- * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-layout-table\src\main.vue
+ * @LastEditTime: 2023-11-11 21:44:54
+ * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-layout-table/src/main.vue
 -->
 <template>
   <MList v-bind="parsedData.listConfig">
@@ -54,23 +54,28 @@ export default {
   },
   props: {
     listConfig: {
-      type: String
+      type: [String, Object]
     },
     searchFormConfig: {
-      type: String
+      type: [String, Object]
     },
     tableConfig: {
-      type: String
+      type: [String, Object]
     },
     dialogConfig: {
-      type: String
+      type: [String, Object]
     }
   },
   watch: {
     listConfig: {
       handler: function (listConfig) {
         if (listConfig) {
-          this.parsedData.listConfig = parse(listConfig);
+          if (typeof listConfig === 'string') {
+            this.parsedData.listConfig = parse(listConfig);
+          } else if (listConfig instanceof Object) {
+            this.parsedData.listConfig = listConfig;
+          }
+
           this.$nextTick(() => {
             this.parsedData.listConfig.loadList = true;
           });
@@ -81,7 +86,11 @@ export default {
     searchFormConfig: {
       handler: function (searchFormConfig) {
         if (searchFormConfig) {
-          this.parsedData.searchFormConfig = parse(searchFormConfig);
+          if (typeof searchFormConfig === 'string') {
+            this.parsedData.searchFormConfig = parse(searchFormConfig);
+          } else if (searchFormConfig instanceof Object) {
+            this.parsedData.searchFormConfig = searchFormConfig;
+          }
         }
       },
       immediate: true
@@ -89,7 +98,11 @@ export default {
     tableConfig: {
       handler: function (tableConfig) {
         if (tableConfig) {
-          this.parsedData.tableConfig = parse(tableConfig);
+          if (typeof tableConfig === 'string') {
+            this.parsedData.tableConfig = parse(tableConfig);
+          } else if (tableConfig instanceof Object) {
+            this.parsedData.tableConfig = tableConfig;
+          }
         }
       },
       immediate: true
@@ -97,7 +110,11 @@ export default {
     dialogConfig: {
       handler: function (dialogConfig) {
         if (dialogConfig) {
-          this.parsedData.dialogConfig = parse(dialogConfig);
+          if (typeof dialogConfig === 'string') {
+            this.parsedData.dialogConfig = parse(dialogConfig);
+          } else if (dialogConfig instanceof Object) {
+            this.parsedData.dialogConfig = dialogConfig;
+          }
         }
       },
       immediate: true

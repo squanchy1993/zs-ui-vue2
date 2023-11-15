@@ -22,13 +22,23 @@ export default class MPopupController {
     elem: 'default',
     props: {}
   };
+  contentInstance;
 
   constructor(options = {}) {
     this.setOptions(options);
   }
 
   // set
-  setOptions({ componentInstance, elem, props, on, scrollStyle, visibleKey, elemOptions }) {
+  setOptions({
+    componentInstance,
+    elem,
+    props,
+    on,
+    scrollStyle,
+    visibleKey,
+    elemOptions,
+    contentInstance
+  }) {
     if (componentInstance) {
       this.componentInstance = componentInstance;
     }
@@ -57,6 +67,10 @@ export default class MPopupController {
     if (elemOptions) {
       this.elemOptions = deepMerge(this.elemOptions, elemOptions);
     }
+
+    if (contentInstance) {
+      this.contentInstance = contentInstance;
+    }
   }
 
   open = ({ tag, data }) => {
@@ -66,7 +80,10 @@ export default class MPopupController {
       await this.componentInstance.$nextTick();
 
       try {
-        this.componentInstance?.$slots['default'][0]['componentInstance'].startup({ data, tag });
+        this.componentInstance?.popupController.contentInstance.componentInstance.startup({
+          data,
+          tag
+        });
       } catch (error) {
         console.warn('excute child error', error);
       }
@@ -77,13 +94,14 @@ export default class MPopupController {
   };
 
   close = () => {
+    if (!this.visible) return;
     this.openReject && this.openReject('form closed');
     this.clear();
   };
 
   clear = () => {
     try {
-      this.componentInstance?.$slots['default'][0]['componentInstance'].clear();
+      this.componentInstance?.popupController.contentInstance.componentInstance.clear();
     } catch (error) {
       console.warn('excute child error', error);
     }

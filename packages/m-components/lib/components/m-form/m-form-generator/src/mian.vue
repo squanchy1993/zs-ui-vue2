@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-11-09 22:10:06
- * @LastEditors: squanchy squanchy@yeah.net
+ * @LastEditTime: 2023-11-15 20:14:16
+ * @LastEditors: squanchy1993 squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
  * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-form/m-form-generator/src/mian.vue
 -->
@@ -15,9 +15,22 @@
             { props, itemBoxClass, itemBoxStyle, elemOptions }, index
           ) of formController.fields"
           :key="index"
-          :class="itemBoxClass"
+          :class="['m-form-item', ...itemBoxClass]"
           :style="itemBoxStyle"
         >
+          <div
+            class="m-form-item__delete"
+            @click="$emit('deleteItem', { field: formController.fields[index], index })"
+          >
+            <i class="el-icon-delete" />
+          </div>
+          <div
+            class="m-form-item__edit"
+            @click="$emit('editItem', { field: formController.fields[index], index })"
+          >
+            <i class="el-icon-edit" />
+          </div>
+
           <el-form-item v-bind="props">
             <MDynamicElem
               :config="elemOptions"
@@ -28,7 +41,10 @@
                 <slot :name="elemOptions.elem" />
               </template>
 
-              <template v-else-if="elemOptions.type == 'scopedSlot'" v-slot:[elemOptions.elem]="test">
+              <template
+                v-else-if="elemOptions.type == 'scopedSlot'"
+                v-slot:[elemOptions.elem]="test"
+              >
                 <slot :name="elemOptions.elem" v-bind="test" />
               </template>
             </MDynamicElem>
@@ -43,6 +59,7 @@
 /* eslint-disable */
 import MFormController from './MFormController';
 import { MDynamicElem } from '../../../m-dynamic-elem';
+import { parse, stringify } from '../../../m-utils';
 
 export default {
   name: 'MFormGenerator',
@@ -53,6 +70,10 @@ export default {
   },
   components: {
     MDynamicElem
+  },
+  model: {
+    prop: 'formData',
+    event: 'formDataChange'
   },
   props: {
     controller: {
@@ -65,6 +86,10 @@ export default {
       default: function () {
         return {};
       }
+    },
+    formData: {
+      type: [Object, null],
+      default: null
     }
   },
   watch: {
@@ -89,6 +114,28 @@ export default {
       },
       deep: true,
       immediate: true
+    },
+    formData: {
+      handler: function (formData) {
+        if (formData == null) return;
+        if (stringify(formData) != stringify(this.formController.formData)) {
+          this.formController.formData = parse(stringify(formData));
+
+          if (!Object.keys(this.formController.originData).length) {
+            this.formController.originData = parse(stringify(formData));
+          }
+        }
+      },
+      deep: true,
+      immediate: true
+    },
+    ['formController.formData']: {
+      handler: function (formData) {
+        if (stringify(formData) != stringify(this.formData)) {
+          this.$emit('formDataChange', formData);
+        }
+      },
+      deep: true
     }
   },
   data() {
@@ -117,6 +164,36 @@ export default {
   &__inner {
     display: flex;
     flex-wrap: wrap;
+    .m-form-item {
+      position: relative;
+      &__delete {
+        position: absolute;
+        right: 12px;
+        bottom: 0;
+        width: 12px;
+        height: 12px;
+        font-size: 8px;
+        line-height: 12px;
+        overflow: hidden;
+        background-color: #f56c6c;
+        color: #fff;
+        display: none;
+      }
+
+      &__edit {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 12px;
+        height: 12px;
+        font-size: 8px;
+        line-height: 12px;
+        overflow: hidden;
+        background-color: #409eff;
+        color: #fff;
+        display: none;
+      }
+    }
   }
 }
 </style>

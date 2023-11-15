@@ -3,12 +3,17 @@ import { MButtonOperator } from '../../m-button-operator';
 import { MAsyncComponent } from '../../m-async-component';
 import { MJsonEditor } from '../../m-json-editor';
 import MDynamicElemModel from './mDynamicElemModel';
+import { getPropByPath } from '../../m-utils';
+import { MDynamicInput } from '../../m-dynamc-input'
+import { MCodeInput } from '../../m-code-input'
 export default {
   name: 'MDynamicElem',
   components: {
     MButtonOperator,
     MAsyncComponent,
-    MJsonEditor
+    MJsonEditor,
+    MDynamicInput,
+    MCodeInput
   },
   inject: {
     mLayoutTable: { default: null },
@@ -36,7 +41,7 @@ export default {
     },
     propKey: {
       type: String,
-      default: null
+      default: ''
     }
   },
   watch: {
@@ -63,12 +68,14 @@ export default {
   data() {
     const previousElemModel = this.elemModel ? this.elemModel : new MDynamicElemModel();
     return {
-      previousElemModel
+      previousElemModel,
+      previousValue: null
     };
   },
   methods: {
     elementGenerator(h) {
       let returnElement = null;
+      const { o, k } = getPropByPath(this.data, this.propKey ?? '');
       const { type, elem, props } = this.previousElemModel;
       switch (type) {
         case 'registered':
@@ -77,8 +84,9 @@ export default {
               placeholder={props['placeholder']}
               maxlength={props['maxlength']}
               minlength={props['minlength']}
-              props={{ ...props, data: this.data }}
-              v-model={this.data[this.propKey]}
+              props={props}
+              data={this.data}
+              v-model={o[k]}
             />
           );
           break;
@@ -97,7 +105,7 @@ export default {
           break;
         }
         case 'slot': {
-          returnElement = this.$slots[elem]
+          returnElement = this.$slots[elem];
           break;
         }
         case 'scopedSlot': {
