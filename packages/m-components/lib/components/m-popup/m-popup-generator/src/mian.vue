@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-11-09 19:11:26
+ * @LastEditTime: 2023-11-12 20:42:50
  * @LastEditors: squanchy1993 squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
- * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-popup\m-popup-generator\src\mian.vue
+ * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-popup/m-popup-generator/src/mian.vue
 -->
 <script>
 /* eslint-disable */
@@ -107,6 +107,7 @@ export default {
     } = this.popupController;
 
     const elementContent = this.contentGenerator(h, elemOptions);
+    this.popupController.setOptions({ contentInstance: elementContent })
     return (
       <elem class="m-popup" props={{ ...props, [visibleKey]: visible }} on={{ ...on }}>
         <el-scrollbar class="m-popup__scrollbar" style={scrollStyle}>

@@ -71,11 +71,15 @@ export default {
 <style scoped lang="scss">
 .design-table-dragge-out {
   width: 100%;
-  display: flex;
+  display: grid;
   flex-direction: column;
+  grid-template-columns: 1;
+  grid-row-gap: 10px;
   .dragge-out__item {
     width: 100%;
-    border: 1px dotted #fff;
+      background-color: #e0d5d5;
+      border-radius: 5px;
+      padding: 5px;
     .title {
       width: 100%;
       line-height: 28px;

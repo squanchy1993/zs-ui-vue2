@@ -814,7 +814,6 @@ export function getConfig() {
                           code: async function ({
                             injectData: { mFormCtrl, mFormDialogCtrl, mListCtrl }
                           }) {
-                            console.log('asdf>>>', this);
                             try {
                               const { validateFields, formData, originData } = mFormCtrl;
                               await validateFields();

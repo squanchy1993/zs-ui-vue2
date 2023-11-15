@@ -1,4 +1,5 @@
-import { deepMerge, buildShortUUID } from '../../../m-utils';
+import { deepMerge, buildShortUUID, setValueByPath, getValueByPath } from '../../../m-utils';
+import { cloneDeep } from 'lodash-es';
 
 export default class MFormController {
   componentInstance = null;
@@ -26,7 +27,7 @@ export default class MFormController {
   }
 
   // set
-  setOptions({ componentInstance, props, formDataDefault, fields, boxStyle }) {
+  setOptions({ componentInstance, props, fields, boxStyle }) {
     if (componentInstance) {
       this.componentInstance = componentInstance;
     }
@@ -39,30 +40,25 @@ export default class MFormController {
       this.boxStyle = deepMerge(this.boxStyle, boxStyle);
     }
 
-    if (formDataDefault) {
-      this.formDataDefault = formDataDefault;
-    }
-
     if (fields && fields.length) {
       this.fields = fields.map((item) => new MFormFieldModel(item));
 
-      // set formDataDefault by fields
+      // generate formDataDefault
+      let tempObj = {}
       for (const dynamicField of this.fields) {
         const {
           props: { prop },
           defaultValue
         } = dynamicField;
-        if (prop && [undefined, null].includes(this.formDataDefault[prop])) {
-          if (this.componentInstance) {
-            this.componentInstance.$set(this.formDataDefault, prop, defaultValue);
-          } else {
-            Reflect.set(this.formDataDefault, prop, defaultValue);
-          }
+        if (prop && defaultValue !== undefined) {
+          setValueByPath(tempObj, prop, defaultValue);
         }
       }
-
-      this.formData = JSON.parse(JSON.stringify(this.formDataDefault));
+      this.formDataDefault = cloneDeep(tempObj)
     }
+
+    // reset
+    this._resetFields();
   }
 
   _resetFields = () => {
@@ -70,42 +66,44 @@ export default class MFormController {
     this._setFormDataByOriginData();
   };
 
-  validateFields = async () => this.componentInstance.$refs[this.props.ref].validate();
-
-  clearFieldsValidate = () => this.componentInstance.$refs[this.props.ref].clearValidate();
-
   _setFormDataByFormDataDefault() {
-    for (const [k, v] of Object.entries(this.formDataDefault)) {
-      this.formData[k] = v;
-    }
+    this.formData = cloneDeep(this.formDataDefault);
   }
 
   _setFormDataByOriginData() {
-    for (const [k] of Object.entries(this.formData)) {
-      if (this.originData[k] !== undefined) {
-        this.formData[k] = this.originData[k];
+    for (const dynamicField of this.fields) {
+      const {
+        props: { prop }
+      } = dynamicField;
+
+      if (prop) {
+        const originDataValue = getValueByPath(this.originData, prop);
+        if (![undefined, null].includes(originDataValue)) {
+          setValueByPath(this.formData, prop, originDataValue);
+        }
       }
     }
   }
 
+  _clearFieldsValidate = () => this.componentInstance.$refs[this.props.ref].clearValidate();
+
+  // 进行表单验证
+  validateFields = async () => this.componentInstance.$refs[this.props.ref].validate();
+
+  // 设置
   startup = ({ data, tag }) => {
     this._resetFields();
 
     this.tag = tag;
-
     if (data) {
-      this.originData = data;
-
-      for (const [k] of Object.entries(this.formData)) {
-        if (data[k] !== undefined) {
-          this.formData[k] = data[k];
-        }
-      }
+      this.originData = JSON.parse(JSON.stringify(data));
+      this._setFormDataByOriginData();
     }
 
-    this.clearFieldsValidate();
+    this._clearFieldsValidate();
   };
 
+  // 清空
   clear = async () => {
     this.originData = {};
 
@@ -114,18 +112,22 @@ export default class MFormController {
     this.tag = null;
 
     // clear form validate
-    this.clearFieldsValidate();
+    this._clearFieldsValidate();
   };
 
+  // 重置按钮
   reset = async () => {
-    this._resetFields()
-    this.clearFieldsValidate();
-  }
+    this._resetFields();
+    this._clearFieldsValidate();
+  };
 }
 
 export class MFormFieldModel {
   id = buildShortUUID();
-  props = {};
+  props = {
+    label: null,
+    prop: null
+  };
   defaultValue = null;
   itemBoxStyle = {}; // 盒子的style
   itemBoxClass = []; // 盒子自定义class
