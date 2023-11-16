@@ -170,6 +170,25 @@ const MDynamicElemFields = {
         elem: 'el-switch'
       }
     }
+  ],
+  MButtonOperator: [
+    {
+      props: {
+        prop: 'elemOptions.props.btns',
+        label: 'btns'
+      },
+      itemBoxStyle: {
+        width: '50%'
+      },
+      elemOptions: {
+        type: 'registered',
+        elem: 'MArrayEdit',
+        props: {
+          arrayType: 'Object',
+          formConfig: ''
+        }
+      }
+    }
   ]
 };
 

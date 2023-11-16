@@ -6,6 +6,7 @@ import MDynamicElemModel from './mDynamicElemModel';
 import { getPropByPath } from '../../m-utils';
 import { MDynamicInput } from '../../m-dynamc-input'
 import { MCodeInput } from '../../m-code-input'
+import { MArrayEdit } from '../../m-array-edit';
 export default {
   name: 'MDynamicElem',
   components: {
@@ -13,7 +14,8 @@ export default {
     MAsyncComponent,
     MJsonEditor,
     MDynamicInput,
-    MCodeInput
+    MCodeInput,
+    MArrayEdit
   },
   inject: {
     mLayoutTable: { default: null },
