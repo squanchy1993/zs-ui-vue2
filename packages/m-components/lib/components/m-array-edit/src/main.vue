@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-05-07 20:54:37
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-16 16:28:22
+ * @LastEditTime: 2023-11-16 16:42:27
  * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-array-edit\src\main.vue
  * @TODO:既可以兼容原生js也可以使用eavl
 -->
@@ -191,13 +191,6 @@ export default {
     };
   },
   methods: {
-    change(val) {
-      try {
-        this.$emit('valueChange', new Function(`return ${val}`)());
-      } catch (error) {
-        console.log('change: error', error);
-      }
-    },
     dealInput(val) {
       let tempArray = [];
       switch (this.arrayType) {
