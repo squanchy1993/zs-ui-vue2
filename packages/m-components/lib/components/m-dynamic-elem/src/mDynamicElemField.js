@@ -185,7 +185,41 @@ const MDynamicElemFields = {
         elem: 'MArrayEdit',
         props: {
           arrayType: 'Object',
-          formConfig: ''
+          formConfig: '',
+          fields: [
+            {
+              props: {
+                label: 'name:',
+                prop: 'name'
+              },
+              itemBoxStyle: {
+                width: '50%',
+                paddingRight: '10px'
+              },
+              defaultValue: 'name....',
+              elemOptions: {
+                type: 'registered',
+                elem: 'el-input',
+                props: {
+                  placeholder: '输入name'
+                }
+              }
+            },
+            {
+              props: {
+                label: 'code:',
+                prop: 'code'
+              },
+              itemBoxStyle: {
+                width: '100%',
+                paddingRight: '10px'
+              },
+              elemOptions: {
+                type: 'registered',
+                elem: 'MCodeInput'
+              }
+            }
+          ]
         }
       }
     }

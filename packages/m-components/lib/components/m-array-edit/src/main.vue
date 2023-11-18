@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-05-07 20:54:37
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-16 16:42:27
- * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-array-edit\src\main.vue
+ * @LastEditTime: 2023-11-18 16:46:33
+ * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-array-edit/src/main.vue
  * @TODO:既可以兼容原生js也可以使用eavl
 -->
 <template>
@@ -41,6 +41,12 @@ export default {
       default: 'Object'
     },
     value: {
+      type: Array,
+      default: function () {
+        return [];
+      }
+    },
+    fields: {
       type: Array,
       default: function () {
         return [];
@@ -108,38 +114,7 @@ export default {
                 'justify-content': 'space-between'
               },
               fields: [
-                {
-                  props: {
-                    label: 'name:',
-                    prop: 'name'
-                  },
-                  itemBoxStyle: {
-                    width: '50%',
-                    paddingRight: '10px'
-                  },
-                  defaultValue: 'name....',
-                  elemOptions: {
-                    type: 'registered',
-                    elem: 'el-input',
-                    props: {
-                      placeholder: '输入name'
-                    }
-                  }
-                },
-                {
-                  props: {
-                    label: 'code:',
-                    prop: 'code'
-                  },
-                  itemBoxStyle: {
-                    width: '100%',
-                    paddingRight: '10px'
-                  },
-                  elemOptions: {
-                    type: 'registered',
-                    elem: 'MCodeInput'
-                  }
-                },
+                ...this.fields,
                 {
                   defaultValue: '',
                   itemBoxStyle: {
