@@ -1,4 +1,4 @@
-import { deepMerge, buildShortUUID, setValueByPath, getValueByPath } from '../../../m-utils';
+import { deepMerge, buildShortUUID, setValueByPath, getValueByPath, stringify, parse } from '../../../m-utils';
 import { cloneDeep } from 'lodash-es';
 
 export default class MFormController {
@@ -96,7 +96,7 @@ export default class MFormController {
 
     this.tag = tag;
     if (data) {
-      this.originData = JSON.parse(JSON.stringify(data));
+      this.originData = parse(stringify(data));
       this._setFormDataByOriginData();
     }
 

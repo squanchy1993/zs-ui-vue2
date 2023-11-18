@@ -347,8 +347,9 @@ export default {
         field.elemOptions.elem
       );
       await this.$nextTick();
+      console.log('field>>>>>', field)
 
-      const changedField = await this.dialogs.formItem.open({ tag: 'edit', data: field });
+      const changedField = await this.dialogs.formItem.open({ tag: 'edit', data: this.config.searchFormConfig.fields[index] });
       let tempList = cloneDeep(this.config.searchFormConfig.fields);
       deepMerge(tempList[index], changedField);
       this.config.searchFormConfig.fields = [];
