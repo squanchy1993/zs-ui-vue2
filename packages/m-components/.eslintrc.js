@@ -80,7 +80,7 @@ module.exports = {
     ],
     'handle-callback-err': [2, '^(err|error)$'],
     indent: [
-      2,
+      'error',
       2,
       {
         SwitchCase: 1
