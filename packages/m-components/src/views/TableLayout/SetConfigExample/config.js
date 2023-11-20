@@ -256,7 +256,16 @@ export function getLayoutConfig() {
                   props: { data }
                 }) {
                   try {
-                    this.$router.push({ path: `/tableLayout/DesignTable/${data.id}` });
+                    this.$router.push({
+                      name: 'DesignTable',
+                      query: { id: data.id },
+                      params: {
+                        refresh: () => {
+                          console.log('refresh')
+                          mListCtrl.getList();
+                        }
+                      }
+                    });
                   } catch (error) {
                     console.error('查看列表', error);
                   }

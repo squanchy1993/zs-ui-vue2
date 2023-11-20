@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-20 15:46:00
+ * @LastEditTime: 2023-11-20 18:55:29
  * @FilePath: \m-components\src\views\TableLayout\SetConfigExample\index.vue
 -->
 <!-- eslint-disable  -->
@@ -75,9 +75,6 @@ export default {
   created() {
     const layoutConfig = getLayoutConfig.apply(this);
     this.setupTableLayout(layoutConfig);
-  },
-  activated() {
-    this.$refs.listRef.listController.getList();
   },
   methods: {
     setupTableLayout({ listConfig, searchFormConfig, tableConfig, dialogConfig }) {

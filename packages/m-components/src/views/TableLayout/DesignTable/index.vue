@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-20 14:49:35
+ * @LastEditTime: 2023-11-20 18:58:10
  * @FilePath: \m-components\src\views\TableLayout\DesignTable\index.vue
 -->
 <template>
@@ -25,14 +25,15 @@ export default {
   },
   methods: {
     async getPageConfig() {
-      const { id } = this.$route.params;
+      const { id } = this.$route.query;
       this.tableConfig = (await getConfig(Number(id))).data;
-      console.log('tableConfig !!>>', this.tableConfig);
     },
     async save(e) {
-      console.log(e)
+      console.log(e);
       await updateConfig(e);
       this.$message.success('保存成功！');
+      const { refresh } = this.$route.params;
+      refresh();
       this.$router.back();
     }
   }

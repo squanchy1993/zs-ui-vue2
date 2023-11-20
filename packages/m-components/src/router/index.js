@@ -38,7 +38,8 @@ export const router = new VueRouter({
       }
     },
     {
-      path: '/tableLayout/DesignTable/:id',
+      name: 'DesignTable',
+      path: '/tableLayout/DesignTable',
       component: DesignTable,
       meta: {
         keepAlive: false
