@@ -275,165 +275,170 @@ export function getLayoutConfig() {
     ]
   };
 
-  const dialogConfig = {
-    userDialog: {
-      mPopoupConfig: {
-        elem: 'el-dialog',
-        props: {
-          title: '列表编辑',
-          width: '80%',
-          size: '30%'
-        },
-
-        scrollStyle: {
-          height: '60vh'
-        },
-        on: ({ mTableCtrl }) => {
-          return {
-            close: mTableCtrl.close
-          };
-        }
+  const dialogConfig = [
+    {
+      key: 'userDialog',
+      elem: 'el-dialog',
+      props: {
+        title: '列表编辑',
+        width: '80%',
+        size: '30%'
       },
-      mFormGeneratorConfig: {
+
+      scrollStyle: {
+        height: '60vh'
+      },
+      on: ({ mTableCtrl }) => {
+        return {
+          close: mTableCtrl.close
+        };
+      },
+      elemOptions: {
+        type: 'registered',
+        elem: 'MFormGenerator',
         props: {
-          ref: 'form',
-          size: 'mini',
-          labelPosition: 'right',
-          labelWidth: '140px'
-        },
-        boxStyle: {
-          'justify-content': 'space-between'
-        },
-        fields: [
-          {
+          config: {
             props: {
-              prop: 'listConfig',
-              label: 'listConfig',
-              rules: [{ required: true, message: '请输入listConfig', trigger: 'change' }]
+              ref: 'form',
+              size: 'mini',
+              labelPosition: 'right',
+              labelWidth: '140px'
             },
-            itemBoxStyle: {
-              width: '100%'
+            boxStyle: {
+              'justify-content': 'space-between'
             },
-            elemOptions: {
-              type: 'registered',
-              elem: 'MJsonEditor',
-              props: {
-                showBtns: false,
-                expandedOnStart: false
-              }
-            }
-          },
-          {
-            props: {
-              prop: 'searchFormConfig',
-              label: 'searchFormConfig',
-              rules: [{ required: true, message: '请输入searchFormConfig', trigger: 'change' }]
-            },
-            itemBoxStyle: {
-              width: '100%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'MJsonEditor',
-              props: {
-                showBtns: false,
-                expandedOnStart: false
-              }
-            }
-          },
-          {
-            props: {
-              prop: 'tableConfig',
-              label: 'tableConfig',
-              rules: [{ required: true, message: '请输入tableConfig', trigger: 'change' }]
-            },
-            itemBoxStyle: {
-              width: '100%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'MJsonEditor',
-              props: {
-                showBtns: false,
-                expandedOnStart: false
-              }
-            }
-          },
-          {
-            props: {
-              prop: 'dialogConfig',
-              label: 'dialogConfig',
-              rules: [{ required: true, message: '输入dialogConfig', trigger: 'change' }]
-            },
-            itemBoxStyle: {
-              width: '100%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'MJsonEditor',
-              props: {
-                showBtns: false,
-                expandedOnStart: false
-              }
-            }
-          },
-          {
-            defaultValue: '',
-            itemBoxStyle: {
-              width: '100%'
-            },
-            elemOptions: {
-              type: 'registered',
-              elem: 'MButtonOperator',
-              props: {
-                btns: [
-                  {
-                    name: '保存',
-                    code: async function ({
-                      injectData: { mFormCtrl, mFormDialogCtrl, mListCtrl }
-                    }) {
-                      try {
-                        const { validateFields, formData, originData } = mFormCtrl;
-                        await validateFields();
-
-                        // only submit changed data;
-                        const params = difference(formData, originData);
-                        if (!Object.keys(params).length) {
-                          this.$message.error('没有修改!');
-                          throw new Error('没有修改!');
-                        }
-
-                        // submit data
-                        let res;
-                        const { id } = originData;
-                        if (!id) {
-                          res = await createConfig(params);
-                        } else {
-                          res = await updateConfig({ ...params, id });
-                        }
-
-                        mFormDialogCtrl.openResolve(res);
-                        mFormDialogCtrl.clear();
-                      } catch (error) {
-                        console.log('提交失败', error);
-                      }
-                    }
-                  },
-                  {
-                    name: '重置',
-                    code: ({ injectData: { mFormCtrl } }) => mFormCtrl.reset()
+            fields: [
+              {
+                props: {
+                  prop: 'listConfig',
+                  label: 'listConfig',
+                  rules: [{ required: true, message: '请输入listConfig', trigger: 'change' }]
+                },
+                itemBoxStyle: {
+                  width: '100%'
+                },
+                elemOptions: {
+                  type: 'registered',
+                  elem: 'MJsonEditor',
+                  props: {
+                    showBtns: false,
+                    expandedOnStart: false
                   }
-                ],
-                boxStyle: {
-                  'justify-content': 'flex-end'
+                }
+              },
+              {
+                props: {
+                  prop: 'searchFormConfig',
+                  label: 'searchFormConfig',
+                  rules: [{ required: true, message: '请输入searchFormConfig', trigger: 'change' }]
+                },
+                itemBoxStyle: {
+                  width: '100%'
+                },
+                elemOptions: {
+                  type: 'registered',
+                  elem: 'MJsonEditor',
+                  props: {
+                    showBtns: false,
+                    expandedOnStart: false
+                  }
+                }
+              },
+              {
+                props: {
+                  prop: 'tableConfig',
+                  label: 'tableConfig',
+                  rules: [{ required: true, message: '请输入tableConfig', trigger: 'change' }]
+                },
+                itemBoxStyle: {
+                  width: '100%'
+                },
+                elemOptions: {
+                  type: 'registered',
+                  elem: 'MJsonEditor',
+                  props: {
+                    showBtns: false,
+                    expandedOnStart: false
+                  }
+                }
+              },
+              {
+                props: {
+                  prop: 'dialogConfig',
+                  label: 'dialogConfig',
+                  rules: [{ required: true, message: '输入dialogConfig', trigger: 'change' }]
+                },
+                itemBoxStyle: {
+                  width: '100%'
+                },
+                elemOptions: {
+                  type: 'registered',
+                  elem: 'MJsonEditor',
+                  props: {
+                    showBtns: false,
+                    expandedOnStart: false
+                  }
+                }
+              },
+              {
+                defaultValue: '',
+                itemBoxStyle: {
+                  width: '100%'
+                },
+                elemOptions: {
+                  type: 'registered',
+                  elem: 'MButtonOperator',
+                  props: {
+                    btns: [
+                      {
+                        name: '保存',
+                        code: async function ({
+                          injectData: { mFormCtrl, mFormDialogCtrl, mListCtrl }
+                        }) {
+                          try {
+                            const { validateFields, formData, originData } = mFormCtrl;
+                            await validateFields();
+
+                            // only submit changed data;
+                            const params = difference(formData, originData);
+                            if (!Object.keys(params).length) {
+                              this.$message.error('没有修改!');
+                              throw new Error('没有修改!');
+                            }
+
+                            // submit data
+                            let res;
+                            const { id } = originData;
+                            if (!id) {
+                              res = await createConfig(params);
+                            } else {
+                              res = await updateConfig({ ...params, id });
+                            }
+
+                            mFormDialogCtrl.openResolve(res);
+                            mFormDialogCtrl.clear();
+                          } catch (error) {
+                            console.log('提交失败', error);
+                          }
+                        }
+                      },
+                      {
+                        name: '重置',
+                        code: ({ injectData: { mFormCtrl } }) => mFormCtrl.reset()
+                      }
+                    ],
+                    boxStyle: {
+                      'justify-content': 'flex-end'
+                    }
+                  }
                 }
               }
-            }
+            ]
           }
-        ]
+        }
       }
     }
-  };
+  ];
   return {
     listConfig,
     searchFormConfig,
@@ -668,7 +673,7 @@ export function getConfig() {
 
   const dialogConfig = [
     {
-      key: 'userDailog',
+      key: 'userDialog',
       elem: 'el-dialog',
       props: {
         title: '会员编辑',

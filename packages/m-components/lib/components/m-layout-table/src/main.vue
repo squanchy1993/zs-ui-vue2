@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-11 21:44:54
- * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-layout-table/src/main.vue
+ * @LastEditTime: 2023-11-20 15:33:51
+ * @FilePath: \m-components\lib\components\m-layout-table\src\main.vue
 -->
 <template>
   <MList v-bind="parsedData.listConfig">
@@ -14,18 +14,18 @@
     </template>
     <template #pagination="{ handlePageOrSizeChange, pageParams, total }">
       <el-pagination
-        @size-change="(pageSize) => handlePageOrSizeChange({ pageSize })"
-        @current-change="(pageIndex) => handlePageOrSizeChange({ pageIndex })"
         :page-size="pageParams.pageSize"
         :current-page="pageParams.pageIndex"
         :total="total"
         :page-sizes="[10, 30, 50]"
         layout="total, sizes, prev, pager, next, jumper"
+        @size-change="(pageSize) => handlePageOrSizeChange({ pageSize })"
+        @current-change="(pageIndex) => handlePageOrSizeChange({ pageIndex })"
       />
     </template>
     <MPopupGenerator
-      v-for="({ mPopoupConfig }, key, i) in parsedData.dialogConfig"
-      :ref="setDialogRef(key)"
+      v-for="(mPopoupConfig, i) in parsedData.dialogConfig"
+      :ref="setDialogRef(mPopoupConfig.key)"
       :key="i"
       :config="mPopoupConfig"
     />
@@ -65,6 +65,17 @@ export default {
     dialogConfig: {
       type: [String, Object]
     }
+  },
+  data() {
+    return {
+      parsedData: {
+        listConfig: {},
+        searchFormConfig: {},
+        tableConfig: {},
+        dialogConfig: {}
+      },
+      dialogs: {}
+    };
   },
   watch: {
     listConfig: {
@@ -112,24 +123,13 @@ export default {
         if (dialogConfig) {
           if (typeof dialogConfig === 'string') {
             this.parsedData.dialogConfig = parse(dialogConfig);
-          } else if (dialogConfig instanceof Object) {
+          } else if (dialogConfig instanceof Array) {
             this.parsedData.dialogConfig = dialogConfig;
           }
         }
       },
       immediate: true
     }
-  },
-  data() {
-    return {
-      parsedData: {
-        listConfig: {},
-        searchFormConfig: {},
-        tableConfig: {},
-        dialogConfig: {}
-      },
-      dialogs: {}
-    };
   },
   methods: {
     setDialogRef(k) {

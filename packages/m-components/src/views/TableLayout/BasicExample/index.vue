@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-19 18:01:43
- * @FilePath: /zs-ui-vue2/packages/m-components/src/views/TableLayout/BasicExample/index.vue
+ * @LastEditTime: 2023-11-20 15:37:17
+ * @FilePath: \m-components\src\views\TableLayout\BasicExample\index.vue
 -->
 <template>
   <MList :controller="listController" v-bind="listConfig">
@@ -28,13 +28,13 @@
     </template>
     <template #pagination="{ handlePageOrSizeChange, pageParams, total }">
       <el-pagination
-        @size-change="(pageSize) => handlePageOrSizeChange({ pageSize })"
-        @current-change="(pageIndex) => handlePageOrSizeChange({ pageIndex })"
         :page-size="pageParams.pageSize"
         :current-page="pageParams.pageIndex"
         :total="total"
         :page-sizes="[100, 200, 300, 400]"
         layout="total, sizes, prev, pager, next, jumper"
+        @size-change="(pageSize) => handlePageOrSizeChange({ pageSize })"
+        @current-change="(pageIndex) => handlePageOrSizeChange({ pageIndex })"
       />
     </template>
     <MPopupGenerator ref="userDialog" :controller="userdialogCtrl">
