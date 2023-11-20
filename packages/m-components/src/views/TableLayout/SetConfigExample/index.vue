@@ -1,51 +1,51 @@
 <!--
  * @Date: 2023-07-15 16:16:17
- * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-09 22:26:24
- * @FilePath: /zs-ui-vue2/packages/m-components/src/views/TableLayout/SetConfigExample/index.vue
+ * @LastEditors: squanchy1993 squanchy@yeah.net
+ * @LastEditTime: 2023-11-20 15:03:22
+ * @FilePath: \m-components\src\views\TableLayout\SetConfigExample\index.vue
 -->
 <!-- eslint-disable  -->
 <template>
-  <MList v-bind="listConfig">
-    <template #search="{ handleSearch, getList }">
-      <MFormGenerator :config="searchFormConfig">
-        <!-- elemOptions.type = 'slot' -->
-        <template #btn1>
-          <div>
-            <el-button @click="handleSearch">搜索</el-button>
-            <el-button @click="getList">slot 刷新</el-button>
-          </div>
-        </template>
+    <MList ref="listRef" v-bind="listConfig">
+      <template #search="{ handleSearch, getList }">
+        <MFormGenerator :config="searchFormConfig">
+          <!-- elemOptions.type = 'slot' -->
+          <template #btn1>
+            <div>
+              <el-button @click="handleSearch">搜索</el-button>
+              <el-button @click="getList">slot 刷新</el-button>
+            </div>
+          </template>
 
-        <!-- or elemOptions.type ='scopedSlot' -->
-        <template #btn2="{ props, injectData: { mListCtrl } }">
-          <el-button @click="mListCtrl.getList">soltScope 刷新</el-button>
-        </template>
-      </MFormGenerator>
-    </template>
-    <template #table="{ list }">
-      <MTableGenerator :config="tableConfig" :list="list" />
-    </template>
-    <template #pagination="{ handlePageOrSizeChange, pageParams, total }">
-      <el-pagination
-        @size-change="(pageSize) => handlePageOrSizeChange({ pageSize })"
-        @current-change="(pageIndex) => handlePageOrSizeChange({ pageIndex })"
-        :page-size="pageParams.pageSize"
-        :current-page="pageParams.pageIndex"
-        :total="total"
-        :page-sizes="[10, 30, 50]"
-        layout="total, sizes, prev, pager, next, jumper"
-      />
-    </template>
-    <MPopupGenerator
-      v-for="({ mPopoupConfig, mFormGeneratorConfig }, key, i) in dialogConfig"
-      :ref="setDialogRef(key)"
-      :key="i"
-      :config="mPopoupConfig"
-    >
-      <MFormGenerator :config="mFormGeneratorConfig" />
-    </MPopupGenerator>
-  </MList>
+          <!-- or elemOptions.type ='scopedSlot' -->
+          <template #btn2="{ props, injectData: { mListCtrl } }">
+            <el-button @click="mListCtrl.getList">soltScope 刷新</el-button>
+          </template>
+        </MFormGenerator>
+      </template>
+      <template #table="{ list }">
+        <MTableGenerator :config="tableConfig" :list="list" />
+      </template>
+      <template #pagination="{ handlePageOrSizeChange, pageParams, total }">
+        <el-pagination
+          @size-change="(pageSize) => handlePageOrSizeChange({ pageSize })"
+          @current-change="(pageIndex) => handlePageOrSizeChange({ pageIndex })"
+          :page-size="pageParams.pageSize"
+          :current-page="pageParams.pageIndex"
+          :total="total"
+          :page-sizes="[10, 30, 50]"
+          layout="total, sizes, prev, pager, next, jumper"
+        />
+      </template>
+      <MPopupGenerator
+        v-for="({ mPopoupConfig, mFormGeneratorConfig }, key, i) in dialogConfig"
+        :ref="setDialogRef(key)"
+        :key="i"
+        :config="mPopoupConfig"
+      >
+        <MFormGenerator :config="mFormGeneratorConfig" />
+      </MPopupGenerator>
+    </MList>
 </template>
 
 <script>
@@ -77,6 +77,9 @@ export default {
   created() {
     const layoutConfig = getLayoutConfig.apply(this);
     this.setupTableLayout(layoutConfig);
+  },
+  activated() {
+    this.$refs.listRef.listController.getList()
   },
   methods: {
     setupTableLayout({ listConfig, searchFormConfig, tableConfig, dialogConfig }) {

@@ -1,21 +1,21 @@
 <!--
  * @Date: 2023-11-05 22:26:36
- * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-05 23:27:59
- * @FilePath: /zs-ui-vue2/packages/m-components/src/components/Layout.vue
+ * @LastEditors: squanchy1993 squanchy@yeah.net
+ * @LastEditTime: 2023-11-20 15:09:52
+ * @FilePath: \m-components\src\components\Layout.vue
 -->
 <template>
   <div class="tac">
     <el-menu
       default-active="2"
       class="el-menu-vertical"
+      router
       @open="handleOpen"
       @close="handleClose"
-      router
     >
       <el-submenu index="tableLayout">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="el-icon-location" />
           <span slot="title">tableLayout</span>
         </template>
         <el-menu-item index="/tableLayout/basicExample">basicExample</el-menu-item>
@@ -24,7 +24,10 @@
       </el-submenu>
     </el-menu>
     <div class="content">
-      <router-view></router-view>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive" />
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive" />
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-07-15 16:16:17
- * @LastEditors: squanchy squanchy@yeah.net
- * @LastEditTime: 2023-11-09 22:20:54
+ * @LastEditors: squanchy1993 squanchy@yeah.net
+ * @LastEditTime: 2023-11-19 18:01:43
  * @FilePath: /zs-ui-vue2/packages/m-components/src/views/TableLayout/BasicExample/index.vue
 -->
 <template>
@@ -294,6 +294,10 @@ export default {
           return {
             close: mTableCtrl.close
           };
+        },
+        elemOptions: {
+          type: 'slot',
+          elem: 'default'
         }
       }),
       userFormCtrl: new MFormController({

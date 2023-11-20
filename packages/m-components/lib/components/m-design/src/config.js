@@ -1,5 +1,5 @@
-import { difference } from '../../../../m-utils';
-import { MDynamicElemFields } from '../../../../m-dynamic-elem/';
+import { difference } from '../../m-utils';
+import { MDynamicElemFields } from '../../m-dynamic-elem/';
 export const getTableColumnFields = (elem) => {
   const tableColumnProps = [
     {
@@ -331,26 +331,6 @@ export const besicData = {
           props: {
             btns: [
               {
-                name: '保存',
-                code: async function ({ injectData: { mFormCtrl, mFormDialogCtrl, mListCtrl } }) {
-                  try {
-                    const { validateFields, formData, originData } = mFormCtrl;
-                    await validateFields();
-
-                    // // only submit changed data;
-                    const params = difference(formData, originData);
-                    if (!Object.keys(params).length) {
-                      this.$message.error('没有修改!');
-                      throw new Error('没有修改!');
-                    }
-                    mFormDialogCtrl.openResolve(params);
-                    mFormDialogCtrl.clear();
-                  } catch (error) {
-                    console.log('提交失败', error);
-                  }
-                }
-              },
-              {
                 name: '重置',
                 code: ({ injectData: { mFormCtrl } }) => mFormCtrl.reset()
               }
@@ -403,74 +383,77 @@ export const besicData = {
       }
     }
   ],
-  dialogConfig: {
-    tableColumn: {
-      elem: 'el-dialog',
-      props: {
-        title: 'el-table-column',
-        width: '60%',
-        size: '60%'
-      },
 
-      scrollStyle: {
-        height: '60vh'
-      },
-      on: ({ mTableCtrl }) => {
-        return {
-          close: mTableCtrl.close
-        };
-      },
-      elemOptions: {
-        type: 'registered',
-        elem: 'MFormGenerator',
-        props: {
-          config: {
-            props: {
-              ref: 'form',
-              size: 'mini',
-              labelPosition: 'right',
-              labelWidth: '140px'
-            },
-            boxStyle: {
-              'justify-content': 'space-between'
-            },
-            fields: []
-          }
+  // edit tableColumn dialog
+  tableColumn: {
+    elem: 'el-dialog',
+    props: {
+      title: 'el-table-column',
+      width: '60%',
+      size: '60%'
+    },
+
+    scrollStyle: {
+      height: '60vh'
+    },
+    on: ({ mTableCtrl }) => {
+      return {
+        close: mTableCtrl.close
+      };
+    },
+    elemOptions: {
+      type: 'registered',
+      elem: 'MFormGenerator',
+      props: {
+        config: {
+          props: {
+            ref: 'form',
+            size: 'mini',
+            labelPosition: 'right',
+            labelWidth: '140px'
+          },
+          boxStyle: {
+            'justify-content': 'space-between'
+          },
+          fields: []
         }
       }
-    },
-    formItem: {
-      elem: 'el-dialog',
-      props: {
-        title: 'el-form-item',
-        width: '60%',
-        size: '60%'
-      },
+    }
+  },
 
-      scrollStyle: {
-        height: '60vh'
-      },
-      on: ({ mTableCtrl }) => {
-        return {
-          close: mTableCtrl.close
-        };
-      },
-      elemOptions: {
-        type: 'registered',
-        elem: 'MFormGenerator',
-        props: {
-          config: {
-            props: {
-              ref: 'form',
-              size: 'mini',
-              labelPosition: 'right',
-              labelWidth: '140px'
-            },
-            boxStyle: {
-              'justify-content': 'space-between'
-            },
-            fields: []
-          }
+  // edit formItem dialog
+  formItem: {
+    elem: 'el-dialog',
+    props: {
+      title: 'el-form-item',
+      width: '60%',
+      size: '60%',
+      'append-to-body': true
+    },
+
+    scrollStyle: {
+      height: '60vh'
+    },
+    on: ({ mTableCtrl }) => {
+      return {
+        close: mTableCtrl.close
+      };
+    },
+    elemOptions: {
+      type: 'registered',
+      elem: 'MFormGenerator',
+      props: {
+        config: {
+          props: {
+            ref: 'form',
+            size: 'mini',
+            labelPosition: 'right',
+            labelWidth: '140px'
+          },
+          boxStyle: {
+            'justify-content': 'space-between'
+          },
+          fields: []
         }
       }
     }

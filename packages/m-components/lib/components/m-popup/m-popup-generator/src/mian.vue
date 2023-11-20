@@ -83,7 +83,7 @@ export default {
           break;
         case 'slot':
           // eslint-disable-next-line no-undef
-          returnElement = this.$slots[elem];
+          returnElement = this.$slots[elem][0];
           break;
         default:
           returnElement = <div>donsnet</div>;

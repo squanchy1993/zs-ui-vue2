@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-11-15 20:14:16
+ * @LastEditTime: 2023-11-19 20:30:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
  * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-form/m-form-generator/src/mian.vue
@@ -152,6 +152,9 @@ export default {
     },
     clear() {
       this.formController.clear();
+    },
+    reset() {
+      this.formController.reset();
     }
   }
 };
