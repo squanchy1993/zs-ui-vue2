@@ -78,7 +78,6 @@ export default class MPopupController {
       this.visible = true;
       // '$slots['default']' will be loaded only if the el-dialog has been opened.
       await this.componentInstance.$nextTick();
-
       try {
         this.componentInstance?.popupController.contentInstance.componentInstance.startup({
           data,

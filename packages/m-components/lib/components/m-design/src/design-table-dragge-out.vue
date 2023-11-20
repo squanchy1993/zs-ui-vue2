@@ -1,35 +1,41 @@
+<!--
+ * @Date: 2023-11-15 21:03:14
+ * @LastEditors: squanchy1993 squanchy@yeah.net
+ * @LastEditTime: 2023-11-20 11:37:18
+ * @FilePath: \m-components\lib\components\m-design\src\design-table-dragge-out.vue
+-->
 <template>
-  <div class="design-table-dragge-out">
+  <div ref="draggeRef" class="design-table-dragge-out">
     <div
-      :key="index"
       v-for="({ props: { prop, label }, elemOptions }, index) in fields"
+      :key="index"
       class="dragge-out__item el-table__cell"
     >
       <p class="title">{{ label }}</p>
-      <MDynamicElem :config="elemOptions" :propKey="prop" :data="{}" />
+      <MDynamicElem :config="elemOptions" :prop-key="prop" :data="{}" />
     </div>
   </div>
 </template>
 
 <script>
 import Sortable from 'sortablejs';
-import { MDynamicElem } from '../../../../m-dynamic-elem';
+import { MDynamicElem } from '../../m-dynamic-elem';
 
 export default {
   components: {
     MDynamicElem
-  },
-  data() {
-    return {
-      row: {},
-      colEle: null
-    };
   },
   props: {
     fields: {
       type: Array,
       default: () => []
     }
+  },
+  data() {
+    return {
+      row: {},
+      colEle: null
+    };
   },
   mounted() {
     this.setSortable();
@@ -41,7 +47,7 @@ export default {
   methods: {
     // 列拖动
     setSortable() {
-      const wrapperTr2 = document.querySelector('.design-table-dragge-out');
+      const wrapperTr2 = this.$refs.draggeRef;
       Sortable.create(wrapperTr2, {
         group: {
           name: 'shared',
@@ -77,9 +83,9 @@ export default {
   grid-row-gap: 10px;
   .dragge-out__item {
     width: 100%;
-      background-color: #e0d5d5;
-      border-radius: 5px;
-      padding: 5px;
+    background-color: #e0d5d5;
+    border-radius: 5px;
+    padding: 5px;
     .title {
       width: 100%;
       line-height: 28px;

@@ -11,23 +11,38 @@ export const router = new VueRouter({
   routes: [
     {
       path: '/tableLayout/basicExample',
-      component: BasicExample
+      component: BasicExample,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/tableLayout/jsConfigExample',
-      component: JsConfigExample
+      component: JsConfigExample,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/tableLayout/jsonConfigExample/:id',
-      component: JsonConfigExample
+      component: JsonConfigExample,
+      meta: {
+        keepAlive: false
+      }
     },
     {
       path: '/tableLayout/setConfigExample',
-      component: SetConfigExample
+      component: SetConfigExample,
+      meta: {
+        keepAlive: true
+      }
     },
     {
-      path: '/tableLayout/DesignTable',
-      component: DesignTable
+      path: '/tableLayout/DesignTable/:id',
+      component: DesignTable,
+      meta: {
+        keepAlive: false
+      }
     }
   ]
 });
