@@ -668,7 +668,7 @@ export function getConfig() {
 
   const dialogConfig = [
     {
-      key: 'userDailog',
+      key: 'userDialog',
       elem: 'el-dialog',
       props: {
         title: '会员编辑',
