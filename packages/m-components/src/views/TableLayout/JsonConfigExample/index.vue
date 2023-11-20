@@ -5,7 +5,7 @@
  * @FilePath: /zs-ui-vue2/packages/m-components/src/views/TableLayout/JsonConfigExample/index.vue
 -->
 <template>
-  <MLayoutTable v-bind="tableConfig"></MLayoutTable>
+  <MLayoutTable v-bind="tableConfig" />
 </template>
 
 <script>
