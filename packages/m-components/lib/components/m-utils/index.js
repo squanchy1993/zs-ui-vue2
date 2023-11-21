@@ -276,3 +276,32 @@ export function getPropByPath(obj, path, strict) {
     v: tempObj ? tempObj[keyArr[i]] : null
   };
 }
+
+/**
+ * 遍历key
+ * @param { array | object } arrOrObj 待遍历的对象
+ * @param { ( key, element ) => void } cb 遍历的函数
+ * @param { Array } keyArr 根节点
+ */
+export function itorKey(arrOrObj, cb, keyArr = []) {
+  for (const key in arrOrObj) {
+    if (Object.hasOwnProperty.call(arrOrObj, key)) {
+      const element = arrOrObj[key];
+      const newRootKey = [...keyArr, key];
+      // cb(newRootKey, element);
+      if (isObj(element)) {
+        itorKey(element, cb, newRootKey);
+      } else {
+        cb(newRootKey, element);
+      }
+    }
+  }
+}
+
+export function isObj(value) {
+  return Object.prototype.toString.call(value) === '[object Object]'; // typeof value === 'object' // value instanceof Object;
+}
+
+export function isArr(value) {
+  return Object.prototype.toString.call(value) === '[object Array]';
+}
