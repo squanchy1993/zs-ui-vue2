@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-11-19 16:03:44
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-20 11:33:57
+ * @LastEditTime: 2023-11-21 10:37:45
  * @FilePath: \m-components\lib\components\m-design\src\design-dialog\design-dialog-content.vue
 -->
 
@@ -211,6 +211,9 @@ export default {
 
     reset() {
       this.$refs.MFormGeneratorRef.reset();
+    },
+    clear () {
+      this.$refs.MFormGeneratorRef.clear();
     },
     async save() {
       console.log('this.$refs.MFormGeneratorRef', this.$refs.MFormGeneratorRef.formController);

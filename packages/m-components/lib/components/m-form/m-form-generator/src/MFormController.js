@@ -1,4 +1,10 @@
-import { deepMerge, buildShortUUID, setValueByPath, getValueByPath } from '../../../m-utils';
+import {
+  deepMerge,
+  buildShortUUID,
+  setValueByPath,
+  getValueByPath,
+  itorKey
+} from '../../../m-utils';
 import { cloneDeep } from 'lodash-es';
 
 export default class MFormController {
@@ -44,7 +50,7 @@ export default class MFormController {
       this.fields = fields.map((item) => new MFormFieldModel(item));
 
       // generate formDataDefault
-      let tempObj = {}
+      let tempObj = {};
       for (const dynamicField of this.fields) {
         const {
           props: { prop },
@@ -54,35 +60,39 @@ export default class MFormController {
           setValueByPath(tempObj, prop, defaultValue);
         }
       }
-      this.formDataDefault = cloneDeep(tempObj)
+      this.formDataDefault = cloneDeep(tempObj);
     }
 
     // reset
-    this._resetFields();
-  }
-
-  _resetFields = () => {
     this._setFormDataByFormDataDefault();
     this._setFormDataByOriginData();
-  };
+  }
 
   _setFormDataByFormDataDefault() {
-    this.formData = cloneDeep(this.formDataDefault);
+    let tempObj = cloneDeep(this.formDataDefault);
+    itorKey(
+      tempObj,
+      (keys, value) => {
+        const prop = keys.join('.');
+        setValueByPath(this.formData, prop, value);
+      },
+      []
+    );
   }
 
   _setFormDataByOriginData() {
-    for (const dynamicField of this.fields) {
-      const {
-        props: { prop }
-      } = dynamicField;
-
-      if (prop) {
+    let tempObj = cloneDeep(this.formDataDefault);
+    itorKey(
+      tempObj,
+      (keys, value) => {
+        const prop = keys.join('.');
         const originDataValue = getValueByPath(this.originData, prop);
         if (![undefined, null].includes(originDataValue)) {
           setValueByPath(this.formData, prop, originDataValue);
         }
-      }
-    }
+      },
+      []
+    );
   }
 
   _clearFieldsValidate = () => this.componentInstance.$refs[this.props.ref].clearValidate();
@@ -92,8 +102,7 @@ export default class MFormController {
 
   // 设置
   startup = ({ data, tag }) => {
-    this._resetFields();
-
+    this._setFormDataByFormDataDefault();
     this.tag = tag;
     if (data) {
       this.originData = cloneDeep(data);
@@ -107,7 +116,7 @@ export default class MFormController {
   clear = async () => {
     this.originData = {};
 
-    this._resetFields();
+    this._setFormDataByFormDataDefault();
 
     this.tag = null;
 
@@ -117,7 +126,8 @@ export default class MFormController {
 
   // 重置按钮
   reset = async () => {
-    this._resetFields();
+    this._setFormDataByFormDataDefault();
+    this._setFormDataByOriginData();
     this._clearFieldsValidate();
   };
 }
