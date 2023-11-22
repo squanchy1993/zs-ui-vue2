@@ -260,7 +260,7 @@ export function getLayoutConfig() {
                       state[key] = parse(value);
                       return state;
                     }, {});
-                    console.log('params>>>>>>', params)
+                    console.log('params>>>>>>', params);
                     await mLayoutTable.$refs.customDialog.open({ tag: 'edit', data: params });
                     await mListCtrl.getList();
                   } catch (error) {
@@ -485,7 +485,7 @@ export function getConfig() {
   const listConfig = {
     loadList: false,
     pageParams: { pageIndex: 1, pageSize: 10 },
-    requestFun: async function ({ pageParams, searchParams }) {
+    requestFun: async ({ pageParams, searchParams }) => {
       const { $importSrc } = this.componentInstance;
       const { getUserList } = await $importSrc('api.js');
       let {
