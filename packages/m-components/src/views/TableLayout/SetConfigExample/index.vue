@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-20 18:55:29
+ * @LastEditTime: 2023-11-21 15:00:53
  * @FilePath: \m-components\src\views\TableLayout\SetConfigExample\index.vue
 -->
 <!-- eslint-disable  -->
@@ -43,6 +43,7 @@
       :key="i"
       :config="mPopoupConfig"
     />
+    <CustomDialog ref="customDialog" />
   </MList>
 </template>
 
@@ -50,6 +51,8 @@
 import { MList, MTableGenerator, MFormGenerator, MPopupGenerator } from '@m-components/index';
 
 import { getLayoutConfig } from './config.js';
+
+import CustomDialog from './custom-dialog';
 
 export default {
   provide() {
@@ -61,7 +64,8 @@ export default {
     MList,
     MTableGenerator,
     MFormGenerator,
-    MPopupGenerator
+    MPopupGenerator,
+    CustomDialog
   },
   data() {
     return {

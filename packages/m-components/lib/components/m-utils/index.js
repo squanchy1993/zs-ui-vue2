@@ -194,9 +194,8 @@ export const stringify = (obj) => {
     return JSON.stringify(obj, (k, v) => {
       if (typeof v === 'function') {
         return `FUNCTION_FLAG ${v}`;
-      } else {
-        return v;
       }
+      return v;
     });
   } catch (error) {
     console.log(error);
@@ -304,4 +303,8 @@ export function isObj(value) {
 
 export function isArr(value) {
   return Object.prototype.toString.call(value) === '[object Array]';
+}
+
+export function isFunction(value) {
+  return ['[object AsyncFunction]', '[object Function]'].includes(Object.prototype.toString.call(value))
 }

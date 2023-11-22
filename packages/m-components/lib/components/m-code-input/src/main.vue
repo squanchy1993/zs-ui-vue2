@@ -1,16 +1,16 @@
 <!--
  * @Date: 2023-05-07 20:54:37
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-16 16:52:49
- * @FilePath: \zs-ui-vue2\packages\m-components\lib\components\m-code-input\src\main.vue
+ * @LastEditTime: 2023-11-22 10:10:11
+ * @FilePath: \m-components\lib\components\m-code-input\src\main.vue
  * @TODO:既可以兼容原生js也可以使用eavl
 -->
 <template>
   <div class="code-container">
     <codemirror
-      style="height: 100%"
       ref="newCm"
       v-model="componentValue"
+      style="height: 100%"
       :options="cmOptions"
       @ready="onCmReady"
       @input="change"
@@ -42,6 +42,7 @@ import 'codemirror/addon/edit/closebrackets.js';
 import 'codemirror/addon/display/autorefresh';
 
 const CodeMirror = require('codemirror/lib/codemirror'); // 后续要使用CodeMIrror，故使用require方式引入
+import { parse, isObj, isFunction } from '../../m-utils';
 
 export default {
   name: 'MCodeInput',
@@ -60,7 +61,7 @@ export default {
       }
     },
     value: {
-      type: Function,
+      type: [Function, Object],
       default: function () {}
     }
   },
@@ -77,7 +78,13 @@ export default {
         // 延迟到组件创建完毕后再进行
         this.$nextTick(() => {
           if (value !== this.componentValue && value !== null) {
-            this.componentValue = value.toString();
+            if (isObj(value)) {
+              this.componentValue = this.parseObjToCodeStr(value);
+            }
+
+            if (isFunction(value)) {
+              this.componentValue = value.toString();
+            }
           }
         });
       }
@@ -96,7 +103,7 @@ export default {
         lineWrapping: true, // 自动换行
         theme: 'cobalt', // 主题根据需要自行配置
         minLines: 4,
-        autoRefresh: true,
+        autoRefresh: true
       },
       visible: false
     };
@@ -169,6 +176,7 @@ export default {
         this.$emit('valueChange', new Function(`return ${val}`)());
       } catch (error) {
         console.log('change: error', error);
+        JSON.stringify;
       }
     },
     async formate() {
@@ -176,6 +184,27 @@ export default {
         { line: 0, ch: 0 },
         { line: this.$refs.newCm.codemirror.lineCount() }
       );
+    },
+
+    parseObjToCodeStr(ojb) {
+      let funcStrings = [];
+      const jsonStr = JSON.stringify(ojb, (key, value) => {
+        let data = value;
+        try {
+          let func = new Function(`return ${data}`)();
+          if (isFunction(func)) {
+            let funcStr = func.toString();
+            funcStrings.push(funcStr);
+            return funcStr;
+          }
+        } catch (error) {}
+        return value;
+      });
+      const codeStr = funcStrings.reduce((state, cur) => {
+        state = state.replace(JSON.stringify(cur), cur);
+        return state;
+      }, jsonStr);
+      return codeStr;
     }
   }
 };

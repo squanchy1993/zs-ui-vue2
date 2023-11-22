@@ -1,5 +1,5 @@
 import { getConfigList, createConfig, updateConfig, deleteConfig } from '@/api';
-import { difference, stringify } from '@m-components/components/m-utils';
+import { difference, stringify, parse } from '@m-components/components/m-utils';
 
 export function getLayoutConfig() {
   const listConfig = {
@@ -185,7 +185,7 @@ export function getLayoutConfig() {
         props: {
           label: 'MTableFieldButton',
           prop: 'MTableFieldButton',
-          width: '310',
+          width: '400',
           fixed: 'right'
         },
         elemOptions: {
@@ -193,26 +193,6 @@ export function getLayoutConfig() {
           elem: 'MButtonOperator',
           props: {
             btns: [
-              {
-                name: '编辑',
-                code: async function ({
-                  injectData: { mListCtrl, mLayoutTable },
-                  props: { data }
-                }) {
-                  try {
-                    await mLayoutTable.dialogs.userDialog.open({ tag: 'edit', data });
-                    await mListCtrl.getList();
-                  } catch (error) {
-                    console.error('编辑失败', error);
-                  }
-                },
-                option: {
-                  size: 'mini',
-                  type: 'primary'
-                },
-                'option.size': null,
-                'option.type': null
-              },
               {
                 name: '删除',
                 code: async function ({ injectData: { mListCtrl }, props: { data } }) {
@@ -250,6 +230,51 @@ export function getLayoutConfig() {
                 'option.type': null
               },
               {
+                name: '编辑JSON',
+                code: async function ({
+                  injectData: { mListCtrl, mLayoutTable },
+                  props: { data }
+                }) {
+                  try {
+                    await mLayoutTable.dialogs.userDialog.open({ tag: 'edit', data });
+                    await mListCtrl.getList();
+                  } catch (error) {
+                    console.error('编辑失败', error);
+                  }
+                },
+                option: {
+                  size: 'mini',
+                  type: 'primary'
+                },
+                'option.size': null,
+                'option.type': null
+              },
+              {
+                name: '编辑code',
+                code: async function ({
+                  injectData: { mListCtrl, mLayoutTable },
+                  props: { data }
+                }) {
+                  try {
+                    const params = Object.entries(data).reduce((state, [key, value]) => {
+                      state[key] = parse(value);
+                      return state;
+                    }, {});
+                    console.log('params>>>>>>', params)
+                    await mLayoutTable.$refs.customDialog.open({ tag: 'edit', data: params });
+                    await mListCtrl.getList();
+                  } catch (error) {
+                    console.error('编辑失败', error);
+                  }
+                },
+                option: {
+                  size: 'mini',
+                  type: 'primary'
+                },
+                'option.size': null,
+                'option.type': null
+              },
+              {
                 name: '设计',
                 code: async function ({
                   injectData: { mListCtrl, mLayoutTable },
@@ -261,7 +286,7 @@ export function getLayoutConfig() {
                       query: { id: data.id },
                       params: {
                         refresh: () => {
-                          console.log('refresh')
+                          console.log('refresh');
                           mListCtrl.getList();
                         }
                       }
