@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-11-19 16:03:44
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-20 11:36:08
- * @FilePath: \m-components\lib\components\m-design\src\design-dialog\design-dialog.vue
+ * @LastEditTime: 2023-11-26 19:42:29
+ * @FilePath: /m-components/lib/components/m-design/src/design-dialog/design-dialog.vue
 -->
 
 <template>
@@ -25,13 +25,13 @@
           <span style="margin-left: 10px">{{ row.elemOptions }}</span>
         </template>
       </el-table-column>
-      <el-table-column width="200" align="right">
+      <el-table-column width="230" fixed="right">
         <template slot="header">
-          <el-button size="mini" @click="() => createItem()">createItem</el-button>
+          <el-button type="primary" size="mini" @click="() => createItem()">createDialog</el-button>
         </template>
         <template slot-scope="{ row }">
-          <el-button size="mini" @click="() => editItem(row)">editItem</el-button>
-          <el-button size="mini" @click="() => deleteItem(row)">deleteItem</el-button>
+          <el-button type="danger" size="mini" @click="() => deleteItem(row)">deleteDialog</el-button>
+          <el-button type="primary" size="mini" @click="() => editItem(row)">editDialog</el-button>
         </template>
       </el-table-column>
     </el-table>

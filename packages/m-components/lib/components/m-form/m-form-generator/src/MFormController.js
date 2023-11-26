@@ -47,20 +47,23 @@ export default class MFormController {
     }
 
     if (fields && fields.length) {
-      this.fields = fields.map((item) => new MFormFieldModel(item));
+      const mFormFields = fields.map((item) => new MFormFieldModel(item));
 
       // generate formDataDefault
       let tempObj = {};
-      for (const dynamicField of this.fields) {
+      for (const dynamicField of mFormFields) {
         const {
           props: { prop },
           defaultValue
         } = dynamicField;
         if (prop && defaultValue !== undefined) {
           setValueByPath(tempObj, prop, defaultValue);
+          setValueByPath(this.formDataDefault, prop, defaultValue);
         }
       }
-      this.formDataDefault = cloneDeep(tempObj);
+      this.formDataDefault = tempObj;
+
+      this.fields = mFormFields;
     }
 
     // reset
@@ -69,33 +72,40 @@ export default class MFormController {
   }
 
   _setFormDataByFormDataDefault() {
-    let tempObj = cloneDeep(this.formDataDefault);
+    let tempObj = {};
     itorKey(
-      tempObj,
+      this.formDataDefault,
       (keys, value) => {
         const prop = keys.join('.');
-        setValueByPath(this.formData, prop, value);
+        setValueByPath(tempObj, prop, value);
       },
       []
     );
+    this.formData = tempObj;
   }
 
   _setFormDataByOriginData() {
-    let tempObj = cloneDeep(this.formDataDefault);
+    let tempObj = {};
     itorKey(
-      tempObj,
+      this.formDataDefault,
       (keys, value) => {
         const prop = keys.join('.');
         const originDataValue = getValueByPath(this.originData, prop);
         if (![undefined, null].includes(originDataValue)) {
-          setValueByPath(this.formData, prop, originDataValue);
+          setValueByPath(tempObj, prop, originDataValue);
         }
       },
       []
     );
+    this.formData = tempObj;
   }
 
-  _clearFieldsValidate = () => this.componentInstance.$refs[this.props.ref].clearValidate();
+  _clearFieldsValidate = () => {
+    let formRef = this.componentInstance.$refs[this.props.ref];
+    if (formRef) {
+      formRef.clearValidate();
+    }
+  };
 
   // 进行表单验证
   validateFields = async () => this.componentInstance.$refs[this.props.ref].validate();

@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-11-19 16:03:44
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-21 10:37:45
- * @FilePath: \m-components\lib\components\m-design\src\design-dialog\design-dialog-content.vue
+ * @LastEditTime: 2023-11-26 19:11:04
+ * @FilePath: /m-components/lib/components/m-design/src/design-dialog/design-dialog-content.vue
 -->
 
 <template>
@@ -29,7 +29,7 @@
               </el-tabs>
             </div>
 
-            <MPopupGenerator ref="formItemRef" :config="besicData.formItemDailogConfig" />
+            <MPopupGenerator ref="formItemRef" :config="besicData.formItemDialogConfig" />
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -46,7 +46,8 @@
 import Sortable from 'sortablejs';
 import { MFormGenerator } from '../../../m-form/m-form-generator';
 import designTableDraggeOut from '../design-table-dragge-out';
-import { getFormItemFields, elemList, formItemDailogConfig, popupDialogConfig} from './config';
+import { elemList, popupDialogConfig} from './config';
+import { getFormItemFields, formItemDialogConfig } from '../config';
 import { cloneDeep, uniqueId } from 'lodash-es';
 import { deepMerge, difference } from '../../../m-utils';
 import { MPopupGenerator } from '../../../m-popup/m-popup-generator';
@@ -103,7 +104,7 @@ export default {
     return {
       besicData: {
         elemList,
-        formItemDailogConfig
+        formItemDialogConfig
       },
       popupDialogConfig,
       formData: {}
@@ -192,8 +193,8 @@ export default {
     },
 
     async editFormItem({ index, field }) {
-      this.besicData.formItemDailogConfig.elemOptions.props.config.fields = getFormItemFields(
-        field.elemOptions.elem
+      this.besicData.formItemDialogConfig.elemOptions.props.config.fields = getFormItemFields(
+        field.elemOptions
       );
       await this.$nextTick();
       console.log('field>>>>>', field);

@@ -1,11 +1,12 @@
 import { getConfigList, createConfig, updateConfig, deleteConfig } from '@/api';
-import { difference, stringify, parse } from '@m-components/components/m-utils';
+import { difference, stringify } from '@m-components/components/m-utils';
 
 export function getLayoutConfig() {
   const listConfig = {
     loadList: true,
     pageParams: { pageIndex: 1, pageSize: 10 },
-    requestFun: async ({ pageParams, searchParams }) => {
+    requestFun: async function ({ pageParams, searchParams }) {
+      console.log('requestFun>>>', pageParams, searchParams)
       let {
         data: { list, total }
       } = await getConfigList({ ...pageParams });
@@ -118,8 +119,17 @@ export function getLayoutConfig() {
         },
         elemOptions: {
           type: 'render',
-          elem: ({ h, injectData: { mFormCtrl } }) => {
-            return <el-button onClick={() => mFormCtrl.reset()}>重置</el-button>;
+          elem: ({ h, injectData: { mFormCtrl, mListCtrl } }) => {
+            return (
+              <el-button
+                onClick={async () => {
+                  await mFormCtrl.reset();
+                  mListCtrl.handleSearch();
+                }}
+              >
+                重置
+              </el-button>
+            );
           }
         }
       },
@@ -256,12 +266,7 @@ export function getLayoutConfig() {
                   props: { data }
                 }) {
                   try {
-                    const params = Object.entries(data).reduce((state, [key, value]) => {
-                      state[key] = parse(value);
-                      return state;
-                    }, {});
-                    console.log('params>>>>>>', params);
-                    await mLayoutTable.$refs.customDialog.open({ tag: 'edit', data: params });
+                    await mLayoutTable.$refs.customDialog.open({ tag: 'edit', data });
                     await mListCtrl.getList();
                   } catch (error) {
                     console.error('编辑失败', error);
@@ -485,7 +490,8 @@ export function getConfig() {
   const listConfig = {
     loadList: false,
     pageParams: { pageIndex: 1, pageSize: 10 },
-    requestFun: async ({ pageParams, searchParams }) => {
+    requestFun: async function ({ pageParams, searchParams }) {
+      console.log('requestFun>>>:', pageParams, searchParams)
       const { $importSrc } = this.componentInstance;
       const { getUserList } = await $importSrc('api.js');
       let {
@@ -561,6 +567,16 @@ export function getConfig() {
           props: {
             btns: [
               {
+                name: '搜索',
+                code: async function ({ injectData: { mListCtrl } }) {
+                  try {
+                    await mListCtrl.getList();
+                  } catch (error) {
+                    console.log('搜索', error);
+                  }
+                }
+              },
+              {
                 name: '创建',
                 code: async function ({ injectData: { mListCtrl, mLayoutTable } }) {
                   try {
@@ -582,8 +598,11 @@ export function getConfig() {
         },
         elemOptions: {
           type: 'render',
-          elem: ({ h, injectData: { mFormCtrl } }) => {
-            return <el-button onClick={() => mFormCtrl.reset()}>重置</el-button>;
+          elem: ({ h, injectData: { mFormCtrl, mListCtrl } }) => {
+            return <el-button onClick={async () => {
+              await mFormCtrl.reset();
+              mListCtrl.getList();
+            }}>重置</el-button>;
           }
         }
       }
@@ -713,10 +732,6 @@ export function getConfig() {
         title: '会员编辑',
         width: '30%',
         size: '30%'
-      },
-
-      scrollStyle: {
-        height: '60vh'
       },
       on: ({ mTableCtrl }) => {
         return {

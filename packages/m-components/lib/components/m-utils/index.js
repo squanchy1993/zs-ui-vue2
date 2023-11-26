@@ -7,19 +7,19 @@
 
 import { transform, isEqual, isObject, debounce } from 'lodash-es';
 
-export const disabledDateStart = (time, endTime) => {
+export function disabledDateStart(time, endTime) {
   if (endTime) {
     return time > new Date(endTime);
   }
-};
+}
 
-export const disabledDateEnd = (time, startTime) => {
+export function disabledDateEnd(time, startTime) {
   if (startTime) {
     return time < new Date(startTime);
   }
-};
+}
 
-export const difference = (object, base) => {
+export function difference(object, base) {
   function changes(object, base) {
     return transform(object, function (result, value, key) {
       if (!isEqual(value, base[key])) {
@@ -28,9 +28,9 @@ export const difference = (object, base) => {
     });
   }
   return changes(object, base);
-};
+}
 
-export const loopFunc = (func) => {
+export function loopFunc(func) {
   let status = true;
   const refresh = async () => {
     try {
@@ -55,10 +55,10 @@ export const loopFunc = (func) => {
     start,
     stop
   };
-};
+}
 
 // 监听
-export const sizeListener = (fun) => {
+export function sizeListener(fun) {
   // 监听变化
   const observer = new ResizeObserver((entries, observer) => {
     entries.forEach((entry) => {
@@ -79,13 +79,13 @@ export const sizeListener = (fun) => {
     observe,
     unobserve
   };
-};
+}
 
-export const debounceCb = (
+export function debounceCb(
   event,
   time,
   { leading = false, executeEvent = function () {}, cancelEvent = function () {} }
-) => {
+) {
   let timer = null;
   let pReject = null;
   let pResolve = null;
@@ -118,11 +118,7 @@ export const debounceCb = (
       }
     });
   };
-};
-
-export const isPromise = (p) => {
-  return p && Object.prototype.toString.call(p) === '[object Promise]';
-};
+}
 
 // 深度合并
 export function deepMerge(src, target) {
@@ -161,7 +157,7 @@ export function buildShortUUID(prefix = '') {
   return prefix + '_' + random + unique + String(time);
 }
 
-export const asyncPromise = (fun) => {
+export function asyncPromise(fun) {
   let loginCB = {
     succeed: [],
     fail: []
@@ -187,13 +183,14 @@ export const asyncPromise = (fun) => {
       }
     });
   };
-};
+}
 
-export const stringify = (obj) => {
+export function stringify(obj) {
   try {
     return JSON.stringify(obj, (k, v) => {
       if (typeof v === 'function') {
-        return `FUNCTION_FLAG ${v}`;
+        // return `FUNCTION_FLAG ${v}`;
+        return v.toString();
       }
       return v;
     });
@@ -201,25 +198,28 @@ export const stringify = (obj) => {
     console.log(error);
     return '出错了';
   }
-};
+}
 
-export const parse = (jsonStr) => {
+export function parse(jsonStr) {
   try {
     return JSON.parse(jsonStr, (key, value) => {
-      if (value && typeof value === 'string') {
-        return value.indexOf('FUNCTION_FLAG') > -1
-          ? new Function(`return ${value.replace('FUNCTION_FLAG', '')}`)()
-          : value;
+      try {
+        let func = new Function(`return ${value}`)();
+        if (isFunction(func)) {
+          return func;
+        }
+        return value;
+      } catch (error) {
+        return value;
       }
-      return value;
     });
   } catch (error) {
     console.log(error);
     return '出错了';
   }
-};
+}
 
-export const setValueByPath = (obj, path, value) => {
+export function setValueByPath(obj, path, value) {
   if (path.indexOf('.') === -1) {
     obj[path] = value;
     return;
@@ -230,9 +230,9 @@ export const setValueByPath = (obj, path, value) => {
   !obj[newPath] && (obj[newPath] = {});
   obj = obj[newPath];
   return setValueByPath(obj, path.substr(dotIndex + 1), value);
-};
+}
 
-export const getValueByPath = (object, prop) => {
+export function getValueByPath(object, prop) {
   prop = prop || '';
   var paths = prop.split('.');
   var current = object;
@@ -248,7 +248,7 @@ export const getValueByPath = (object, prop) => {
     current = current[path];
   }
   return result;
-};
+}
 
 export function getPropByPath(obj, path, strict) {
   var tempObj = obj;
@@ -301,10 +301,24 @@ export function isObj(value) {
   return Object.prototype.toString.call(value) === '[object Object]'; // typeof value === 'object' // value instanceof Object;
 }
 
+export function isEmptyObj(value) {
+  return Boolean(!Object.keys(value).length);
+}
+
 export function isArr(value) {
   return Object.prototype.toString.call(value) === '[object Array]';
 }
 
 export function isFunction(value) {
-  return ['[object AsyncFunction]', '[object Function]'].includes(Object.prototype.toString.call(value))
+  return ['[object AsyncFunction]', '[object Function]'].includes(
+    Object.prototype.toString.call(value)
+  );
+}
+
+export function isPromise(p) {
+  return p && Object.prototype.toString.call(p) === '[object Promise]';
+}
+
+export function clearObj(obj) {
+  Object.keys(obj).forEach(key => delete obj[key]);
 }

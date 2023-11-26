@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-05-07 20:54:37
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-22 10:10:11
- * @FilePath: \m-components\lib\components\m-code-input\src\main.vue
+ * @LastEditTime: 2023-11-26 19:38:10
+ * @FilePath: /m-components/lib/components/m-code-input/src/main.vue
  * @TODO:既可以兼容原生js也可以使用eavl
 -->
 <template>
@@ -21,28 +21,41 @@
 <script>
 /* eslint-disable */
 
-// 核心组件
+// codemirror
+/// 核心组件
 import { codemirror } from 'vue-codemirror';
 
-// 核心样式
+/// 核心样式
 import 'codemirror/lib/codemirror.css';
 
-// 高亮库
+/// 高亮库
 import 'codemirror/mode/javascript/javascript.js';
 
-// 主题css
+/// 主题css
 import 'codemirror/theme/cobalt.css';
 
-// require active-line.js
+/// require active-line.js
 import 'codemirror/addon/selection/active-line.js';
 
-// closebrackets
+/// closebrackets
 import 'codemirror/addon/edit/closebrackets.js';
 
 import 'codemirror/addon/display/autorefresh';
 
-const CodeMirror = require('codemirror/lib/codemirror'); // 后续要使用CodeMIrror，故使用require方式引入
-import { parse, isObj, isFunction } from '../../m-utils';
+/// 代码错误检查
+// import 'codemirror/addon/lint/lint.css'
+// import 'codemirror/addon/lint/lint'
+// import 'codemirror/addon/lint/javascript-lint'
+
+// import jshint from 'jshint'
+// window.JSHINT = jshint.JSHINT;
+
+/// 代码美化
+import jsBeautify from 'js-beautify';
+const beautifyJs = jsBeautify.js_beautify;
+
+// others
+import { parse, isObj, isFunction, isArr } from '../../m-utils';
 
 export default {
   name: 'MCodeInput',
@@ -61,8 +74,8 @@ export default {
       }
     },
     value: {
-      type: [Function, Object],
-      default: function () {}
+      type: [Function, Object, Array],
+      default: null
     }
   },
   computed: {
@@ -78,12 +91,14 @@ export default {
         // 延迟到组件创建完毕后再进行
         this.$nextTick(() => {
           if (value !== this.componentValue && value !== null) {
-            if (isObj(value)) {
+            if (isObj(value) || isArr(value)) {
               this.componentValue = this.parseObjToCodeStr(value);
             }
 
             if (isFunction(value)) {
-              this.componentValue = value.toString();
+              this.componentValue = beautifyJs(value.toString(), {
+                indent_size: 2
+              });
             }
           }
         });
@@ -97,6 +112,7 @@ export default {
         tabSize: 2, // tabsize默认为4
         styleActiveLine: true,
         lineNumbers: true,
+        lint: true,
         line: true,
         mode: 'text/javascript', // 选择代码语言，我这里选的sql
         extraKeys: { Ctrl: 'autocomplete' }, // 自动提示配置
@@ -108,98 +124,40 @@ export default {
       visible: false
     };
   },
-  created() {
-    CodeMirror.defineExtension('autoFormatRange', function (from, to) {
-      var cm = this;
-      var outer = cm.getMode(),
-        text = cm.getRange(from, to).split('\n');
-      var state = CodeMirror.copyState(outer, cm.getTokenAt(from).state);
-      var tabSize = cm.getOption('tabSize');
-
-      var out = '',
-        lines = 0,
-        atSol = from.ch === 0;
-
-      function newline() {
-        out += '\n';
-        atSol = true;
-        ++lines;
-      }
-
-      for (var i = 0; i < text.length; ++i) {
-        var stream = new CodeMirror.StringStream(text[i], tabSize);
-        while (!stream.eol()) {
-          var inner = CodeMirror.innerMode(outer, state);
-          var style = outer.token(stream, state),
-            cur = stream.current();
-          stream.start = stream.pos;
-          if (!atSol || /\S/.test(cur)) {
-            out += cur;
-            atSol = false;
-          }
-          if (
-            !atSol &&
-            inner.mode.newlineAfterToken &&
-            inner.mode.newlineAfterToken(
-              style,
-              cur,
-              stream.string.slice(stream.pos) || text[i + 1] || '',
-              inner.state
-            )
-          )
-            newline();
-        }
-        if (!stream.pos && outer.blankLine) outer.blankLine(state);
-        if (!atSol) newline();
-      }
-
-      cm.operation(function () {
-        cm.replaceRange(out, from, to);
-        for (var cur = from.line + 1, end = from.line + lines; cur <= end; ++cur) {
-          cm.indentLine(cur, 'smart');
-        }
-      });
-    });
-  },
-  mounted() {
-    setTimeout(() => {
-      this.formate();
-    }, 1000);
-  },
   methods: {
     onCmReady(cm) {
       // 设置代码编辑框宽和高
       this.$refs.newCm.codemirror.setSize('-webkit-fill-available', 'auto');
     },
     change(val) {
+      let emitVal = null;
       try {
-        this.$emit('valueChange', new Function(`return ${val}`)());
+        let value = new Function(`return ${val}`)();
+        value && (emitVal = value);
       } catch (error) {
         console.log('change: error', error);
-        JSON.stringify;
       }
-    },
-    async formate() {
-      this.$refs.newCm.codemirror.autoFormatRange(
-        { line: 0, ch: 0 },
-        { line: this.$refs.newCm.codemirror.lineCount() }
-      );
+      this.$emit('valueChange', emitVal);
     },
 
     parseObjToCodeStr(ojb) {
       let funcStrings = [];
-      const jsonStr = JSON.stringify(ojb, (key, value) => {
-        let data = value;
-        try {
-          let func = new Function(`return ${data}`)();
-          if (isFunction(func)) {
-            let funcStr = func.toString();
-            funcStrings.push(funcStr);
-            return funcStr;
-          }
-        } catch (error) {}
-        return value;
-      });
+      const jsonStr = JSON.stringify(
+        ojb,
+        (key, value) => {
+          let data = value;
+          try {
+            let func = new Function(`return ${data}`)();
+            if (isFunction(func)) {
+              let funcStr = func.toString();
+              funcStrings.push(funcStr);
+              return funcStr;
+            }
+          } catch (error) {}
+          return value;
+        },
+        '\t'
+      );
       const codeStr = funcStrings.reduce((state, cur) => {
         state = state.replace(JSON.stringify(cur), cur);
         return state;

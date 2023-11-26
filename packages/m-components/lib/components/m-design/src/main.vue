@@ -2,7 +2,7 @@
   <div class="m-design">
     <el-tabs class="tab-area" type="border-card">
       <el-tab-pane label="列表设置">
-        <MFormGenerator v-model="config.listConfig" :config="besicData.mListSettingForm" />
+        <MFormGenerator v-model="config.listConfig" :config="besicData.listConfig" />
       </el-tab-pane>
       <el-tab-pane label="元素">
         <div class="design-table">
@@ -15,10 +15,10 @@
                   @editItem="editFormItem"
                 />
               </template>
-              <template #table="{ list }">
+              <template #table>
                 <MTableGenerator
                   :config="config.tableConfig"
-                  :list="list"
+                  :list="[{}]"
                   @deleteItem="deleteTableItem"
                   @editItem="editTableItem"
                 />
@@ -34,12 +34,6 @@
                   @current-change="(pageIndex) => handlePageOrSizeChange({ pageIndex })"
                 />
               </template>
-              <MPopupGenerator
-                v-for="(config, key, i) in config.dialogConfig"
-                :ref="setDialogRef(key)"
-                :key="i"
-                :config="config"
-              />
             </MList>
           </div>
           <div class="design-table__dragge-out">
@@ -51,16 +45,27 @@
             </el-tabs>
           </div>
 
-          <MPopupGenerator ref="tableColumnRef" :config="besicData.tableColumn" />
-          <MPopupGenerator ref="formItemRef" :config="besicData.formItem" />
+          <MPopupGenerator ref="tableColumnRef" :config="besicData.tableColumnDialogConfig" />
+          <MPopupGenerator ref="formItemRef" :config="besicData.formItemDialogConfig" />
         </div>
+        <MPopupGenerator
+          v-for="(mPopoupConfig, i) in config.dialogConfig"
+          :ref="setDialogRef(mPopoupConfig.key)"
+          :key="i"
+          :config="mPopoupConfig"
+        />
       </el-tab-pane>
       <el-tab-pane label="弹框列表">
         <DesignDialog v-model="config.dialogConfig" />
       </el-tab-pane>
     </el-tabs>
     <div class="btn-area">
-      <el-button size="small" @click="save">保存</el-button>
+      <el-button
+        style="width: 100%; margin-top: 20px"
+        type="primary"
+        size="small"
+        @click="save"
+      >保存</el-button>
     </div>
   </div>
 </template>
@@ -74,10 +79,22 @@ import { MTableGenerator } from '../../m-table/m-table-generator/index';
 import { MFormGenerator } from '../../m-form/m-form-generator/index';
 import { MPopupGenerator } from '../../m-popup/m-popup-generator';
 import { deepMerge, parse, stringify } from '../../m-utils';
-import { getTableColumnFields, getFormItemFields, besicData } from './config';
+import {
+  getTableColumnFields,
+  getFormItemFields,
+  elemFields,
+  listConfig,
+  tableColumnDialogConfig,
+  formItemDialogConfig
+} from './config';
 import DesignDialog from './design-dialog/design-dialog';
 
 export default {
+  provide() {
+    return {
+      mLayoutTable: this
+    };
+  },
   components: {
     designTableDraggeOut,
     MList,
@@ -96,7 +113,12 @@ export default {
   },
   data() {
     return {
-      besicData,
+      besicData: {
+        elemFields,
+        listConfig,
+        tableColumnDialogConfig,
+        formItemDialogConfig
+      },
       config: {
         listConfig: {},
         searchFormConfig: {},
@@ -235,7 +257,7 @@ export default {
     },
 
     async editTableItem({ index, field }) {
-      this.besicData.tableColumn.elemOptions.props.config.fields = getTableColumnFields(
+      this.besicData.tableColumnDialogConfig.elemOptions.props.config.fields = getTableColumnFields(
         field.elemOptions.elem
       );
       await this.$nextTick();
@@ -254,8 +276,8 @@ export default {
     },
 
     async editFormItem({ index, field }) {
-      this.besicData.formItem.elemOptions.props.config.fields = getFormItemFields(
-        field.elemOptions.elem
+      this.besicData.formItemDialogConfig.elemOptions.props.config.fields = getFormItemFields(
+        field.elemOptions
       );
       await this.$nextTick();
       console.log('field>>>>>', field);

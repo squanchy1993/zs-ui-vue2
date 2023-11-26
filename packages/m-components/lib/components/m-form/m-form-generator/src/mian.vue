@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-11-19 20:30:17
+ * @LastEditTime: 2023-11-26 20:34:39
  * @LastEditors: squanchy1993 squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
- * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-form/m-form-generator/src/mian.vue
+ * @FilePath: /m-components/lib/components/m-form/m-form-generator/src/mian.vue
 -->
 <template>
   <div class="m-form-generator">
@@ -35,7 +35,7 @@
             <MDynamicElem
               :config="elemOptions"
               :data="formController.formData"
-              :propKey="props.prop"
+              :prop-key="props.prop"
             >
               <template v-if="elemOptions.type == 'slot'" v-slot:[elemOptions.elem]>
                 <slot :name="elemOptions.elem" />
@@ -59,7 +59,8 @@
 /* eslint-disable */
 import MFormController from './MFormController';
 import { MDynamicElem } from '../../../m-dynamic-elem';
-import { parse, stringify } from '../../../m-utils';
+import { parse, stringify, isEmptyObj, itorKey, setValueByPath, clearObj } from '../../../m-utils';
+import { nextTick } from 'vue';
 
 export default {
   name: 'MFormGenerator',
@@ -88,40 +89,48 @@ export default {
       }
     },
     formData: {
-      type: [Object, null],
-      default: null
+      type: Object,
+      default: function () {
+        return {};
+      }
     }
   },
   watch: {
-    // tips:
-    // when controller were send from out side, if use watch use deep property and excut setOptions it will triger watch
     controller: {
       handler: function (controller) {
-        if (controller && controller !== this.formController) {
+        if (!controller) {
+          this.formController = new MFormController();
+          this.formController.setOptions({ componentInstance: this });
+        } else if (controller && controller !== this.formController) {
           this.formController = null;
           this.$nextTick(() => {
             this.formController = controller;
             this.formController.setOptions({ componentInstance: this });
           });
         }
-      }
+      },
+      immediate: true
     },
     config: {
       handler: function (config) {
-        if (config) {
-          this.formController.setOptions(config);
-        }
+        nextTick(() => {
+          if (!isEmptyObj(config)) {
+            this.formController.setOptions(config);
+          }
+        });
       },
       deep: true,
       immediate: true
     },
     formData: {
+      // listen input formdata
       handler: function (formData) {
-        if (formData == null) return;
+        if (isEmptyObj(formData)) return;
+
         if (stringify(formData) != stringify(this.formController.formData)) {
           this.formController.formData = parse(stringify(formData));
 
-          if (!Object.keys(this.formController.originData).length) {
+          if (isEmptyObj(this.formController.originData)) {
             this.formController.originData = parse(stringify(formData));
           }
         }
@@ -130,20 +139,29 @@ export default {
       immediate: true
     },
     ['formController.formData']: {
+      // notify outside formData's value is changed
       handler: function (formData) {
         if (stringify(formData) != stringify(this.formData)) {
-          this.$emit('formDataChange', formData);
+          if(!isEmptyObj(formData)){
+            itorKey(
+            formData,
+            (keys, value) => {
+              const prop = keys.join('.');
+              setValueByPath(this.formData, prop, value);
+            }
+          );
+          }else {
+            clearObj(this.formData)
+          }
+  
         }
       },
       deep: true
     }
   },
   data() {
-    // tips: uauslly data gos early than watch, but if watch had immediate property it will reverse.
-    const formController = this.controller ? this.controller : new MFormController();
-    formController.setOptions({ componentInstance: this });
     return {
-      formController
+      formController: null
     };
   },
   methods: {
