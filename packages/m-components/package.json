@@ -63,6 +63,8 @@
   "gitHead": "b60259b95a9e367dcd5a6b4f00eb5fe4d2c23357",
   "dependencies": {
     "draggable": "^4.2.0",
+    "js-beautify": "^1.14.11",
+    "jshint": "^2.13.6",
     "lodash-es": "^4.17.21",
     "sortablejs": "^1.15.0",
     "vue-codemirror": "^4.0.6",

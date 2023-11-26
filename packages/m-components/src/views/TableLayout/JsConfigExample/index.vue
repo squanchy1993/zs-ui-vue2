@@ -1,13 +1,13 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-20 15:39:33
- * @FilePath: \m-components\src\views\TableLayout\JsConfigExample\index.vue
+ * @LastEditTime: 2023-11-26 20:52:59
+ * @FilePath: /m-components/src/views/TableLayout/JsConfigExample/index.vue
 -->
 <template>
   <MList v-bind="listConfig">
-    <template #search="{ handleSearch, getList }">
-      <MFormGenerator :config="searchFormConfig">
+    <template #search="{ searchParams, handleSearch, getList }">
+      <MFormGenerator :form-data="searchParams" :config="searchFormConfig">
         <!-- elemOptions.type = 'slot' -->
         <template #btn1>
           <div>

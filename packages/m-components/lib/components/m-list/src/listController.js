@@ -61,6 +61,7 @@ export default class ListController {
         this.status.requestStatus = 'succeed';
         resolve(res);
       } catch (error) {
+        console.error('getList Error', error)
         this.status.requestStatus = 'failed';
       }
     });

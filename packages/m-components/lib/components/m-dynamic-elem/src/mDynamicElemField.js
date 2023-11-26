@@ -223,6 +223,21 @@ const MDynamicElemFields = {
         }
       }
     }
+  ],
+  render: [
+    {
+      props: {
+        prop: 'elemOptions.elem',
+        label: 'elem'
+      },
+      itemBoxStyle: {
+        width: '100%'
+      },
+      elemOptions: {
+        type: 'registered',
+        elem: 'MCodeInput'
+      }
+    }
   ]
 };
 

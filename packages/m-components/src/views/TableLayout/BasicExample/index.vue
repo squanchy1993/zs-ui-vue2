@@ -1,14 +1,14 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-20 15:37:17
- * @FilePath: \m-components\src\views\TableLayout\BasicExample\index.vue
+ * @LastEditTime: 2023-11-26 20:57:04
+ * @FilePath: /m-components/src/views/TableLayout/BasicExample/index.vue
 -->
 <template>
   <MList :controller="listController" v-bind="listConfig">
     <!-- <template #search="{ searchParams, handleSearch, getList }"> -->
-    <template #search="{ handleSearch }">
-      <MFormGenerator :config="searchFormConfig">
+    <template #search="{ searchParams, handleSearch }">
+      <MFormGenerator :form-data="searchParams" :config="searchFormConfig">
         <!-- elemOptions.type = 'slot' -->
         <template #btn1>
           <div>
@@ -157,8 +157,17 @@ export default {
             },
             elemOptions: {
               type: 'render',
-              elem: ({ h, injectData: { mFormCtrl } }) => {
-                return <el-button onClick={() => mFormCtrl.reset()}>重置</el-button>;
+              elem: ({ h, injectData: { mFormCtrl, mListCtrl } }) => {
+                return (
+                  <el-button
+                    onClick={async () => {
+                      await mFormCtrl.reset();
+                      mListCtrl.getList();
+                    }}
+                  >
+                    重置
+                  </el-button>
+                );
               }
             }
           },
@@ -285,10 +294,6 @@ export default {
           title: '会员编辑',
           width: '30%',
           size: '30%'
-        },
-
-        scrollStyle: {
-          height: '60vh'
         },
         on: ({ mTableCtrl }) => {
           return {
@@ -442,6 +447,7 @@ export default {
   },
   methods: {
     async requestFun({ pageParams, searchParams }) {
+      console.log('basicExample requestFun>>>:', pageParams, searchParams);
       let {
         data: { list, total }
       } = await getUserList({ ...pageParams });

@@ -1,14 +1,14 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-20 18:55:29
- * @FilePath: \m-components\src\views\TableLayout\SetConfigExample\index.vue
+ * @LastEditTime: 2023-11-26 20:48:08
+ * @FilePath: /m-components/src/views/TableLayout/SetConfigExample/index.vue
 -->
 <!-- eslint-disable  -->
 <template>
   <MList ref="listRef" v-bind="listConfig">
-    <template #search="{ handleSearch, getList }">
-      <MFormGenerator :config="searchFormConfig">
+    <template #search="{ searchParams, handleSearch, getList }">
+      <MFormGenerator  :form-data="searchParams" :config="searchFormConfig">
         <!-- elemOptions.type = 'slot' -->
         <template #btn1>
           <div>
@@ -43,6 +43,7 @@
       :key="i"
       :config="mPopoupConfig"
     />
+    <CustomDialog ref="customDialog" />
   </MList>
 </template>
 
@@ -50,6 +51,8 @@
 import { MList, MTableGenerator, MFormGenerator, MPopupGenerator } from '@m-components/index';
 
 import { getLayoutConfig } from './config.js';
+
+import CustomDialog from './custom-dialog';
 
 export default {
   provide() {
@@ -61,7 +64,8 @@ export default {
     MList,
     MTableGenerator,
     MFormGenerator,
-    MPopupGenerator
+    MPopupGenerator,
+    CustomDialog
   },
   data() {
     return {

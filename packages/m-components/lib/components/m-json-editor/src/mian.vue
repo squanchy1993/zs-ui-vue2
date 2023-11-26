@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-15 11:12:27
- * @LastEditTime: 2023-11-04 23:11:27
- * @LastEditors: squanchy squanchy@yeah.net
+ * @LastEditTime: 2023-11-26 18:25:53
+ * @LastEditors: squanchy1993 squanchy@yeah.net
  * @Description: type 的设置 可以写在一个组件里面，可以单独拉出来，看你这个组件复杂不，复杂的话一个模块一个type
  * @FilePath: /m-components/lib/components/m-json-editor/src/mian.vue
 -->
@@ -61,7 +61,6 @@ export default {
           if ([null, undefined].includes(value) || typeof value != 'string') {
             this.previousValue = {};
           } else if (value !== JSON.stringify(this.previousValue)) {
-            console.log('.>>')
             this.previousValue = JSON.parse(value);
           }
         });

@@ -1,13 +1,13 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-20 15:33:51
- * @FilePath: \m-components\lib\components\m-layout-table\src\main.vue
+ * @LastEditTime: 2023-11-26 19:56:57
+ * @FilePath: /m-components/lib/components/m-layout-table/src/main.vue
 -->
 <template>
   <MList v-bind="parsedData.listConfig">
-    <template #search>
-      <MFormGenerator :config="parsedData.searchFormConfig" />
+    <template #search="scoped">
+      <MFormGenerator v-model="scoped.searchParams" :config="parsedData.searchFormConfig" />
     </template>
     <template #table="{ list }">
       <MTableGenerator :config="parsedData.tableConfig" :list="list" />

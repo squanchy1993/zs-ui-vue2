@@ -3,7 +3,8 @@ export function getLayoutConfig() {
   const listConfig = {
     loadList: true,
     pageParams: { pageIndex: 1, pageSize: 10 },
-    requestFun: async ({ pageParams, searchParams }) => {
+    requestFun: async function ({ pageParams, searchParams }) {
+      console.log('jsConfigExample requestFun>>>:', pageParams, searchParams);
       let {
         data: { list, total }
       } = await getUserList({ ...pageParams });
@@ -98,8 +99,15 @@ export function getLayoutConfig() {
         },
         elemOptions: {
           type: 'render',
-          elem: ({h, injectData: { mFormCtrl } }) => {
-            return <el-button onClick={() => mFormCtrl.reset()}>重置</el-button>;
+          elem: ({h, injectData: { mFormCtrl, mListCtrl } }) => {
+            return <el-button
+              onClick={async () => {
+                await mFormCtrl.reset();
+                mListCtrl.getList();
+              }}
+            >
+            重置
+            </el-button>
           }
         }
       },
@@ -244,10 +252,6 @@ export function getLayoutConfig() {
           title: '会员编辑',
           width: '30%',
           size: '30%'
-        },
-
-        scrollStyle: {
-          height: '60vh'
         },
         on: ({ mTableCtrl }) => {
           return {
