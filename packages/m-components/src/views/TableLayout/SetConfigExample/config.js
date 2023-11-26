@@ -195,8 +195,7 @@ export function getLayoutConfig() {
         props: {
           label: 'MTableFieldButton',
           prop: 'MTableFieldButton',
-          width: '400',
-          fixed: 'right'
+          width: '420'
         },
         elemOptions: {
           type: 'registered',
