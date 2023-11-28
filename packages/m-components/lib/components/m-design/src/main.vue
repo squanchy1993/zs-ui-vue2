@@ -37,14 +37,13 @@
             </MList>
           </div>
           <div class="design-table__dragge-out">
-            <el-tabs type="border-card">
-              <el-tab-pane label="元素">
-                <designTableDraggeOut :fields="besicData.elemFields" />
-              </el-tab-pane>
-              <el-tab-pane label="列表设置" />
-            </el-tabs>
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>元素</span>
+              </div>
+              <designTableDraggeOut :fields="besicData.elemFields" />
+            </el-card>
           </div>
-
           <MPopupGenerator ref="tableColumnRef" :config="besicData.tableColumnDialogConfig" />
           <MPopupGenerator ref="formItemRef" :config="besicData.formItemDialogConfig" />
         </div>
@@ -219,13 +218,14 @@ export default {
           let tempList = cloneDeep(this.config.searchFormConfig.fields);
           let {
             elemOptions,
-            props: { prop = uniqueId('prop_'), label }
+            props: { prop = uniqueId('prop_') }
           } = cloneDeep(this.besicData.elemFields[oldDraggableIndex]);
 
           const insertItem = {
             props: {
-              label,
-              prop
+              label: '',
+              prop,
+              disabled: false
             },
             itemBoxStyle: {
               width: '200px',
@@ -315,7 +315,7 @@ export default {
     .design-table {
       display: flex;
       height: 400px;
-      width: 100%;
+      width: calc( 100vw - 200px);
       &__drop-in {
         width: 80%;
         .dragge-out__item {
