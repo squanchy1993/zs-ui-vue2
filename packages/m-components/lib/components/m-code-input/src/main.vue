@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-05-07 20:54:37
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-26 19:38:10
- * @FilePath: /m-components/lib/components/m-code-input/src/main.vue
+ * @LastEditTime: 2023-11-30 14:41:06
+ * @FilePath: \m-components\lib\components\m-code-input\src\main.vue
  * @TODO:既可以兼容原生js也可以使用eavl
 -->
 <template>
@@ -74,7 +74,7 @@ export default {
       }
     },
     value: {
-      type: [Function, Object, Array],
+      type: [Function, Object, Array, Boolean, Number, String],
       default: null
     }
   },
@@ -93,12 +93,12 @@ export default {
           if (value !== this.componentValue && value !== null) {
             if (isObj(value) || isArr(value)) {
               this.componentValue = this.parseObjToCodeStr(value);
-            }
-
-            if (isFunction(value)) {
+            }else if (isFunction(value)) {
               this.componentValue = beautifyJs(value.toString(), {
                 indent_size: 2
               });
+            }else {
+              this.componentValue = JSON.stringify(value)
             }
           }
         });

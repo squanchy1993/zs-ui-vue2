@@ -1,8 +1,8 @@
 <!--
  * @Date: 2022-11-01 09:12:52
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-13 21:36:58
- * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-table/m-table-generator/src/main.vue
+ * @LastEditTime: 2023-11-30 15:42:47
+ * @FilePath: \m-components\lib\components\m-table\m-table-generator\src\main.vue
 -->
 <template>
   <el-table
@@ -78,7 +78,6 @@ export default {
     config: {
       handler: function (config) {
         if (config) {
-          console.log('m-table-config')
           this.tableController.setOptions(config);
         }
       },

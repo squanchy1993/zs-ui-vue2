@@ -218,7 +218,6 @@ export default class IndexedDB {
     return new Promise(async (resolve, reject) => {
       const db = await this.db;
       const store = await db.transaction([tabelName], 'readonly').objectStore(tabelName);
-      console.log('id>>', id)
       const requeset = store.get(id);
       requeset.onsuccess = function (event) {
         resolve({ code: 0, success: true, data: requeset.result, msg: '获取成功!' });

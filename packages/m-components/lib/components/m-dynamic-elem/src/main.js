@@ -7,6 +7,8 @@ import { getPropByPath } from '../../m-utils';
 import { MDynamicInput } from '../../m-dynamc-input'
 import { MCodeInput } from '../../m-code-input'
 import { MArrayEdit } from '../../m-array-edit';
+import { MSelect } from '../../m-select/index'
+
 export default {
   name: 'MDynamicElem',
   components: {
@@ -15,7 +17,8 @@ export default {
     MJsonEditor,
     MDynamicInput,
     MCodeInput,
-    MArrayEdit
+    MArrayEdit,
+    MSelect
   },
   inject: {
     mLayoutTable: { default: null },
@@ -87,6 +90,7 @@ export default {
               maxlength={props['maxlength']}
               minlength={props['minlength']}
               props={props}
+              attrs={props}
               data={this.data}
               v-model={o[k]}
             />

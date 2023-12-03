@@ -31,6 +31,62 @@ export const elemList = [
         disabled: true
       }
     }
+  },
+  {
+    props: {
+      label: 'mSelect',
+      prop: 'mSelect'
+    },
+    elemOptions: {
+      type: 'registered',
+      elem: 'mSelect',
+      props: {
+        placeholder: '输入mSelect',
+        multiple: true,
+        filterable: true,
+        remote: true,
+        'collapse-tags': true,
+        options: [
+          {
+            label: 'option1-string',
+            value: 'string'
+          },
+          {
+            label: 'option2-number',
+            value: 1
+          },
+          {
+            label: 'option3-boolean',
+            value: true
+          }
+        ],
+        remoteMethod: async function (e) {
+          let returnData = [
+            {
+              value: 'test1',
+              label: 'test1'
+            },
+            {
+              value: 'test2',
+              label: 'test2'
+            },
+            {
+              value: 'test3',
+              label: 'test3'
+            },
+            {
+              value: 'test4',
+              label: 'test4'
+            },
+            {
+              value: 'test5',
+              label: 'test5'
+            }
+          ];
+          return e ? returnData : [];
+        }
+      }
+    }
   }
 ];
 

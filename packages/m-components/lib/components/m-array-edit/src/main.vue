@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-05-07 20:54:37
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-18 16:46:33
- * @FilePath: /zs-ui-vue2/packages/m-components/lib/components/m-array-edit/src/main.vue
+ * @LastEditTime: 2023-11-30 15:04:47
+ * @FilePath: \m-components\lib\components\m-array-edit\src\main.vue
  * @TODO:既可以兼容原生js也可以使用eavl
 -->
 <template>
@@ -15,7 +15,7 @@
       @click="editDialog(tag)"
       @close="deleteTag(tag)"
     >
-      {{ tag.name }}
+      {{ tag[labelKey] }}
     </el-tag>
     <el-button class="button-new-tag" size="small" @click="openDialog">添加</el-button>
     <MPopupGenerator ref="form" :config="formConfig" />
@@ -51,6 +51,10 @@ export default {
       default: function () {
         return [];
       }
+    },
+    labelKey: {
+      type: String,
+      default: 'label'
     }
   },
   computed: {
@@ -89,10 +93,6 @@ export default {
           width: '60%',
           size: '60%',
           appendToBody: true
-        },
-
-        scrollStyle: {
-          height: '60vh'
         },
         on: ({ mTableCtrl }) => {
           return {
