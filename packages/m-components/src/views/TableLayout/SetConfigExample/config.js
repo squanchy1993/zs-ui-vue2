@@ -491,7 +491,7 @@ export function getConfig() {
     pageParams: { pageIndex: 1, pageSize: 10 },
     requestFun: async function ({ pageParams, searchParams }) {
       console.log('requestFun>>>:', pageParams, searchParams)
-      const { $importSrc } = this.componentInstance;
+      const { $importSrc } = window.Vue;
       const { getUserList } = await $importSrc('api.js');
       let {
         data: { list, total }
@@ -552,6 +552,61 @@ export function getConfig() {
           elem: 'el-input',
           props: {
             placeholder: '输入address'
+          }
+        }
+      },
+      {
+        props: {
+          prop: 'mSelect'
+        },
+        elemOptions: {
+          type: 'registered',
+          elem: 'mSelect',
+          props: {
+            placeholder: '输入mSelect',
+            multiple: true,
+            filterable: true,
+            remote: true,
+            'collapse-tags': true,
+            options: [
+              {
+                label: 'option1-string',
+                value: 'string'
+              },
+              {
+                label: 'option2-number',
+                value: 1
+              },
+              {
+                label: 'option3-boolean',
+                value: true
+              }
+            ],
+            remoteMethod: async function (e) {
+              let returnData = [
+                {
+                  value: 'test1',
+                  label: 'test1'
+                },
+                {
+                  value: 'test2',
+                  label: 'test2'
+                },
+                {
+                  value: 'test3',
+                  label: 'test3'
+                },
+                {
+                  value: 'test4',
+                  label: 'test4'
+                },
+                {
+                  value: 'test5',
+                  label: 'test5'
+                }
+              ];
+              return e ? returnData : [];
+            }
           }
         }
       },
@@ -701,7 +756,7 @@ export function getConfig() {
                 name: '删除',
                 code: async function ({ injectData: { mListCtrl }, props: { data } }) {
                   try {
-                    const { $importSrc } = mListCtrl.componentInstance;
+                    const { $importSrc } = window.Vue;
                     const { deleteUser } = await $importSrc('api.js');
                     await deleteUser(data.id);
                     await mListCtrl.getList();
@@ -872,7 +927,7 @@ export function getConfig() {
                             await validateFields();
 
                             // only submit changed data;
-                            const { $importSrc, $mComponent } = mListCtrl.componentInstance;
+                            const { $importSrc, $mComponent } = window.Vue;
                             const {
                               MUtils: { difference }
                             } = await $mComponent('index.js');
@@ -940,7 +995,7 @@ export function getConfig() {
                     name: '删除',
                     code: async function ({ injectData: { mListCtrl }, props: { data } }) {
                       try {
-                        const { $importSrc } = mListCtrl.componentInstance;
+                        const { $importSrc } = window.Vue;
                         const { deleteUser } = await $importSrc('api.js');
                         await deleteUser(data.id);
                         await mListCtrl.getList();

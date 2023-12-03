@@ -104,7 +104,7 @@ export default {
         } else if (controller && controller !== this.formController) {
           this.formController = null;
           this.$nextTick(() => {
-            this.formController = controller;
+            this._provided.mFormCtrl = this.formController = controller;
             this.formController.setOptions({ componentInstance: this });
           });
         }

@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-07-15 16:16:17
  * @LastEditors: squanchy1993 squanchy@yeah.net
- * @LastEditTime: 2023-11-26 20:57:04
- * @FilePath: /m-components/src/views/TableLayout/BasicExample/index.vue
+ * @LastEditTime: 2023-11-30 14:49:09
+ * @FilePath: \m-components\src\views\TableLayout\BasicExample\index.vue
 -->
 <template>
   <MList :controller="listController" v-bind="listConfig">
@@ -129,6 +129,61 @@ export default {
               elem: 'el-input',
               props: {
                 placeholder: '输入address'
+              }
+            }
+          },
+          {
+            props: {
+              prop: 'mSelect'
+            },
+            elemOptions: {
+              type: 'registered',
+              elem: 'mSelect',
+              props: {
+                placeholder: '输入mSelect',
+                multiple: true,
+                filterable: true,
+                remote: true,
+               'collapse-tags': true,
+                options: [
+                  {
+                    label: 'option1-string',
+                    value: 'string'
+                  },
+                  {
+                    label: 'option2-number',
+                    value: 1
+                  },
+                  {
+                    label: 'option3-boolean',
+                    value: true
+                  }
+                ],
+                remoteMethod: async function (e) {
+                  let returnData = [
+                    {
+                      value: 'test1',
+                      label: 'test1'
+                    },
+                    {
+                      value: 'test2',
+                      label: 'test2'
+                    },
+                    {
+                      value: 'test3',
+                      label: 'test3'
+                    },
+                    {
+                      value: 'test4',
+                      label: 'test4'
+                    },
+                    {
+                      value: 'test5',
+                      label: 'test5'
+                    }
+                  ];
+                  return e ? returnData : [];
+                }
               }
             }
           },
